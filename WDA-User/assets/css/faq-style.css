@@ -62,10 +62,13 @@
   font-family: "Karla", sans-serif;
   font-weight: 700;
   color: black;
-  background-color: white;
   font-size: 1.1em;
   cursor: pointer;
   border-radius: 0px;
+}
+
+.panel-default>.panel-heading:hover {
+  background: #fff;
 }
 
 .panel-default>.panel-heading{

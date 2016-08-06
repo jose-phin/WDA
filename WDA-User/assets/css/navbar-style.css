@@ -26,6 +26,9 @@
     transition: 0.1s;
 }
 
+.navbar-default > .navbar-header > a.navbar-brand .icon:hover{
+    color: #D0021B;
+}
 
 a.navbar-brand:hover{
     color: #D0021B;
@@ -81,4 +84,9 @@ button.navbar-toggle.collapsed{
 .nav.navbar-nav.navbar-right> li > a.active{
     background-color: black;
     color: white;
+}
+
+/*Navbar icons*/
+.icon {
+    padding-right: 3px;
 }
