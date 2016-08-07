@@ -3,7 +3,7 @@
 
   class HandleRequest extends Api{
 
-      public function __construct($request, $url) {
+    public function __construct($request, $url) {
       parent::__construct($request, $url);
     }
   }

@@ -4,6 +4,6 @@
   if (preg_match('/\.(?:png|jpg|jpeg|gif)$/', $_SERVER["REQUEST_URI"])) {
     return false;
   } else {
-      include $_SERVER['DOCUMENT_ROOT'] . '\endpoints\test.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '\endpoints\test.php';
   }
 ?>
