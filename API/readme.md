@@ -15,3 +15,6 @@ Launch postman and make a GET or POST request to localhost:3001 with any url and
 params that you want. You should get a responce echo'd back of the URL that you
 sent the request to, and the contents of the request
 (the params you sent through).
+
+#Reference
+[Guide to making an API in PHP](http://coreymaynard.com/blog/creating-a-restful-api-with-php/)
