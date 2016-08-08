@@ -20,7 +20,7 @@ class DatabaseHandler
 
             $this->setUpTables();
         } catch (PDOException $e) {
-            echo 'Unable to connect: ' . $e->getMessage() . '<br/>';
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to create database: " . $e->getMessage() . "\n", 3, "errors.log");
             die();
         }
 
@@ -88,7 +88,7 @@ class DatabaseHandler
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            echo 'Failed to create tables: ' . $e->getMessage() . '<br/>';
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to create tables: " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
 
@@ -113,7 +113,7 @@ class DatabaseHandler
             $this->db->commit();
         } catch (Exception $e) {
             $this->db->rollBack();
-            echo 'Failed to insert user: ' . $e->getMessage();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to create user: " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
 
@@ -134,7 +134,7 @@ class DatabaseHandler
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            echo 'Failed to get user: ' . $e->getMessage();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to get user: " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
 
@@ -161,7 +161,7 @@ class DatabaseHandler
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            echo 'Failed to update user: ' . $e->getMessage();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to update user: " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
 
@@ -179,7 +179,7 @@ class DatabaseHandler
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            echo 'Failed to delete user: ' . $e->getMessage();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to delete user: " . $e->getMessage() . "\n", 3, "errors.log");
         }
 
     }
@@ -208,7 +208,7 @@ class DatabaseHandler
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            echo 'Failed to insert ticket: ' . $e->getMessage();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to create ticket: " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
 
@@ -229,7 +229,7 @@ class DatabaseHandler
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            echo 'Failed to get ticket: ' . $e->getMessage();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to get ticket: " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
 
@@ -260,7 +260,7 @@ class DatabaseHandler
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            echo 'Failed to update ticket: ' . $e->getMessage();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to update ticket: " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
 
@@ -278,7 +278,7 @@ class DatabaseHandler
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            echo 'Failed to delete ticket: ' . $e->getMessage();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to delete ticket: " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
 
