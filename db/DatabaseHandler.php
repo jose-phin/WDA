@@ -92,8 +92,11 @@ class DatabaseHandler
         }
     }
 
-    # User Functions
-    function addUser($firstName, $lastName, $email)
+    /****************************************
+     *  USER FUNCTIONS
+     ****************************************/
+
+    function createUser($firstName, $lastName, $email)
     {
         try {
             $this->db->beginTransaction();
@@ -135,21 +138,155 @@ class DatabaseHandler
         }
     }
 
-    function updateUser($userId)
+    function updateUser($userId, $firstName, $lastName, $email)
     {
+        try {
+            $this->db->beginTransaction();
 
+            $update = "UPDATE users SET 
+                        first_name = :first_name,
+                        last_name = :last_name,
+                        email = :email
+                        WHERE user_id = :user_id";
+
+            $stmt = $this->db->prepare($update);
+
+            $stmt->bindParam(':first_name', $firstName);
+            $stmt->bindParam(':last_name', $lastName);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':user_id', $userId);
+
+            $stmt->execute();
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            echo 'Failed to update user: ' . $e->getMessage();
+        }
     }
 
     function deleteUser($userId)
     {
+        try {
+            $this->db->beginTransaction();
+
+            $delete = "DELETE FROM users WHERE user_id = :user_id";
+            $stmt = $this->db->prepare($delete);
+
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            echo 'Failed to delete user: ' . $e->getMessage();
+        }
 
     }
 
-    # Ticket Functions
+    /****************************************
+     *  TICKET FUNCTIONS
+     ****************************************/
 
+    function createTicket($osType, $primaryIssue, $additionalNotes, $status, $submitterId)
+    {
+        try {
+            $this->db->beginTransaction();
 
-    # ITS Functions
+            $insert = "INSERT INTO tickets (os_type, primary_issue, additional_notes, status, submitter_id) 
+                      VALUES (:os_type, :primary_issue, :additional_notes, :status, :submitter_id)";
+            $stmt = $this->db->prepare($insert);
 
+            $stmt->bindParam(':os_type', $osType);
+            $stmt->bindParam(':primary_issue', $primaryIssue);
+            $stmt->bindParam(':additional_notes', $additionalNotes);
+            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':submitter_id', $submitterId);
 
-    # Comment Functions
+            $stmt->execute();
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            echo 'Failed to insert ticket: ' . $e->getMessage();
+        }
+    }
+
+    function getTicket($ticketId)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $query = "SELECT * FROM tickets WHERE ticket_id = :ticket_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':ticket_id', $ticketId, PDO::PARAM_INT);
+
+            $stmt->execute();
+            $this->db->commit();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            echo 'Failed to get ticket: ' . $e->getMessage();
+        }
+    }
+
+    function updateTicket($ticketId, $osType, $primaryIssue, $additionalNotes, $status, $submitterId)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $update = "UPDATE tickets SET 
+                        os_type = :os_type,
+                        primary_issue = :primary_issue,
+                        additional_notes = :additional_notes,
+                        status = :status,
+                        submitter_id = :submitter_id
+                        WHERE ticket_id = :ticket_id";
+
+            $stmt = $this->db->prepare($update);
+
+            $stmt->bindParam(':os_type', $osType);
+            $stmt->bindParam(':primary_issue', $primaryIssue);
+            $stmt->bindParam(':additional_notes', $additionalNotes);
+            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':submitter_id', $submitterId);
+            $stmt->bindParam(':ticket_id', $ticketId);
+
+            $stmt->execute();
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            echo 'Failed to update ticket: ' . $e->getMessage();
+        }
+    }
+
+    function deleteTicket($ticketId)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $delete = "DELETE FROM tickets WHERE ticket_id = :ticket_id";
+            $stmt = $this->db->prepare($delete);
+
+            $stmt->bindParam(':ticket_id', $ticketId);
+            $stmt->execute();
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            echo 'Failed to delete ticket: ' . $e->getMessage();
+        }
+    }
+
+    /****************************************
+     *  ITS FUNCTIONS
+     ****************************************/
+
+    /****************************************
+     *  COMMENT FUNCTIONS
+     ****************************************/
 }
