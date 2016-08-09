@@ -286,7 +286,166 @@ class DatabaseHandler
      *  ITS FUNCTIONS
      ****************************************/
 
+    function createITSMember($firstName, $lastName, $email)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $insert = "INSERT INTO its_members (first_name, last_name, email) VALUES (:first_name, :last_name, :email)";
+            $stmt = $this->db->prepare($insert);
+
+            $stmt->bindParam(':first_name', $firstName);
+            $stmt->bindParam(':last_name', $lastName);
+            $stmt->bindParam(':email', $email);
+
+            $stmt->execute();
+
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to create ITS Member: " . $e->getMessage() . "\n", 3, "errors.log");
+        }
+    }
+
+    function getITSMember($itsId)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $query = "SELECT * FROM its_members WHERE its_id = :its_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':its_id', $itsId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $this->db->commit();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to get ITS Member: " . $e->getMessage() . "\n", 3, "errors.log");
+        }
+    }
+
+    function updateITSMember($itsId, $firstName, $lastName, $email)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $update = "UPDATE its_members SET 
+                        first_name = :first_name,
+                        last_name = :last_name,
+                        email = :email
+                        WHERE its_id = :its_id";
+
+            $stmt = $this->db->prepare($update);
+
+            $stmt->bindParam(':first_name', $firstName);
+            $stmt->bindParam(':last_name', $lastName);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':its_id', $itsId);
+
+            $stmt->execute();
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to update ITS Member: " . $e->getMessage() . "\n", 3, "errors.log");
+        }
+    }
+
+    function deleteITSMember($itsId)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $delete = "DELETE FROM its_members WHERE its_id = :its_id";
+            $stmt = $this->db->prepare($delete);
+
+            $stmt->bindParam(':its_id', $itsId);
+            $stmt->execute();
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to delete ITS Member: " . $e->getMessage() . "\n", 3, "errors.log");
+        }
+    }
+
+
     /****************************************
      *  COMMENT FUNCTIONS
      ****************************************/
+
+    /****************************************
+     *  USER COMMENT FUNCTIONS
+     ****************************************/
+
+    function addUserComment($ticketId, $commentText)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            // Insert the comment into the comments table
+            $commentInsert = "INSERT INTO comments (comment_text) VALUES (:comment_text)";
+            $commentStmt = $this->db->prepare($commentInsert);
+            $commentStmt->bindParam(':comment_text', $commentText);
+            $commentStmt->execute();
+
+            // Bind the comment to the ticket by inserting into the junction table (ticket_comments)
+            $ticketInsert = "INSERT INTO ticket_comments (ticket_id, comment_id) VALUES (:ticket_id, :comment_id)";
+            $ticketStmt = $this->db->prepare($ticketInsert);
+            $ticketStmt->bindParam(':ticket_id', $ticketId);
+
+            $commentId = $this->db->lastInsertId();
+            $ticketStmt->bindParam(':comment_id', $commentId);
+            $ticketStmt->execute();
+
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to add comment: " . $e->getMessage() . "\n", 3, "errors.log");
+        }
+    }
+
+    function getAllUserCommentsForTicket($ticketId)
+    {
+
+    }
+
+    function updateUserComment($ticketId, $commentId, $newText)
+    {
+
+    }
+
+    function deleteUserComment($ticketId, $commentId)
+    {
+
+    }
+
+    /****************************************
+     *  ITS COMMENT FUNCTIONS
+     ****************************************/
+
+    function addITSComment($ticketId, $commentText)
+    {
+
+    }
+
+    function getAllITSCommentsForTicket($ticketID)
+    {
+
+    }
+
+    function updateITSComment($ticketId, $commentId, $commentText)
+    {
+
+    }
+
+    function deleteITSComment($ticketId, $commentId)
+    {
+
+    }
 }
