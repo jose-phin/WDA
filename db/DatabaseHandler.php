@@ -412,17 +412,78 @@ class DatabaseHandler
 
     function getAllUserCommentsForTicket($ticketId)
     {
+        try {
+            $this->db->beginTransaction();
+            $comments = array();
+
+            $query = "SELECT users.user_id, tickets.ticket_id, tickets.os_type, tickets.primary_issue, tickets.additional_notes, tickets.status, comments.comment_id, comments.comment_text
+                        FROM users
+                        INNER JOIN tickets ON users.user_id = tickets.submitter_id
+                        INNER JOIN ticket_comments ON tickets.ticket_id = ticket_comments.ticket_id
+                        INNER JOIN comments ON ticket_comments.comment_id = comments.comment_id
+                        WHERE tickets.ticket_id = :ticket_id";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':ticket_id', $ticketId);
+            $stmt->execute();
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($comments, $row);
+            }
+
+            $this->db->commit();
+
+            return $comments;
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to get user comment for this ticket: " . $e->getMessage() . "\n", 3, "errors.log");
+        }
+    }
+
+    function updateUserComment($commentId, $newText)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $updateCommentTable = "UPDATE comments SET comment_text = :comment_text WHERE comment_id = :comment_id";
+            $stmt = $this->db->prepare($updateCommentTable);
+            $stmt->bindParam(':comment_text', $newText);
+            $stmt->bindParam(':comment_id', $commentId);
+            $stmt->execute();
+
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to update user comment: " . $e->getMessage() . "\n", 3, "errors.log");
+        }
 
     }
 
-    function updateUserComment($ticketId, $commentId, $newText)
+    function deleteUserComment($commentId)
     {
+        try {
+            $this->db->beginTransaction();
 
-    }
+            // Delete the comment from the actual comments table
+            $deleteFromComments = "DELETE FROM comments WHERE comment_id = :comment_id";
+            $stmt = $this->db->prepare($deleteFromComments);
+            $stmt->bindParam(':comment_id', $commentId);
+            $stmt->execute();
 
-    function deleteUserComment($ticketId, $commentId)
-    {
+            // Remove the link between the ticket and comment by deleting from the junction table
+            $deleteTicketCommentLink = "DELETE FROM ticket_comments WHERE comment_id = :comment_id";
+            $stmt = $this->db->prepare($deleteTicketCommentLink);
+            $stmt->bindParam(':comment_id', $commentId);
+            $stmt->execute();
 
+            $this->db->commit();
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to delete user comment for this ticket: " . $e->getMessage() . "\n", 3, "errors.log");
+        }
     }
 
     /****************************************
@@ -431,7 +492,7 @@ class DatabaseHandler
 
     function addITSComment($ticketId, $commentText)
     {
-
+        
     }
 
     function getAllITSCommentsForTicket($ticketID)
