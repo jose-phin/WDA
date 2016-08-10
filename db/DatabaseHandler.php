@@ -82,6 +82,7 @@ class DatabaseHandler
                             FOREIGN KEY (its_id) REFERENCES its_members(its_id)
                         )");
 
+
             $this->db->commit();
 
             echo 'Created tables (if they didn\'t exist already)<br/>';
@@ -378,11 +379,7 @@ class DatabaseHandler
      *  COMMENT FUNCTIONS
      ****************************************/
 
-    /****************************************
-     *  USER COMMENT FUNCTIONS
-     ****************************************/
-
-    function addUserComment($ticketId, $commentText)
+    function addComment($ticketId, $commentText, $itsId = null)
     {
         try {
             $this->db->beginTransaction();
@@ -402,46 +399,47 @@ class DatabaseHandler
             $ticketStmt->bindParam(':comment_id', $commentId);
             $ticketStmt->execute();
 
+            // If ITS != null then we're adding a comment for an ITS user and we need to bind the ITS member to the comment
+            if ($itsId) {
+                $itsInsert = "INSERT INTO its_comments (comment_id, its_id) VALUES (:comment_id, :its_id)";
+                $itsStmt = $this->db->prepare($itsInsert);
+                $itsStmt->bindParam(':comment_id', $commentId);
+                $itsStmt->bindParam(':its_id', $itsId);
+                $itsStmt->execute();
+            }
+
             $this->db->commit();
 
         } catch (Exception $e) {
             $this->db->rollBack();
             error_log('['.date("d/m/y H:i:s").'] '."Failed to add comment: " . $e->getMessage() . "\n", 3, "errors.log");
         }
+
     }
 
-    function getAllUserCommentsForTicket($ticketId)
+    function getComment($commentId)
     {
         try {
             $this->db->beginTransaction();
-            $comments = array();
 
-            $query = "SELECT users.user_id, tickets.ticket_id, tickets.os_type, tickets.primary_issue, tickets.additional_notes, tickets.status, comments.comment_id, comments.comment_text
-                        FROM users
-                        INNER JOIN tickets ON users.user_id = tickets.submitter_id
-                        INNER JOIN ticket_comments ON tickets.ticket_id = ticket_comments.ticket_id
-                        INNER JOIN comments ON ticket_comments.comment_id = comments.comment_id
-                        WHERE tickets.ticket_id = :ticket_id";
+            $query = "SELECT comments.comment_id, comments.comment_text, ticket_comments.ticket_id
+                    FROM comments
+                    INNER JOIN ticket_comments ON comments.comment_id = ticket_comments.comment_id
+                    WHERE comments.comment_id = :comment_id";
 
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':ticket_id', $ticketId);
+            $stmt->bindParam(':comment_id', $commentId);
             $stmt->execute();
 
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                array_push($comments, $row);
-            }
-
-            $this->db->commit();
-
-            return $comments;
+            return $stmt->fetch(PDO::FETCH_ASSOC);
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            error_log('['.date("d/m/y H:i:s").'] '."Failed to get user comment for this ticket: " . $e->getMessage() . "\n", 3, "errors.log");
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to get comment " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
 
-    function updateUserComment($commentId, $newText)
+    function updateComment($commentId, $newText)
     {
         try {
             $this->db->beginTransaction();
@@ -456,12 +454,12 @@ class DatabaseHandler
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            error_log('['.date("d/m/y H:i:s").'] '."Failed to update user comment: " . $e->getMessage() . "\n", 3, "errors.log");
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to update comment: " . $e->getMessage() . "\n", 3, "errors.log");
         }
 
     }
 
-    function deleteUserComment($commentId)
+    function deleteComment($commentId, $isITS)
     {
         try {
             $this->db->beginTransaction();
@@ -478,35 +476,19 @@ class DatabaseHandler
             $stmt->bindParam(':comment_id', $commentId);
             $stmt->execute();
 
+            if ($isITS) {
+                // If the comment belongs to an ITS member, then remove the entry from the its_comments table
+                $deleteITSCommentLink = "DELETE FROM its_comments WHERE comment_id = :comment_id";
+                $stmt = $this->db->prepare($deleteITSCommentLink);
+                $stmt->bindParam(':comment_id', $commentId);
+                $stmt->execute();
+            }
+
             $this->db->commit();
 
         } catch (Exception $e) {
             $this->db->rollBack();
-            error_log('['.date("d/m/y H:i:s").'] '."Failed to delete user comment for this ticket: " . $e->getMessage() . "\n", 3, "errors.log");
+            error_log('['.date("d/m/y H:i:s").'] '."Failed to delete comment: " . $e->getMessage() . "\n", 3, "errors.log");
         }
-    }
-
-    /****************************************
-     *  ITS COMMENT FUNCTIONS
-     ****************************************/
-
-    function addITSComment($ticketId, $commentText)
-    {
-        
-    }
-
-    function getAllITSCommentsForTicket($ticketID)
-    {
-
-    }
-
-    function updateITSComment($ticketId, $commentId, $commentText)
-    {
-
-    }
-
-    function deleteITSComment($ticketId, $commentId)
-    {
-
     }
 }
