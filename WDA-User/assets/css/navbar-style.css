@@ -90,3 +90,9 @@ button.navbar-toggle.collapsed{
 .icon {
     padding-right: 3px;
 }
+
+
+/*Active navbar font-awesome styles*/
+a.active > .fa {
+    color: white;
+}

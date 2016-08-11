@@ -1,3 +1,4 @@
+/*Global styles*/
 *{
     font-family: "Karla", "Helvetica Neue", "Arial", sans-serif;
     font-size: 15px;
@@ -15,6 +16,12 @@ body{
 
 .content{
     padding-bottom: 100px;
+}
+
+/* Fixes margin on buttons, optimised for mobile */
+.btn-margin-fix > .btn-col{
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 
@@ -71,6 +78,18 @@ button.btn.btn-primary:active{
     background-color: #D0021B;
     border-color: #D0021B;
     box-shadow: none;
+}
+
+button.btn.btn-secondary{
+    background-color: transparent;
+    border-color: #525252;
+    color: #525252;
+}
+
+button.btn.btn-secondary:hover{
+    background-color: #525252;
+    border-color: #525252;
+    color: white;
 }
 
 button.btn a{

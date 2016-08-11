@@ -54,7 +54,7 @@
                             Didn't find what you were looking for?
                         </div>
                         <div class="col-md-4 faq-ticket-button">
-                            <button class="btn btn-primary">Submit a Ticket</button>
+                            <a href="report.php"><button class="btn btn-primary">Submit a Ticket</button></a>
                         </div>
 
                     </div>
