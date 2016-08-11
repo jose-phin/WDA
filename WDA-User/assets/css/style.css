@@ -73,6 +73,9 @@ button.btn.btn-primary:active{
     box-shadow: none;
 }
 
+button.btn a{
+    color: #fff;
+}
 /*Page-specific styles*/
 p.hero-description{
     margin-top: 10%;

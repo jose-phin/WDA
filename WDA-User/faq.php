@@ -11,7 +11,7 @@
 <head>
 
     <!-- Site metadata -->
-    <title>FAQ - ITS Ticketing System | RMIT University </title>
+    <title>FAQ &ndash; ITS Ticketing System | RMIT University </title>
 
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
@@ -48,7 +48,7 @@
                     <?php include "./assets/content/faq-staff-content.php" ?>
                     <!-- Submit a ticket hero banner -->
 
-                    <!-- ARGHHHH 💩 damn you CSS -->
+                    <!-- CSS 5EVA 😊 -->
                     <div class="col-md-12 faq-ticket-hero">
                         <div class="col-md-5 faq-ticket-text">
                             Didn't find what you were looking for?

@@ -1,0 +1,9 @@
+/*Report an Issue*/
+#report-issue, .text-description {
+    margin-top: 30px;
+}
+
+/*This will control the style of form validation errors*/
+.error {
+    color: #D0021B;
+}
