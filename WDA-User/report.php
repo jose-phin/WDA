@@ -72,13 +72,13 @@
                     <div class="col-sm-8">
                         <div class="form-group">
                             <label for="enquiry">Type of Enquiry</label>*
-                            <select class="form-control" id="enquiry">
-                            <option disabled selected value> -- Select an option -- </option>
-                            <option>General IT Enquiry</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Other (Please specify)</option>
+                            <select name="enquiry" class="form-control" id="enquiry">
+                                <option disabled selected value=""> -- Select an option -- </option>
+                                <option>General IT Enquiry</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                                <option>Option 4</option>
+                                <option>Other (Please specify)</option>
                             </select>
                         </div>
 
