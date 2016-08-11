@@ -40,27 +40,4 @@ $(document).ready(function () {
             }
         }
     })
-
-    /*AJAX
-    .on("submit", "#report-issue", function() {
-        var name = $("#name").val();
-        var email = $("#email").val();
-        var data = name + ", " + email;
-        var data = $(this).serialize();
-
-        $.ajax({
-            url: "submit.php",
-            type: "POST",
-            data: $form.serialize(),
-            success: function(data) {
-                $("#report-issue").fadeOut(500).hide(function() {
-                    $(".result").fadeIn(500).show(function() {
-                        $(".result").html(data);
-                    });
-                });
-            }
-        });
-        return false;
-    }); */
-
 });
