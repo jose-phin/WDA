@@ -17,7 +17,7 @@
     <?php include "./assets/head_items.php" ?>
     <link rel="stylesheet" href="./assets/css/report-issue-style.css">
     <script src="./assets/js/report_issue_scripts.js"></script>
-
+    <script src="./assets/js/eventHandler-form.js"></script>
 </head>
 
 <body>
@@ -46,72 +46,72 @@
             <div class="row">
 
                     <!-- Form begins -->
-                    <form id="report-issue" method="post" action="" autocomplete="off" novalidate="novalidate">
+                    <form id="report-issue" name="reportIssueForm" method="post" action="" autocomplete="off" novalidate="novalidate">
 
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="firstname">First Name</label>*
-                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your first name">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="firstname">First Name</label>*
+                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your first name">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="lastname">Last Name</label>*
-                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>*
+                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-sm-8">
-                        <div class="form-group">
-                            <label for="email">Email Address</label>*
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address">
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>*
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-sm-8">
-                        <div class="form-group">
-                            <label for="enquiry">Type of Enquiry</label>*
-                            <select name="enquiry" class="form-control" id="enquiry">
-                                <option disabled selected value=""> -- Select an option -- </option>
-                                <option>General IT Enquiry</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
-                                <option>Option 4</option>
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <label for="enquiry">Type of Enquiry</label>*
+                                <select name="enquiry" class="form-control" id="enquiry">
+                                    <option disabled selected value=""> -- Select an option -- </option>
+                                    <option>General IT Enquiry</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                    <option>Option 4</option>
+                                    <option>Other (Please specify)</option>
+                                </select>
+                            </div>
+
+                            <!-- Eventually, this will only show when "Other" is clicked -->
+                            <div class="form-group" style="display:none">
+                                <label for="other-enquiry">Other (Please specify)</label>
+                                <input type="other-enquiry" class="form-control" id="other-equiry" area-describedby="other-enquiry-help" placeholder="">
+                                <small id="other-enquiery-help" class="form-text text-muted">What?!</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="os">Operating System</label>
+                                <select class="form-control" id="os">
+                                <option disabled selected value> -- Select an option -- </option>
+                                <option>Windows</option>
+                                <option>Mac OS</option>
+                                <option>Linux</option>
+                                <option>Ubuntu</option>
                                 <option>Other (Please specify)</option>
-                            </select>
-                        </div>
+                                </select>
+                            </div>
 
-                        <!-- Eventually, this will only show when "Other" is clicked -->
-                        <div class="form-group" style="display:none">
-                            <label for="other-enquiry">Other (Please specify)</label>
-                            <input type="other-enquiry" class="form-control" id="other-equiry" area-describedby="other-enquiry-help" placeholder="">
-                            <small id="other-enquiery-help" class="form-text text-muted">What?!</small>
-                        </div>
+                            <div class="form-group text-description">
+                                <legend>Issue Description*</legend>
+                                <p>
+                                    Please provide more details of your issue in the text box below.
+                                    Dtails such as computer names, website paths, account numbers,
+                                    and error numbers will help us to resolve your issue more efficiently.
+                                </p>
+                                <textarea class="form-control" id="description" name="description" rows="5" placeholder="Provide more details here..."></textarea>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="os">Operating System</label>
-                            <select class="form-control" id="os">
-                            <option disabled selected value> -- Select an option -- </option>
-                            <option>Windows</option>
-                            <option>Mac OS</option>
-                            <option>Linux</option>
-                            <option>Ubuntu</option>
-                            <option>Other (Please specify)</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group text-description">
-                            <legend>Issue Description*</legend>
-                            <p>
-                                Please provide more details of your issue in the text box below.
-                                Dtails such as computer names, website paths, account numbers,
-                                and error numbers will help us to resolve your issue more efficiently.
-                            </p>
-                            <textarea class="form-control" id="description" name="description" rows="5" placeholder="Provide more details here..."></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
 
                         </div><!-- End col-sm-8 -->
 
