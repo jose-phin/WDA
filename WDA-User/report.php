@@ -15,9 +15,8 @@
 
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
-    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/report-issue-style.css">
-    <script src="./assets/js/scripts.js"></script>
+    <script src="./assets/js/report_issue_scripts.js"></script>
 
 </head>
 

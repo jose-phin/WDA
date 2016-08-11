@@ -72,6 +72,7 @@
 }
 
 .panel-default>.panel-heading{
+  background: rgb(251,251,251);
   border-radius: 0px;
   padding-top: 15px;
   padding-bottom: 15px;
