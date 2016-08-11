@@ -44,7 +44,7 @@
                     report any IT-related issues and get help and support from our team.
                 </p>
 
-                <button class="btn btn-primary">Report an Issue</button>
+                <button class="btn btn-primary"><a href="report.php">Report an Issue</a></button>
 
             <!-- End of hero div -->
             </div>

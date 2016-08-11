@@ -20,14 +20,14 @@
                 <a
                     <?php echo ($currPage == '-') ? "class='active'" : ""; ?>
                     href="#">
-                    Login
+                    <span class="fa fa-sign-in icon"></span> Login
                 </a>
             </li>
             <li class="navbar-faq-li">
                 <a
                     <?php echo ($currPage == 'faq') ? "class='active'" : ""; ?>
                     href="./faq.php">
-                    FAQ
+                    <span class="fa fa-question-circle-o icon"></span> FAQ
                 </a>
             </li>
 
