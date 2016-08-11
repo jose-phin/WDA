@@ -36,58 +36,84 @@
                     We got yo back.
                 </h1>
                 <p>
-                    Please fill out the form below, and we will endeavour to answer your request within 48 hours.
+                    Please fill out the form below, and we will endeavour to answer your enquiry within 48 hours.
                 </p>
 
             <!-- End of hero div -->
             </div>
 
-            <!-- Instantiate Bootstrap's sm-8 grid -->
+            <!-- Instantiate Bootstrap's col-sm-4 grid -->
             <div class="row">
-                <div class="col-sm-8">
 
                     <!-- Form begins -->
                     <form id="report-issue" method="post" action="" autocomplete="off" novalidate="novalidate">
 
-                    <div class="form-group">
-                        <label for="name">Name</label>*
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="firstname">First Name</label>*
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your first name">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Email address</label>*
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="lastname">Last Name</label>*
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="service-area">Service area</label>
-                        <select class="form-control" id="service-area">
-                        <option>General IT Enquiry</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
-                        <option>Option 4</option>
-                        <option>Other (Please specify)</option>
-                        </select>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>*
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address">
+                        </div>
                     </div>
 
-                    <!-- Eventually, this will only show when "Other" is clicked -->
-                    <div class="form-group" style="display:none">
-                        <label for="other-enquiry">Other (Please specify)</label>
-                        <input type="other-enquiry" class="form-control" id="other-equiry" area-describedby="other-enquiry-help" placeholder="">
-                        <small id="other-enquiery-help" class="form-text text-muted">What?!</small>
-                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="enquiry">Type of Enquiry</label>*
+                            <select class="form-control" id="enquiry">
+                            <option disabled selected value> -- Select an option -- </option>
+                            <option>General IT Enquiry</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                            <option>Option 4</option>
+                            <option>Other (Please specify)</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group text-description">
-                        <legend>Nature of Problem*</legend>
-                        <p>
-                            Please provide more details of your issue in the text box below.
-                            Providing issues such as website paths, computer names, account numbers,
-                            and error numbers can help us resolve your issue more efficiently.
-                        </p>
-                        <textarea class="form-control" id="description" name="description" rows="5" placeholder="Provide more details here..."></textarea>
-                    </div>
+                        <!-- Eventually, this will only show when "Other" is clicked -->
+                        <div class="form-group" style="display:none">
+                            <label for="other-enquiry">Other (Please specify)</label>
+                            <input type="other-enquiry" class="form-control" id="other-equiry" area-describedby="other-enquiry-help" placeholder="">
+                            <small id="other-enquiery-help" class="form-text text-muted">What?!</small>
+                        </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="form-group">
+                            <label for="os">Operating System</label>
+                            <select class="form-control" id="os">
+                            <option disabled selected value> -- Select an option -- </option>
+                            <option>Windows</option>
+                            <option>Mac OS</option>
+                            <option>Linux</option>
+                            <option>Ubuntu</option>
+                            <option>Other (Please specify)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group text-description">
+                            <legend>Issue Description*</legend>
+                            <p>
+                                Please provide more details of your issue in the text box below.
+                                Dtails such as computer names, website paths, account numbers,
+                                and error numbers will help us to resolve your issue more efficiently.
+                            </p>
+                            <textarea class="form-control" id="description" name="description" rows="5" placeholder="Provide more details here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        </div><!-- End col-sm-8 -->
 
                     </form>
                     <!-- End form -->
