@@ -1,1 +1,5 @@
-Redirect 302 . /WDA-User/home.php
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ticket/delete(.*)$ /API/endpoints/ticket/delete.php$1 [NC,QSA]
+RewriteRule ^ticket/new(.*)$ /API/endpoints/ticket/new.php$1 [NC,QSA,L]
