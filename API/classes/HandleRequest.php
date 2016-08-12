@@ -1,5 +1,5 @@
 <?php
-  require_once $_SERVER['DOCUMENT_ROOT'] . '\classes\Api.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '\API\classes\Api.php';
 
   class HandleRequest extends Api{
 
