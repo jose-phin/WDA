@@ -41,14 +41,16 @@ class DatabaseHandler
                             user_id INTEGER PRIMARY KEY,
                             first_name TEXT NOT NULL,
                             last_name TEXT NOT NULL,
-                            email TEXT NOT NULL
+                            email TEXT NOT NULL,
+                            UNIQUE(email)
                         )");
 
             $this->db->exec("CREATE TABLE IF NOT EXISTS its_members (
                             its_id INTEGER PRIMARY KEY,
                             first_name TEXT NOT NULL,
                             last_name TEXT NOT NULL,
-                            email TEXT NOT NULL
+                            email TEXT NOT NULL,
+                            UNIQUE(email)
                         )");
 
             $this->db->exec("CREATE TABLE IF NOT EXISTS tickets (
@@ -80,6 +82,14 @@ class DatabaseHandler
                             its_id INT NOT NULL,
                             FOREIGN KEY (comment_id) REFERENCES comments(comment_id),
                             FOREIGN KEY (its_id) REFERENCES its_members(its_id)
+                        )");
+
+            $this->db->exec("CREATE TABLE IF NOT EXISTS users_comments (
+                            id INTEGER PRIMARY KEY,
+                            user_id INT NOT NULL,
+                            comment_id INT NOT NULL,
+                            FOREIGN KEY (user_id) REFERENCES users(user_id),
+                            FOREIGN KEY (comment_id) REFERENCES comments(comment_id)
                         )");
 
 
@@ -379,7 +389,7 @@ class DatabaseHandler
      *  COMMENT FUNCTIONS
      ****************************************/
 
-    function addComment($ticketId, $commentText, $itsId = null)
+    function addComment($ticketId, $commentText, $submitterId, $isITS = false)
     {
         try {
             $this->db->beginTransaction();
@@ -399,14 +409,19 @@ class DatabaseHandler
             $ticketStmt->bindParam(':comment_id', $commentId);
             $ticketStmt->execute();
 
-            // If ITS != null then we're adding a comment for an ITS user and we need to bind the ITS member to the comment
-            if ($itsId) {
-                $itsInsert = "INSERT INTO its_comments (comment_id, its_id) VALUES (:comment_id, :its_id)";
-                $itsStmt = $this->db->prepare($itsInsert);
-                $itsStmt->bindParam(':comment_id', $commentId);
-                $itsStmt->bindParam(':its_id', $itsId);
-                $itsStmt->execute();
+            $submitterInsert = null;
+
+            // Figure out which junction table we need to add to
+            if ($isITS) {
+                $submitterInsert = "INSERT INTO its_comments (comment_id, its_id) VALUES (:comment_id, :submitter_id)";
+            } else {
+                $submitterInsert = "INSERT INTO users_comments (comment_id, user_id) VALUES (:comment_id, :submitter_id)";
             }
+
+            $insertStmt = $this->db->prepare($submitterInsert);
+            $insertStmt->bindParam(':comment_id', $commentId);
+            $insertStmt->bindParam(':submitter_id', $submitterId);
+            $insertStmt->execute();
 
             $this->db->commit();
 
