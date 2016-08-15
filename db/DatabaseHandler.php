@@ -10,10 +10,15 @@ class DatabaseHandler
 {
     private $db = NULL;
 
-    function __construct($databaseName)
+    function __construct($databaseName, $testingMode = false)
     {
         try {
-            $this->db = new PDO('sqlite:'.$databaseName.'.db');
+            if ($testingMode) {
+                $this->db = new PDO('sqlite::memory:');
+            } else {
+                $this->db = new PDO('sqlite:'.$databaseName.'.db');
+            }
+
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             echo 'Connected'.'<br/>';
@@ -42,14 +47,7 @@ class DatabaseHandler
                             first_name TEXT NOT NULL,
                             last_name TEXT NOT NULL,
                             email TEXT NOT NULL,
-                            UNIQUE(email)
-                        )");
-
-            $this->db->exec("CREATE TABLE IF NOT EXISTS its_members (
-                            its_id INTEGER PRIMARY KEY,
-                            first_name TEXT NOT NULL,
-                            last_name TEXT NOT NULL,
-                            email TEXT NOT NULL,
+                            is_its INTEGER NOT NULL CHECK (is_its IN (0,1)),
                             UNIQUE(email)
                         )");
 
@@ -76,13 +74,6 @@ class DatabaseHandler
                             FOREIGN KEY(comment_id) REFERENCES comments(comment_id)
                         )");
 
-            $this->db->exec("CREATE TABLE IF NOT EXISTS its_comments (
-                            id INTEGER PRIMARY KEY,
-                            comment_id INT NOT NULL,
-                            its_id INT NOT NULL,
-                            FOREIGN KEY (comment_id) REFERENCES comments(comment_id),
-                            FOREIGN KEY (its_id) REFERENCES its_members(its_id)
-                        )");
 
             $this->db->exec("CREATE TABLE IF NOT EXISTS users_comments (
                             id INTEGER PRIMARY KEY,
@@ -107,24 +98,36 @@ class DatabaseHandler
      *  USER FUNCTIONS
      ****************************************/
 
-    function createUser($firstName, $lastName, $email)
+    function createUser($firstName, $lastName, $email, $isITS)
     {
         try {
             $this->db->beginTransaction();
 
-            $insert = "INSERT INTO users (first_name, last_name, email) VALUES (:first_name, :last_name, :email)";
+            $insert = "INSERT INTO users (first_name, last_name, email, is_its) VALUES (:first_name, :last_name, :email, :is_its)";
             $stmt = $this->db->prepare($insert);
 
             $stmt->bindParam(':first_name', $firstName);
             $stmt->bindParam(':last_name', $lastName);
             $stmt->bindParam(':email', $email);
 
+            if ($isITS) {
+                $its = 1;
+            } else {
+                $its = 0;
+            }
+
+            $stmt->bindParam(':is_its', $its);
+
             $stmt->execute();
 
             $this->db->commit();
+            return true;
+
         } catch (Exception $e) {
             $this->db->rollBack();
             error_log('['.date("d/m/y H:i:s").'] '."Failed to create user: " . $e->getMessage() . "\n", 3, "errors.log");
+
+            return false;
         }
     }
 
@@ -141,15 +144,22 @@ class DatabaseHandler
             $this->db->commit();
 
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result;
+
+            if (!$result) {
+                return null;
+            } else {
+                return $result;
+            }
 
         } catch (Exception $e) {
             $this->db->rollBack();
             error_log('['.date("d/m/y H:i:s").'] '."Failed to get user: " . $e->getMessage() . "\n", 3, "errors.log");
+
+            return null;
         }
     }
 
-    function updateUser($userId, $firstName, $lastName, $email)
+    function updateUser($userId, $firstName, $lastName, $email, $isITS)
     {
         try {
             $this->db->beginTransaction();
@@ -157,7 +167,8 @@ class DatabaseHandler
             $update = "UPDATE users SET 
                         first_name = :first_name,
                         last_name = :last_name,
-                        email = :email
+                        email = :email,
+                        is_its = :is_its
                         WHERE user_id = :user_id";
 
             $stmt = $this->db->prepare($update);
@@ -166,13 +177,23 @@ class DatabaseHandler
             $stmt->bindParam(':last_name', $lastName);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':user_id', $userId);
+            $stmt->bindParam(':is_its', $isITS);
 
             $stmt->execute();
             $this->db->commit();
 
+            // Check to see if the UPDATE affected any rows
+            if ($stmt->rowCount() != 0) {
+                return true;
+            } else {
+                return false;
+            }
+
         } catch (Exception $e) {
             $this->db->rollBack();
             error_log('['.date("d/m/y H:i:s").'] '."Failed to update user: " . $e->getMessage() . "\n", 3, "errors.log");
+
+            return false;
         }
     }
 
@@ -185,8 +206,15 @@ class DatabaseHandler
             $stmt = $this->db->prepare($delete);
 
             $stmt->bindParam(':user_id', $userId);
-            $stmt->execute();
+            $res =$stmt->execute();
+
             $this->db->commit();
+
+            if ($stmt->rowCount() != 0) {
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (Exception $e) {
             $this->db->rollBack();
@@ -293,103 +321,12 @@ class DatabaseHandler
         }
     }
 
-    /****************************************
-     *  ITS FUNCTIONS
-     ****************************************/
-
-    function createITSMember($firstName, $lastName, $email)
-    {
-        try {
-            $this->db->beginTransaction();
-
-            $insert = "INSERT INTO its_members (first_name, last_name, email) VALUES (:first_name, :last_name, :email)";
-            $stmt = $this->db->prepare($insert);
-
-            $stmt->bindParam(':first_name', $firstName);
-            $stmt->bindParam(':last_name', $lastName);
-            $stmt->bindParam(':email', $email);
-
-            $stmt->execute();
-
-            $this->db->commit();
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            error_log('['.date("d/m/y H:i:s").'] '."Failed to create ITS Member: " . $e->getMessage() . "\n", 3, "errors.log");
-        }
-    }
-
-    function getITSMember($itsId)
-    {
-        try {
-            $this->db->beginTransaction();
-
-            $query = "SELECT * FROM its_members WHERE its_id = :its_id";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':its_id', $itsId, PDO::PARAM_INT);
-            $stmt->execute();
-
-            $this->db->commit();
-
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result;
-
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            error_log('['.date("d/m/y H:i:s").'] '."Failed to get ITS Member: " . $e->getMessage() . "\n", 3, "errors.log");
-        }
-    }
-
-    function updateITSMember($itsId, $firstName, $lastName, $email)
-    {
-        try {
-            $this->db->beginTransaction();
-
-            $update = "UPDATE its_members SET 
-                        first_name = :first_name,
-                        last_name = :last_name,
-                        email = :email
-                        WHERE its_id = :its_id";
-
-            $stmt = $this->db->prepare($update);
-
-            $stmt->bindParam(':first_name', $firstName);
-            $stmt->bindParam(':last_name', $lastName);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':its_id', $itsId);
-
-            $stmt->execute();
-            $this->db->commit();
-
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            error_log('['.date("d/m/y H:i:s").'] '."Failed to update ITS Member: " . $e->getMessage() . "\n", 3, "errors.log");
-        }
-    }
-
-    function deleteITSMember($itsId)
-    {
-        try {
-            $this->db->beginTransaction();
-
-            $delete = "DELETE FROM its_members WHERE its_id = :its_id";
-            $stmt = $this->db->prepare($delete);
-
-            $stmt->bindParam(':its_id', $itsId);
-            $stmt->execute();
-            $this->db->commit();
-
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            error_log('['.date("d/m/y H:i:s").'] '."Failed to delete ITS Member: " . $e->getMessage() . "\n", 3, "errors.log");
-        }
-    }
-
 
     /****************************************
      *  COMMENT FUNCTIONS
      ****************************************/
 
-    function addComment($ticketId, $commentText, $submitterId, $isITS = false)
+    function addComment($ticketId, $commentText, $submitterId)
     {
         try {
             $this->db->beginTransaction();
@@ -409,15 +346,8 @@ class DatabaseHandler
             $ticketStmt->bindParam(':comment_id', $commentId);
             $ticketStmt->execute();
 
-            $submitterInsert = null;
-
-            // Figure out which junction table we need to add to
-            if ($isITS) {
-                $submitterInsert = "INSERT INTO its_comments (comment_id, its_id) VALUES (:comment_id, :submitter_id)";
-            } else {
-                $submitterInsert = "INSERT INTO users_comments (comment_id, user_id) VALUES (:comment_id, :submitter_id)";
-            }
-
+            // Insert the comment into the users_comments junction table to link the submitter to the comment
+            $submitterInsert = "INSERT INTO users_comments (comment_id, user_id) VALUES (:comment_id, :submitter_id)";
             $insertStmt = $this->db->prepare($submitterInsert);
             $insertStmt->bindParam(':comment_id', $commentId);
             $insertStmt->bindParam(':submitter_id', $submitterId);
@@ -491,13 +421,11 @@ class DatabaseHandler
             $stmt->bindParam(':comment_id', $commentId);
             $stmt->execute();
 
-            if ($isITS) {
-                // If the comment belongs to an ITS member, then remove the entry from the its_comments table
-                $deleteITSCommentLink = "DELETE FROM its_comments WHERE comment_id = :comment_id";
-                $stmt = $this->db->prepare($deleteITSCommentLink);
-                $stmt->bindParam(':comment_id', $commentId);
-                $stmt->execute();
-            }
+            // Remove the link between the comment and the user
+            $deleteUserCommentLink = "DELETE FROM users_comments WHERE comment_id = :comment_id";
+            $stmt = $this->db->prepare($deleteUserCommentLink);
+            $stmt->bindParam(':comment_id', $commentId);
+            $stmt->execute();
 
             $this->db->commit();
 
@@ -506,4 +434,5 @@ class DatabaseHandler
             error_log('['.date("d/m/y H:i:s").'] '."Failed to delete comment: " . $e->getMessage() . "\n", 3, "errors.log");
         }
     }
+
 }
