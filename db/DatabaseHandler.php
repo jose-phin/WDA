@@ -74,7 +74,7 @@ class DatabaseHandler
                             ticket_id INT NOT NULL,
                             comment_id INT NOT NULL,
                             FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id),
-                            FOREIGN KEY(comment_id) REFERENCES comments(comment_id)
+                            FOREIGN KEY(comment_id) REFERENCES comments(comment_id) ON DELETE CASCADE
                         )");
 
 
@@ -83,7 +83,7 @@ class DatabaseHandler
                             user_id INT NOT NULL,
                             comment_id INT NOT NULL,
                             FOREIGN KEY (user_id) REFERENCES users(user_id),
-                            FOREIGN KEY (comment_id) REFERENCES comments(comment_id)
+                            FOREIGN KEY (comment_id) REFERENCES comments(comment_id) ON DELETE CASCADE
                         )");
 
 
@@ -376,9 +376,13 @@ class DatabaseHandler
 
             $this->db->commit();
 
+            return true;
+
         } catch (Exception $e) {
             $this->db->rollBack();
             error_log('['.date("d/m/y H:i:s").'] '."Failed to add comment: " . $e->getMessage() . "\n", 3, "errors.log");
+
+            return false;
         }
 
     }
@@ -418,6 +422,12 @@ class DatabaseHandler
 
             $this->db->commit();
 
+            if ($stmt->rowCount() != 0) {
+                return true;
+            } else {
+                return false;
+            }
+
         } catch (Exception $e) {
             $this->db->rollBack();
             error_log('['.date("d/m/y H:i:s").'] '."Failed to update comment: " . $e->getMessage() . "\n", 3, "errors.log");
@@ -425,7 +435,7 @@ class DatabaseHandler
 
     }
 
-    function deleteComment($commentId, $isITS)
+    function deleteComment($commentId)
     {
         try {
             $this->db->beginTransaction();
@@ -436,23 +446,19 @@ class DatabaseHandler
             $stmt->bindParam(':comment_id', $commentId);
             $stmt->execute();
 
-            // Remove the link between the ticket and comment by deleting from the junction table
-            $deleteTicketCommentLink = "DELETE FROM ticket_comments WHERE comment_id = :comment_id";
-            $stmt = $this->db->prepare($deleteTicketCommentLink);
-            $stmt->bindParam(':comment_id', $commentId);
-            $stmt->execute();
-
-            // Remove the link between the comment and the user
-            $deleteUserCommentLink = "DELETE FROM users_comments WHERE comment_id = :comment_id";
-            $stmt = $this->db->prepare($deleteUserCommentLink);
-            $stmt->bindParam(':comment_id', $commentId);
-            $stmt->execute();
-
             $this->db->commit();
+
+            if ($stmt->rowCount() != 0) {
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (Exception $e) {
             $this->db->rollBack();
             error_log('['.date("d/m/y H:i:s").'] '."Failed to delete comment: " . $e->getMessage() . "\n", 3, "errors.log");
+
+            return false;
         }
     }
 
