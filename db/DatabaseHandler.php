@@ -21,6 +21,9 @@ class DatabaseHandler
 
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+            // Turn foreign key constraints on
+            $this->db->exec('PRAGMA foreign_keys = ON;');
+
             echo 'Connected'.'<br/>';
 
             $this->setUpTables();
@@ -242,12 +245,16 @@ class DatabaseHandler
             $stmt->bindParam(':status', $status);
             $stmt->bindParam(':submitter_id', $submitterId);
 
-            $stmt->execute();
+            $res = $stmt->execute();
             $this->db->commit();
+
+            return true;
 
         } catch (Exception $e) {
             $this->db->rollBack();
             error_log('['.date("d/m/y H:i:s").'] '."Failed to create ticket: " . $e->getMessage() . "\n", 3, "errors.log");
+
+            return false;
         }
     }
 
@@ -297,9 +304,17 @@ class DatabaseHandler
             $stmt->execute();
             $this->db->commit();
 
+            if ($stmt->rowCount() != 0) {
+                return true;
+            } else {
+                return false;
+            }
+
         } catch (Exception $e) {
             $this->db->rollBack();
             error_log('['.date("d/m/y H:i:s").'] '."Failed to update ticket: " . $e->getMessage() . "\n", 3, "errors.log");
+
+            return false;
         }
     }
 
@@ -314,6 +329,12 @@ class DatabaseHandler
             $stmt->bindParam(':ticket_id', $ticketId);
             $stmt->execute();
             $this->db->commit();
+
+            if ($stmt->rowCount() != 0) {
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (Exception $e) {
             $this->db->rollBack();
