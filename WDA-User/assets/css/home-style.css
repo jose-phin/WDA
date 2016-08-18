@@ -34,3 +34,12 @@
 .follow-up-hero-div p{
     margin-top: 20px;
 }
+
+.home-follow-up-form{
+    margin-top: 20px;
+}
+
+/* Error message colour */
+.error {
+    color: #D0021B;
+}

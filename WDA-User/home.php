@@ -51,9 +51,7 @@
 
                     </div>
                     <div class="col-sm-12 col-md-2 btn-col ">
-
                             <button class="btn btn-secondary follow-up-home-button">Follow Up on Ticket</button>
-
                     </div>
                 </div>
 
@@ -72,8 +70,25 @@
                     and replies from our ITS support team. You can also reply to
                     add on more information so we can help you further.
                 </p>
-            </div>
 
+                <form class="home-follow-up-form" id="user-login" name="userLoginForm" method="post" action="" autocomplete="off" novalidate="novalidate">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="ticketID">Ticket ID</label>*
+                                <input type="text" class="form-control" id="ticketID" name="ticketID" placeholder="Enter your Ticket ID">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Check your Ticket</button>
+
+                </form>
+
+
+            <!-- End of container div -->
+            </div>
+        <!-- End of follow up div -->
         </div>
 
     </div>
