@@ -15,7 +15,8 @@
 
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
-
+    <link rel="stylesheet" href="./assets/css/home-style.css">
+    <script src="./assets/js/home-follow-up-script.js"></script>
 </head>
 
 <body>
@@ -49,8 +50,10 @@
                         <a href="report.php"><button class="btn btn-primary">Report an Issue</button></a>
 
                     </div>
-                    <div class="col-sm-12 col-md-2 btn-col">
-                        <a href="report.php"><button class="btn btn-secondary">Follow Up on Ticket</button></a>
+                    <div class="col-sm-12 col-md-2 btn-col ">
+
+                            <button class="btn btn-secondary follow-up-home-button">Follow Up on Ticket</button>
+
                     </div>
                 </div>
 
@@ -59,6 +62,20 @@
 
         <!-- End of site-wide container -->
         </div>
+
+        <!-- Modal login hero div -->
+        <div class="follow-up-hero-div">
+            <div class="container text-container">
+                <h2>Follow Up on Your Ticket</h2>
+                <p>
+                    Enter your support ticket ID to check on the latest updates
+                    and replies from our ITS support team. You can also reply to
+                    add on more information so we can help you further.
+                </p>
+            </div>
+
+        </div>
+
     </div>
 </body>
 

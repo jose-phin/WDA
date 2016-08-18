@@ -18,6 +18,25 @@ body{
     padding-bottom: 100px;
 }
 
+/* Pulls texts leftwards and break on 40% browser length
+for readability.
+*/
+.text-container{
+    padding-right: 40%;
+}
+
+@media (max-width: 978px) {
+
+    .follow-up-hero-div{
+        padding-left: 2%!important;
+    }
+
+    .text-container{
+        padding-right: 5%;
+    }
+
+}
+
 /* Fixes margin on buttons, optimised for mobile */
 .btn-margin-fix > .btn-col{
     margin-top: 10px;
@@ -42,7 +61,11 @@ h1.h1-subtitle{
     letter-spacing: -0.02em;
 }
 
-
+h2{
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    font-size: 40px;
+}
 
 bold{
     font-family: inherit;
@@ -91,6 +114,14 @@ button.btn.btn-secondary:hover{
     border-color: #525252;
     color: white;
 }
+
+button.btn.btn-secondary.clicked{
+    box-shadow: none;
+    background-color: #525252!important;
+    border-color: #525252;
+    color: white;
+}
+
 
 button.btn a{
     color: #fff;
