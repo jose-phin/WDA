@@ -2,6 +2,9 @@
     position:relative;
 }
 
+.follow-up-home-button.clicked:focus{
+    outline: 0!important;
+}
 
 .follow-up-home-button.clicked:after{
     display: block;
