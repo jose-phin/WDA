@@ -20,7 +20,7 @@
 
 <body>
     <div class="home-body content">
-    
+
         <div class="site-wide-container container">
 
             <!-- Navigation Bar -->
@@ -44,7 +44,15 @@
                     report any IT-related issues and get help and support from our team.
                 </p>
 
-                <button class="btn btn-primary">Report an Issue</button>
+                <div class="row btn-margin-fix">
+                    <div class="col-sm-12 col-md-2 btn-col">
+                        <a href="report.php"><button class="btn btn-primary">Report an Issue</button></a>
+
+                    </div>
+                    <div class="col-sm-12 col-md-2 btn-col">
+                        <a href="report.php"><button class="btn btn-secondary">Follow Up on Ticket</button></a>
+                    </div>
+                </div>
 
             <!-- End of hero div -->
             </div>
