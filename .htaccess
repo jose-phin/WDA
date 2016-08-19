@@ -1,5 +1,4 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ticket/delete(.*)$ /API/endpoints/ticket/delete.php$1 [NC,QSA]
-RewriteRule ^ticket/new(.*)$ /API/endpoints/ticket/new.php$1 [NC,QSA,L]
+RewriteRule ^ticket(.*)$ /API/endpoints/ticket.php?endpoint=$1 [NC,QSA,L]

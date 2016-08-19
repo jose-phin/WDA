@@ -44,3 +44,38 @@
 [19/08/16 04:23:55] INFO Created tables (if they didn't exist already)
 [19/08/16 04:24:25] INFO Connected!
 [19/08/16 04:24:25] INFO Created tables (if they didn't exist already)
+[19/08/16 04:40:44] INFO Connected!
+[19/08/16 04:40:44] INFO Created tables (if they didn't exist already)
+[19/08/16 04:42:48] INFO Connected!
+[19/08/16 04:42:48] INFO Created tables (if they didn't exist already)
+[19/08/16 04:44:01] INFO Connected!
+[19/08/16 04:44:01] INFO Created tables (if they didn't exist already)
+[19/08/16 04:44:13] INFO Connected!
+[19/08/16 04:44:13] INFO Created tables (if they didn't exist already)
+[19/08/16 04:44:21] INFO Connected!
+[19/08/16 04:44:21] INFO Created tables (if they didn't exist already)
+[19/08/16 04:44:49] INFO Connected!
+[19/08/16 04:44:49] INFO Created tables (if they didn't exist already)
+[19/08/16 04:44:49] ERROR Failed to create ticket: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tickets.submitter_id
+[19/08/16 04:46:50] INFO Connected!
+[19/08/16 04:46:50] INFO Created tables (if they didn't exist already)
+[19/08/16 04:46:50] ERROR Failed to create ticket: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tickets.submitter_id
+[19/08/16 04:47:45] INFO Connected!
+[19/08/16 04:47:45] INFO Created tables (if they didn't exist already)
+[19/08/16 04:47:45] ERROR Failed to create ticket: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tickets.submitter_id
+[19/08/16 04:48:07] INFO Connected!
+[19/08/16 04:48:07] INFO Created tables (if they didn't exist already)
+[19/08/16 04:48:07] ERROR Failed to create ticket: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tickets.submitter_id
+[19/08/16 04:48:18] INFO Connected!
+[19/08/16 04:48:18] INFO Created tables (if they didn't exist already)
+[19/08/16 04:54:33] INFO Connected!
+[19/08/16 04:54:33] INFO Created tables (if they didn't exist already)
+[19/08/16 04:54:33] ERROR Failed to create ticket: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tickets.os_type
+[19/08/16 04:55:13] INFO Connected!
+[19/08/16 04:55:13] INFO Created tables (if they didn't exist already)
+[19/08/16 04:55:13] ERROR Failed to create ticket: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tickets.os_type
+[19/08/16 04:56:57] INFO Connected!
+[19/08/16 04:56:57] INFO Created tables (if they didn't exist already)
+[19/08/16 04:56:57] ERROR Failed to create ticket: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: tickets.os_type
+[19/08/16 05:00:30] INFO Connected!
+[19/08/16 05:00:30] INFO Created tables (if they didn't exist already)
