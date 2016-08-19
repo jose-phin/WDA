@@ -23,6 +23,20 @@
     }
 
     /**
+     * function that grabs user data from the Request JSON and creates the
+     * user in the database
+     *
+     * @return boolean
+     */
+    public function createUser() {
+    //grab the user data from the JSON
+    $user = $this->jsonRequest["user"];
+
+    //create the user
+    return @parent::createUser($user["firstName"], $user["lastName"], $user["email"]);
+    }
+
+    /**
      * Create a new ticket for the user
      *
      * @return bool

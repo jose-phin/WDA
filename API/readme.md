@@ -1,20 +1,81 @@
 #API
-## How to use API
-To use this API with the built in php developer server, navigate a terminal to
-this folder (The API folder of this PHP Project) and run the following command
+This API will allow you to interact with the database VIA AJAX calls,
+this API is designed to be used with JSON POST requests and uses RESTful API
+URL names
+## How to use the API
+In order to send an AJAX call to this API, an example of sending an Jquery AJAX
+call would be
+```
+//NOTE: HAVENT TESTED IF THIS EXACT SYNTAX WORKS FROM A PHP FILE, ONLY IN POSTMAN!!!!!
+
+$.post("user/new", {
+  "user": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "XxSephiroth477xX@hotmail.com"
+  }
+});
+```
+
+##Endpoints
+###User
+This endpoint deals with setting and getting user information
+####new
+```
+localhost/user/new
+```
+This endpoint will attempt to create a new user with the given params
 
 ```
-php -S localhost:3001 ./route/router.php
+{
+  "user": {
+    "firstName": "User's First Name",
+    "lastName": "User's Last Name",
+    "email": "The user's email address"    
+  }
+}
 ```
 
-this will setup a php dev server, next, you'll need to make a GET or POST
-request to localhost:3001, If you are using Chrome, I'd highly recommend you use
-this RESTful API tool called [POSTman](http://www.getpostman.com/)
+and will return a response object
 
-Launch postman and make a GET or POST request to localhost:3001 with any url and
-params that you want. You should get a responce echo'd back of the URL that you
-sent the request to, and the contents of the request
-(the params you sent through).
+```
+//if the user was created successfully
+{"success": true}
 
-#Reference
-[Guide to making an API in PHP](http://coreymaynard.com/blog/creating-a-restful-api-with-php/)
+//else, if the user was not created
+{"success": false}
+```
+
+###ticket
+####new
+```
+localhost/ticket/new
+```
+This endpoint will attempt to create a new ticket for the specified user with
+ the given params, if the user does not exist, this endpoint call will attempt
+ to create the user
+
+```
+{
+  "user": {
+    "firstName": "User's First Name (NOT NEEDED IF USER EXISTS)",
+    "lastName": "User's Last Name (NOT NEEDED IF USER EXISTS)",
+    "email": "The user's email address"    
+  },
+  "ticket": {
+    "osType": "The users Operating System",
+    "primaryIssue": "the issue the user is having",
+    "additionalNotes": "Any additional notes for the user's issue"
+  }
+}
+```
+
+and will return a response object
+
+```
+//if the ticket was created successfully
+{"success": true}
+
+//else, if the ticket was not created
+{"success": false}
+```
