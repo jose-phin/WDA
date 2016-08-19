@@ -199,16 +199,16 @@ class DatabaseHandler
     }
 
     /**
-     * Updates a user with a specified ID
+     * Updates a user with a specified email
      *
-     * @param $userId int
+     * @param $email String
      * @param $firstName String
      * @param $lastName String
-     * @param $email String note again that this must be unique
+     * @param $newEmail String
      * @param $isITS Boolean
      * @return bool True if the query succeeds, False if otherwise
      */
-    function updateUser($userId, $firstName, $lastName, $email, $isITS)
+    function updateUser($email, $firstName, $lastName, $newEmail, $isITS)
     {
         try {
             $this->db->beginTransaction();
@@ -216,16 +216,16 @@ class DatabaseHandler
             $update = "UPDATE users SET 
                         first_name = :first_name,
                         last_name = :last_name,
-                        email = :email,
+                        email = :newEmail,
                         is_its = :is_its
-                        WHERE user_id = :user_id";
+                        WHERE email = :email";
 
             $stmt = $this->db->prepare($update);
 
             $stmt->bindParam(':first_name', $firstName);
             $stmt->bindParam(':last_name', $lastName);
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':user_id', $userId);
+            $stmt->bindParam(':newEmail', $newEmail);
             $stmt->bindParam(':is_its', $isITS);
 
             $stmt->execute();
@@ -248,21 +248,21 @@ class DatabaseHandler
     }
 
     /**
-     * Deletes a user from the Users table with the specified ID
+     * Deletes a user from the Users table with the specified email
      *
-     * @param $userId int
+     * @param $email String
      * @return bool True if successfully deleted, False otherwise
      */
-    function deleteUser($userId)
+    function deleteUser($email)
     {
         try {
             $this->db->beginTransaction();
 
-            $delete = "DELETE FROM users WHERE user_id = :user_id";
+            $delete = "DELETE FROM users WHERE email = :email";
             $stmt = $this->db->prepare($delete);
 
-            $stmt->bindParam(':user_id', $userId);
-            $res =$stmt->execute();
+            $stmt->bindParam(':email', $email);
+            $res = $stmt->execute();
 
             $this->db->commit();
 
@@ -292,7 +292,7 @@ class DatabaseHandler
      * @param $additionalNotes String
      * @param $status String (OPTIONAL) will default to 'Pending' if not provided
      * @param $submitterId int
-     * @return bool True if the ticket is successfully created, False otherwise
+     * @return int the newly created Ticket ID, or -1 if unable to create the ticket
      */
     function createTicket($osType, $primaryIssue, $additionalNotes, $status = "Pending", $submitterId)
     {
@@ -309,17 +309,19 @@ class DatabaseHandler
             $stmt->bindParam(':status', $status);
             $stmt->bindParam(':submitter_id', $submitterId);
 
-            $res = $stmt->execute();
-            $this->db->commit();
+            $stmt->execute();
 
-            return true;
+            $ticketId = $this->db->lastInsertId();
+
+            $this->db->commit();
+            return $ticketId;
 
         } catch (Exception $e) {
             $this->db->rollBack();
             $message = "Failed to create ticket: " . $e->getMessage();
             $this->logger->log_error($message);
 
-            return false;
+            return -1;
         }
     }
 
@@ -446,7 +448,7 @@ class DatabaseHandler
      * @param $ticketId int
      * @param $commentText String
      * @param $submitterId int
-     * @return bool True if able to successfully create the comment, False otherwise
+     * @return int the ID of the newly created comment, or -1 if unable to create the comment
      */
     function addComment($ticketId, $commentText, $submitterId)
     {
@@ -477,14 +479,14 @@ class DatabaseHandler
 
             $this->db->commit();
 
-            return true;
+            return $commentId;
 
         } catch (Exception $e) {
             $this->db->rollBack();
             $message = "Failed to add comment: " . $e->getMessage();
             $this->logger->log_error($message);
 
-            return false;
+            return -1;
         }
 
     }
