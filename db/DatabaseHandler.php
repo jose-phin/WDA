@@ -448,7 +448,7 @@ class DatabaseHandler
      * @param $ticketId int
      * @param $commentText String
      * @param $submitterId int
-     * @return bool True if able to successfully create the comment, False otherwise
+     * @return int the ID of the newly created comment, or -1 if unable to create the comment
      */
     function addComment($ticketId, $commentText, $submitterId)
     {
@@ -479,14 +479,14 @@ class DatabaseHandler
 
             $this->db->commit();
 
-            return true;
+            return $commentId;
 
         } catch (Exception $e) {
             $this->db->rollBack();
             $message = "Failed to add comment: " . $e->getMessage();
             $this->logger->log_error($message);
 
-            return false;
+            return -1;
         }
 
     }
