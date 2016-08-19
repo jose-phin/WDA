@@ -292,7 +292,7 @@ class DatabaseHandler
      * @param $additionalNotes String
      * @param $status String (OPTIONAL) will default to 'Pending' if not provided
      * @param $submitterId int
-     * @return bool True if the ticket is successfully created, False otherwise
+     * @return int the newly created Ticket ID, or -1 if unable to create the ticket
      */
     function createTicket($osType, $primaryIssue, $additionalNotes, $status = "Pending", $submitterId)
     {
@@ -309,17 +309,19 @@ class DatabaseHandler
             $stmt->bindParam(':status', $status);
             $stmt->bindParam(':submitter_id', $submitterId);
 
-            $res = $stmt->execute();
-            $this->db->commit();
+            $stmt->execute();
 
-            return true;
+            $ticketId = $this->db->lastInsertId();
+
+            $this->db->commit();
+            return $ticketId;
 
         } catch (Exception $e) {
             $this->db->rollBack();
             $message = "Failed to create ticket: " . $e->getMessage();
             $this->logger->log_error($message);
 
-            return false;
+            return -1;
         }
     }
 
