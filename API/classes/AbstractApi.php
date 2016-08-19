@@ -2,6 +2,10 @@
 
   require($_SERVER['DOCUMENT_ROOT'].'\db\DatabaseHandler.php');
 
+  /**
+   * Class that handles the interaction between the API and the Database, Abstracted so that
+   * the Concrete class has no idea how the Database works
+   */
   abstract class AbstractApi {
 
     /**

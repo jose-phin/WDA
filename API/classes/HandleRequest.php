@@ -1,6 +1,11 @@
 <?php
   require($_SERVER['DOCUMENT_ROOT'] . '\API\classes\AbstractApi.php');
 
+  /**
+   * Concrete Class implementation of AbstractApi, this HandleRequest class
+   * is made to handle JSON POST requests and will process and use a raw JSON
+   * AJAX call
+   */
   class HandleRequest extends AbstractApi{
 
     /**
