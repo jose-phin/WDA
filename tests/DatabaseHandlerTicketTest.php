@@ -25,14 +25,14 @@ class DatabaseHandlerTicketTest extends TestCase
         self::$dbh = null;
     }
 
-    public function testCreateTicketWithValidSubmitterIDReturnsTrue()
+    public function testCreateTicketWithValidSubmitterIDReturnsExpectedId()
     {
-        $this->assertTrue(self::$dbh->createTicket("Mac OSX", "It won't turn on!", "", "Pending", 1));
+        $this->assertEquals(self::$dbh->createTicket("Mac OSX", "It won't turn on!", "", "Pending", 1), 1);
     }
 
-    public function testCreateTicketWithInvalidSubmitterIDReturnsFalse()
+    public function testCreateTicketWithInvalidSubmitterIDReturnsNegative()
     {
-        $this->assertFalse(self::$dbh->createTicket("Windows", "Help!", "", "Pending", 2));
+        $this->assertEquals(self::$dbh->createTicket("Windows", "Help!", "", "Pending", 2), -1);
     }
 
     public function testGetTicketWithValidIDReturnsNotNull()

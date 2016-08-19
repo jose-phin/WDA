@@ -26,24 +26,24 @@ class DatabaseHandlerCommentTest extends TestCase
         self::$dbh = null;
     }
 
-    public function testAddCommentValidUserValidTicketIDReturnsTrue()
+    public function testAddCommentValidUserValidTicketIDReturnsExpectedId()
     {
-        $this->assertTrue(self::$dbh->addComment(1, "Comment", 1));
+        $this->assertEquals(self::$dbh->addComment(1, "Comment", 1), 1);
     }
 
-    public function testAddCommentValidUserInvalidTicketIDReturnsFalse()
+    public function testAddCommentValidUserInvalidTicketIDReturnsNegative()
     {
-        $this->assertFalse(self::$dbh->addComment(2, "Comment", 1));
+        $this->assertEquals(self::$dbh->addComment(2, "Comment", 1), -1);
     }
 
-    public function testAddCommentInvalidUserValidTicketIDReturnsFalse()
+    public function testAddCommentInvalidUserValidTicketIDReturnsNegative()
     {
-        $this->assertFalse(self::$dbh->addComment(1, "Comment", 2));
+        $this->assertEquals(self::$dbh->addComment(1, "Comment", 2), -1);
     }
 
-    public function testAddCommentInvalidUserInvalidTicketIDReturnsFalse()
+    public function testAddCommentInvalidUserInvalidTicketIDReturnsNegative()
     {
-        $this->assertFalse(self::$dbh->addComment(2, "Comment", 2));
+        $this->assertEquals(self::$dbh->addComment(2, "Comment", 2), -1);
     }
 
     public function testGetCommentValidCommentIDReturnsNotNull()
