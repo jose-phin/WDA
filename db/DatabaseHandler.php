@@ -199,6 +199,42 @@ class DatabaseHandler
     }
 
     /**
+     * Gets a user with the specified Email
+     *
+     * @param $userEmail string
+     * @return array|null an associative array containing the user's details, or null if the query fails
+     */
+    function getUserByEmail($userEmail)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $query = "SELECT * FROM users WHERE email = :userEmail";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':userEmail', $userEmail, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $this->db->commit();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$result) {
+                return null;
+            } else {
+                return $result;
+            }
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $message = "Failed to get user: " . $e->getMessage();
+            $this->logger->log_error($message);
+
+            return null;
+        }
+    }
+
+
+    /**
      * Updates a user with a specified email
      *
      * @param $email String
@@ -213,7 +249,7 @@ class DatabaseHandler
         try {
             $this->db->beginTransaction();
 
-            $update = "UPDATE users SET 
+            $update = "UPDATE users SET
                         first_name = :first_name,
                         last_name = :last_name,
                         email = :newEmail,
@@ -299,7 +335,7 @@ class DatabaseHandler
         try {
             $this->db->beginTransaction();
 
-            $insert = "INSERT INTO tickets (os_type, primary_issue, additional_notes, status, submitter_id) 
+            $insert = "INSERT INTO tickets (os_type, primary_issue, additional_notes, status, submitter_id)
                       VALUES (:os_type, :primary_issue, :additional_notes, :status, :submitter_id)";
             $stmt = $this->db->prepare($insert);
 
@@ -370,7 +406,7 @@ class DatabaseHandler
         try {
             $this->db->beginTransaction();
 
-            $update = "UPDATE tickets SET 
+            $update = "UPDATE tickets SET
                         os_type = :os_type,
                         primary_issue = :primary_issue,
                         additional_notes = :additional_notes,
