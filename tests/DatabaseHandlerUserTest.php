@@ -45,22 +45,22 @@ class DatabaseHandlerUserTest extends TestCase
 
     public function testUpdateValidUserReturnsTrue()
     {
-        $this->assertTrue(self::$dbh->updateUser(1, 'Jon', 'Stark', 'jstark@gmail.com', 0));
+        $this->assertTrue(self::$dbh->updateUser('jsnow@gmail.com', 'Jon', 'Stark', 'jstark@gmail.com', 0));
     }
 
     public function testUpdateInvalidUserReturnsFalse()
     {
-        $this->assertFalse(self::$dbh->updateUser(3, 'Robb', 'Stark', 'rstark@gmail.com', 0));
+        $this->assertFalse(self::$dbh->updateUser('rstark@gmail.com', 'Robb', 'Stark', 'rstark2@gmail.com', 0));
     }
 
     public function testDeleteInvalidUserReturnsFalse()
     {
-        $this->assertFalse(self::$dbh->deleteUser(2));
+        $this->assertFalse(self::$dbh->deleteUser('nstark@gmail.com'));
     }
 
     public function testDeleteValidUserReturnsTrue()
     {
-        $this->assertTrue(self::$dbh->deleteUser(1));
+        $this->assertTrue(self::$dbh->deleteUser('jstark@gmail.com'));
     }
 
 }
