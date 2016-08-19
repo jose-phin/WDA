@@ -199,16 +199,16 @@ class DatabaseHandler
     }
 
     /**
-     * Updates a user with a specified ID
+     * Updates a user with a specified email
      *
-     * @param $userId int
+     * @param $email String
      * @param $firstName String
      * @param $lastName String
-     * @param $email String note again that this must be unique
+     * @param $newEmail String
      * @param $isITS Boolean
      * @return bool True if the query succeeds, False if otherwise
      */
-    function updateUser($userId, $firstName, $lastName, $email, $isITS)
+    function updateUser($email, $firstName, $lastName, $newEmail, $isITS)
     {
         try {
             $this->db->beginTransaction();
@@ -216,16 +216,16 @@ class DatabaseHandler
             $update = "UPDATE users SET 
                         first_name = :first_name,
                         last_name = :last_name,
-                        email = :email,
+                        email = :newEmail,
                         is_its = :is_its
-                        WHERE user_id = :user_id";
+                        WHERE email = :email";
 
             $stmt = $this->db->prepare($update);
 
             $stmt->bindParam(':first_name', $firstName);
             $stmt->bindParam(':last_name', $lastName);
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':user_id', $userId);
+            $stmt->bindParam(':newEmail', $newEmail);
             $stmt->bindParam(':is_its', $isITS);
 
             $stmt->execute();
@@ -248,21 +248,21 @@ class DatabaseHandler
     }
 
     /**
-     * Deletes a user from the Users table with the specified ID
+     * Deletes a user from the Users table with the specified email
      *
-     * @param $userId int
+     * @param $email String
      * @return bool True if successfully deleted, False otherwise
      */
-    function deleteUser($userId)
+    function deleteUser($email)
     {
         try {
             $this->db->beginTransaction();
 
-            $delete = "DELETE FROM users WHERE user_id = :user_id";
+            $delete = "DELETE FROM users WHERE email = :email";
             $stmt = $this->db->prepare($delete);
 
-            $stmt->bindParam(':user_id', $userId);
-            $res =$stmt->execute();
+            $stmt->bindParam(':email', $email);
+            $res = $stmt->execute();
 
             $this->db->commit();
 
