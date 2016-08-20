@@ -57,8 +57,18 @@ class DatabaseHandlerTicketTest extends TestCase
         $this->assertFalse(self::$dbh->updateTicket(2, "Ubuntu", "It won't turn on!", "", "Pending", 1));
     }
 
+    public function testGetUserTicketsValidEmailReturnsCorrectCount() {
+        self::$dbh->createTicket("Mac OSX", "It won't turn on again!", "", "Pending", 1);
+
+        $this->assertCount(2, self::$dbh->getAllTicketsForUser("jsnow@gmail.com"));
+    }
+
+    public function testGetUserTicketsInvalidEmailReturnsNull() {
+        $this->assertNotNull(self::$dbh->getAllTicketsForUser("rstark@gmail.com"));
+    }
+
     public function testDeleteTicketWithInvalidTicketIDReturnsFalse() {
-        $this->assertFalse(self::$dbh->deleteTicket(2));
+        $this->assertFalse(self::$dbh->deleteTicket(100));
     }
 
     public function testDeleteTicketWithValidTicketIDReturnsTrue() {
