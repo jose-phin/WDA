@@ -199,33 +199,69 @@ class DatabaseHandler
     }
 
     /**
-     * Updates a user with a specified ID
+     * Gets a user with the specified Email
      *
-     * @param $userId int
-     * @param $firstName String
-     * @param $lastName String
-     * @param $email String note again that this must be unique
-     * @param $isITS Boolean
-     * @return bool True if the query succeeds, False if otherwise
+     * @param $userEmail string
+     * @return array|null an associative array containing the user's details, or null if the query fails
      */
-    function updateUser($userId, $firstName, $lastName, $email, $isITS)
+    function getUserByEmail($userEmail)
     {
         try {
             $this->db->beginTransaction();
 
-            $update = "UPDATE users SET 
+            $query = "SELECT * FROM users WHERE email = :userEmail";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':userEmail', $userEmail, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $this->db->commit();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$result) {
+                return null;
+            } else {
+                return $result;
+            }
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $message = "Failed to get user: " . $e->getMessage();
+            $this->logger->log_error($message);
+
+            return null;
+        }
+    }
+
+
+    /**
+     * Updates a user with a specified email
+     *
+     * @param $email String
+     * @param $firstName String
+     * @param $lastName String
+     * @param $newEmail String
+     * @param $isITS Boolean
+     * @return bool True if the query succeeds, False if otherwise
+     */
+    function updateUser($email, $firstName, $lastName, $newEmail, $isITS)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $update = "UPDATE users SET
                         first_name = :first_name,
                         last_name = :last_name,
-                        email = :email,
+                        email = :newEmail,
                         is_its = :is_its
-                        WHERE user_id = :user_id";
+                        WHERE email = :email";
 
             $stmt = $this->db->prepare($update);
 
             $stmt->bindParam(':first_name', $firstName);
             $stmt->bindParam(':last_name', $lastName);
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':user_id', $userId);
+            $stmt->bindParam(':newEmail', $newEmail);
             $stmt->bindParam(':is_its', $isITS);
 
             $stmt->execute();
@@ -248,21 +284,21 @@ class DatabaseHandler
     }
 
     /**
-     * Deletes a user from the Users table with the specified ID
+     * Deletes a user from the Users table with the specified email
      *
-     * @param $userId int
+     * @param $email String
      * @return bool True if successfully deleted, False otherwise
      */
-    function deleteUser($userId)
+    function deleteUser($email)
     {
         try {
             $this->db->beginTransaction();
 
-            $delete = "DELETE FROM users WHERE user_id = :user_id";
+            $delete = "DELETE FROM users WHERE email = :email";
             $stmt = $this->db->prepare($delete);
 
-            $stmt->bindParam(':user_id', $userId);
-            $res =$stmt->execute();
+            $stmt->bindParam(':email', $email);
+            $res = $stmt->execute();
 
             $this->db->commit();
 
@@ -292,14 +328,14 @@ class DatabaseHandler
      * @param $additionalNotes String
      * @param $status String (OPTIONAL) will default to 'Pending' if not provided
      * @param $submitterId int
-     * @return bool True if the ticket is successfully created, False otherwise
+     * @return int the newly created Ticket ID, or -1 if unable to create the ticket
      */
     function createTicket($osType, $primaryIssue, $additionalNotes, $status = "Pending", $submitterId)
     {
         try {
             $this->db->beginTransaction();
 
-            $insert = "INSERT INTO tickets (os_type, primary_issue, additional_notes, status, submitter_id) 
+            $insert = "INSERT INTO tickets (os_type, primary_issue, additional_notes, status, submitter_id)
                       VALUES (:os_type, :primary_issue, :additional_notes, :status, :submitter_id)";
             $stmt = $this->db->prepare($insert);
 
@@ -309,17 +345,19 @@ class DatabaseHandler
             $stmt->bindParam(':status', $status);
             $stmt->bindParam(':submitter_id', $submitterId);
 
-            $res = $stmt->execute();
-            $this->db->commit();
+            $stmt->execute();
 
-            return true;
+            $ticketId = $this->db->lastInsertId();
+
+            $this->db->commit();
+            return $ticketId;
 
         } catch (Exception $e) {
             $this->db->rollBack();
             $message = "Failed to create ticket: " . $e->getMessage();
             $this->logger->log_error($message);
 
-            return false;
+            return -1;
         }
     }
 
@@ -368,7 +406,7 @@ class DatabaseHandler
         try {
             $this->db->beginTransaction();
 
-            $update = "UPDATE tickets SET 
+            $update = "UPDATE tickets SET
                         os_type = :os_type,
                         primary_issue = :primary_issue,
                         additional_notes = :additional_notes,
@@ -434,6 +472,42 @@ class DatabaseHandler
         }
     }
 
+    /**
+     * Fetches all tickets submitted by a user with a given email
+     *
+     * @param $email
+     * @return array|null returns a 2D array of tickets, or null if unable to fetch tickets
+     */
+    function getAllTicketsForUser($email)
+    {
+        try {
+            $tickets = [];
+
+            $this->db->beginTransaction();
+
+            $query = "SELECT tickets.* FROM tickets
+                      INNER JOIN users ON tickets.submitter_id = users.user_id
+                      WHERE users.email = :email;";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':email', $email);
+
+            $stmt->execute();
+            $this->db->commit();
+
+            // Move through the results of the query, adding the next assoc array to the tickets master array
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($tickets, $row);
+            }
+
+            return $tickets;
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $message = "Failed to get tickets for user " . $email . ": " . $e->getMessage();
+            $this->logger->log_error($message);
+        }
+    }
 
     /****************************************
      *  COMMENT FUNCTIONS
@@ -446,7 +520,7 @@ class DatabaseHandler
      * @param $ticketId int
      * @param $commentText String
      * @param $submitterId int
-     * @return bool True if able to successfully create the comment, False otherwise
+     * @return int the ID of the newly created comment, or -1 if unable to create the comment
      */
     function addComment($ticketId, $commentText, $submitterId)
     {
@@ -477,14 +551,14 @@ class DatabaseHandler
 
             $this->db->commit();
 
-            return true;
+            return $commentId;
 
         } catch (Exception $e) {
             $this->db->rollBack();
             $message = "Failed to add comment: " . $e->getMessage();
             $this->logger->log_error($message);
 
-            return false;
+            return -1;
         }
 
     }
@@ -586,4 +660,40 @@ class DatabaseHandler
         }
     }
 
+    /**
+     * Fetches all comments associated with a ticket
+     *
+     * @param $ticketId int
+     * @return array|null returns a 2D array of comments. Each comment assoc array provides the following:
+     * [comment_id, comment_text, user_id, email, is_its]. If unable to fetch comments, this function will return null.
+     */
+    function getAllCommentsForTicket($ticketId)
+    {
+        try {
+            $comments = [];
+
+            $this->db->beginTransaction();
+
+            $query = "SELECT comments.comment_id, comments.comment_text, users_comments.user_id, users.email, users.is_its
+                    FROM ticket_comments INNER JOIN comments ON ticket_comments.comment_id = comments.comment_id
+                    INNER JOIN users_comments ON comments.comment_id = users_comments.comment_id
+                    INNER JOIN users ON users_comments.user_id = users.user_id
+                    WHERE ticket_comments.ticket_id = :ticket_id;";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':ticket_id', $ticketId);
+            $stmt->execute();
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($comments, $row);
+            }
+
+            return $comments;
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $message = "Failed to get comments for ticket: " . $ticketId . $e->getMessage();
+            $this->logger->log_error($message);
+        }
+    }
 }
