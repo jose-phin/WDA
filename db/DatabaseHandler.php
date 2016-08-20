@@ -472,6 +472,42 @@ class DatabaseHandler
         }
     }
 
+    /**
+     * Fetches all tickets submitted by a user with a given email
+     *
+     * @param $email
+     * @return array|null returns a 2D array of tickets, or null if unable to fetch tickets
+     */
+    function getAllTicketsForUser($email)
+    {
+        try {
+            $tickets = [];
+
+            $this->db->beginTransaction();
+
+            $query = "SELECT tickets.* FROM tickets
+                      INNER JOIN users ON tickets.submitter_id = users.user_id
+                      WHERE users.email = :email;";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':email', $email);
+
+            $stmt->execute();
+            $this->db->commit();
+
+            // Move through the results of the query, adding the next assoc array to the tickets master array
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($tickets, $row);
+            }
+
+            return $tickets;
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $message = "Failed to get tickets for user " . $email . ": " . $e->getMessage();
+            $this->logger->log_error($message);
+        }
+    }
 
     /****************************************
      *  COMMENT FUNCTIONS
@@ -624,4 +660,40 @@ class DatabaseHandler
         }
     }
 
+    /**
+     * Fetches all comments associated with a ticket
+     *
+     * @param $ticketId int
+     * @return array|null returns a 2D array of comments. Each comment assoc array provides the following:
+     * [comment_id, comment_text, user_id, email, is_its]. If unable to fetch comments, this function will return null.
+     */
+    function getAllCommentsForTicket($ticketId)
+    {
+        try {
+            $comments = [];
+
+            $this->db->beginTransaction();
+
+            $query = "SELECT comments.comment_id, comments.comment_text, users_comments.user_id, users.email, users.is_its
+                    FROM ticket_comments INNER JOIN comments ON ticket_comments.comment_id = comments.comment_id
+                    INNER JOIN users_comments ON comments.comment_id = users_comments.comment_id
+                    INNER JOIN users ON users_comments.user_id = users.user_id
+                    WHERE ticket_comments.ticket_id = :ticket_id;";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':ticket_id', $ticketId);
+            $stmt->execute();
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($comments, $row);
+            }
+
+            return $comments;
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $message = "Failed to get comments for ticket: " . $ticketId . $e->getMessage();
+            $this->logger->log_error($message);
+        }
+    }
 }

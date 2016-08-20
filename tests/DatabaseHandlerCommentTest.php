@@ -53,7 +53,7 @@ class DatabaseHandlerCommentTest extends TestCase
 
     public function testGetCommentInvalidCommentIDReturnsNull()
     {
-        $this->assertNull(self::$dbh->getComment(2));
+        $this->assertNull(self::$dbh->getComment(100));
     }
 
     public function testUpdateCommentValidCommentIDReturnsTrue()
@@ -66,13 +66,25 @@ class DatabaseHandlerCommentTest extends TestCase
         $this->assertFalse(self::$dbh->updateComment(2, "Edited comment"));
     }
 
+    public function testGetAllCommentsForTicketValidTicketIDReturnsCorrectAmount() {
+        self::$dbh->addComment(1, "Another comment", 1);
+        self::$dbh->addComment(1, "Yet Another comment", 1);
+
+        $this->assertCount(3, self::$dbh->getAllCommentsForTicket(1));
+    }
+
+    public function testGetAllCommentsForTicketInvalidTicketIDReturnsNull() {
+        $this->assertEmpty(self::$dbh->getAllCommentsForTicket(100));
+    }
+
     public function testDeleteCommentInvalidCommentIDReturnsFalse()
     {
-        $this->assertFalse(self::$dbh->deleteComment(2));
+        $this->assertFalse(self::$dbh->deleteComment(100));
     }
 
     public function testDeleteCommentValidCommentIDReturnsTrue()
     {
         $this->assertTrue(self::$dbh->deleteComment(1));
     }
+
 }
