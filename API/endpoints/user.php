@@ -1,12 +1,12 @@
 <?php
 
-  require($_SERVER['DOCUMENT_ROOT'].'\API\classes\HandleRequest.php');
+  require($_SERVER['DOCUMENT_ROOT'].'/WDA/API/classes/HandleRequest.php');
 
   //create a request Handler
   $requestHandler = new HandleRequest();
 
   //get the part of the url after .../user
-  $endpoint = $_GET['endpoint'];
+  $endpoint = isset($_GET['endpoint'])? $_GET['endpoint'] : '';
 
   $result = null;
   switch($endpoint) {

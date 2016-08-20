@@ -2,4 +2,5 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^user(.*)$ /API/endpoints/user.php?endpoint=$1 [NC,QSA]
+RewriteRule ^comment(.*)$ /API/endpoints/comment.php?endpoint=$1 [NC,QSA]
 RewriteRule ^ticket(.*)$ /API/endpoints/ticket.php?endpoint=$1 [NC,QSA,L]
