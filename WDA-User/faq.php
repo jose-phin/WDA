@@ -46,9 +46,8 @@
                     <!-- FAQ contents -->
                     <?php include "./assets/content/faq-student-content.php" ?>
                     <?php include "./assets/content/faq-staff-content.php" ?>
-                    <!-- Submit a ticket hero banner -->
 
-                    <!-- CSS 5EVA 😊 -->
+                    <!-- Submit a ticket hero banner -->
                     <div class="col-md-12 faq-ticket-hero">
                         <div class="col-md-5 faq-ticket-text">
                             Didn't find what you were looking for?
