@@ -71,13 +71,29 @@
     border-top: 2px solid black;
 }
 
+.individual-ticket-info-row{
+  margin-bottom: 10px;
+}
+
 .panel-body, .panel-comment, .panel-comment>a{
   font-family: "Karla", sans-serif;
 }
 
-
+.panel-comment>.ticket-info-header-text{
+  color: black;
+  margin-bottom: 5px;
+}
 .panel-comment>a, .panel-body>a{
   text-decoration: underline;
   font-family: inherit;
   color: #2C35E4;
+}
+
+.panel-comment textarea{
+  resize: vertical;
+}
+
+.add-reply-button{
+  margin-top: 10px;
+  margin-bottom: 20px;
 }

@@ -54,7 +54,9 @@
                         <!-- Return home button -->
                         <div class="row btn-margin-fix">
                             <div class="col-sm-12 col-md-2 btn-col ">
-                                <button class="btn btn-secondary follow-up-home-button">Return Home</button>
+                                <a href="./home.php">
+                                    <button class="btn btn-secondary follow-up-home-button">Return Home</button>
+                                </a>
                             </div>
                         </div>
                     <!-- End of col-md-10 -->
