@@ -1,18 +1,46 @@
 <?php
 
-  require($_SERVER['DOCUMENT_ROOT'].'\API\classes\HandleRequest.php');
+/* Format of the request for
+  /new
+  {
+    "user":{
+        "firstName":"John",
+        "lastName":"Doe",
+        "email":"poo@ko.com"
+    },
+    "ticket":{
+        "osType": "Mac",
+        "primaryIssue": "Issue here",
+        "additionalNotes": "Addition notes here"
+    }
+  }
 
-  //create a request Handler
+  /view && /close
+  {
+    "ticketId": 1
+  }
+
+ */
+
+  require($_SERVER['DOCUMENT_ROOT'].'/WDA/API/classes/HandleRequest.php');
+
+ //create a request Handler
   $requestHandler = new HandleRequest();
 
   //get the part of the url after .../ticket
-  $endpoint = $_GET['endpoint'];
+  $endpoint = isset($_GET['endpoint'])? $_GET['endpoint'] : '';
 
   //if the url pointer to /ticket/new, create a new ticket
   $result = null;
   switch($endpoint) {
     case "/new" :
       $result = $requestHandler->createNewTicket();
+      break;
+    case "/view" :
+      $result = $requestHandler->viewTicketAndComments();
+      break;
+    case "/close" :
+      $result = $requestHandler->closeTicket();
       break;
   };
 

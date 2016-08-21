@@ -1,7 +1,5 @@
 <?php
-
-  require($_SERVER['DOCUMENT_ROOT'].'\db\DatabaseHandler.php');
-
+  require($_SERVER['DOCUMENT_ROOT'].'/WDA/db/DatabaseHandler.php');
   /**
    * Class that handles the interaction between the API and the Database, Abstracted so that
    * the Concrete class has no idea how the Database works
@@ -14,7 +12,7 @@
     private $db = null;
 
     public function __construct() {
-      $this->db = new DatabaseHandler("TestDatabase", TRUE);
+      $this->db = new DatabaseHandler("TestDatabase");
     }
 
     public function __destruct() {
@@ -31,7 +29,7 @@
      *
      * @return bool - true is user was created, false if user was not created
      */
-    public function createUser($firstName, $lastName, $email) {
+    public function createUserDB($firstName, $lastName, $email) {
 
       $result = $this->db->createUser(
         $firstName,
@@ -77,6 +75,53 @@
         );
 
         return $result;
+    }
+
+    /**
+     * Create a new ticket for the user into the database
+     *
+     * @param $ticketId int
+     * @param $comment string
+     * @param $userId int
+     *
+     * @return ticketId
+     */
+    public function createComment( $ticketId, $comment, $userId) {
+      $result = $this->db->addComment($ticketId, $comment, $userId);
+      return $result;
+    }
+
+    /**
+     * Create a new ticket for the user into the database
+     *
+     * @param $ticketId int
+     * @return array of comments
+     */
+    public function getCommentsFromTicket($ticketId) {
+      $result = $this->db->getAllCommentsForTicket($ticketId);
+      return $result;
+    }
+
+    public function getTicketInfo($ticketId) {
+      $result = $this->db->getTicket($ticketId);
+      return $result;
+    }
+
+    public function closeTicketDB($ticketId){
+
+      $ticket = $this->db->getTicket($ticketId);
+      if($ticket === null) {
+        return false;
+      }
+      echo var_dump($ticket);
+      $result = $this->db->updateTicket($ticketId, $ticket["os_type"], $ticket["primary_issue"],$ticket["additional_notes"], "Resolved",$ticket["submitter_id"]);
+
+      return $result;
+    }
+
+    public function getAllTickets() {
+      $result = $this->db->getTicket();
+      return $result;
     }
 
     public function getTicketHandler() {

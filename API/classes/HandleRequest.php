@@ -1,6 +1,5 @@
 <?php
-  require($_SERVER['DOCUMENT_ROOT'] . '\API\classes\AbstractApi.php');
-
+  require($_SERVER['DOCUMENT_ROOT'] . '/WDA/API/classes/AbstractApi.php');
   /**
    * Concrete Class implementation of AbstractApi, this HandleRequest class
    * is made to handle JSON POST requests and will process and use a raw JSON
@@ -33,7 +32,7 @@
     $user = $this->jsonRequest["user"];
 
     //create the user
-    return @parent::createUser($user["firstName"], $user["lastName"], $user["email"]);
+    return @parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
     }
 
     /**
@@ -54,7 +53,7 @@
       $userId = parent::getUserIdByEmail($user['email']);
       if(!isset($userId)) {
         //if the user does not exist, create the user
-        $couldCreateUser = parent::createUser($user["firstName"], $user["lastName"], $user["email"]);
+        $couldCreateUser = parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
 
         //if we could not create the user, return false
         if(!$couldCreateUser) return false;
@@ -70,6 +69,69 @@
       $couldCreateTicket = parent::createTicket($userId, $ticket['osType'], $ticket['primaryIssue'], $ticket['additionalNotes']);
 
       return $couldCreateTicket;
+    }
+
+    /**
+     * Create a new comment
+     *
+     * @return bool
+     * @note we can remove the create user later
+     */
+    public function createNewComment() {
+      $user = $this->jsonRequest["user"];
+      $comment = $this->jsonRequest["comment"];
+
+      //if the user or the ticket data is not set, return false
+      if( !isset($user) || !isset($comment) )return false;
+
+      $userId = parent::getUserIdByEmail($user['email']);
+
+      if(!isset($userId)) {
+
+        $couldCreateUser = parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
+
+        if(!$couldCreateUser) return false;
+
+        $userId = parent::getUserIdByEmail($user['email']);
+
+        if(!isset($userId)) return false;
+      }
+      $ticketId = intval($comment['ticketId']);
+      if(is_nan($ticketId)) {
+        return false;
+      }
+
+      $couldCreateNewComment = parent::createComment($ticketId, $comment["comment"],$userId);
+      return $couldCreateNewComment;
+    }
+
+    /**
+     * View the tickets and their comments
+     *
+     * @return false if ticket number isnt found, else returns array with information
+     */
+    public function viewTicketAndComments() {
+      $ticket = $this->jsonRequest["ticketId"];
+
+      $ticketInfo = parent::getTicketInfo($ticket);
+      if($ticketInfo === -1) {
+        return false;
+      }
+      $commentList = parent::getCommentsFromTicket($ticket);
+
+      $resultArray = array("ticketInfo" =>$ticketInfo, "commentList"=>$commentList);
+      return $resultArray;
+    }
+
+    /**
+     * Close ticket
+     *
+     * @return false if ticket number isnt found
+     */
+    public function closeTicket(){
+      $ticket = $this->jsonRequest["ticketId"];
+      $result = parent::closeTicketDB($ticket);
+      return $result;
     }
   }
 ?>

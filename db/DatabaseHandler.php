@@ -436,7 +436,6 @@ class DatabaseHandler
             $this->db->rollBack();
             $message = "Failed to update ticket: " . $e->getMessage();
             $this->logger->log_error($message);
-
             return false;
         }
     }
@@ -508,6 +507,38 @@ class DatabaseHandler
             $this->logger->log_error($message);
         }
     }
+
+//    function getSortedTickets($sortType = null, $email, $ticketId)
+//    {
+//        try {
+//            $tickets = [];
+//            $query = null;
+//
+//            switch ($sortType) {
+//                case :
+//                    break;
+//                default :
+//                    $query = "SELECT * FROM tickets";
+//                    break;
+//            }
+//
+//            $stmt = $this->db->prepare($query);
+//
+//            $stmt->execute();
+//            $this->db->commit();
+//
+//            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+//                array_push($tickets, $row);
+//            }
+//
+//            return $tickets;
+//
+//        } catch (Exception $e) {
+//            $this->db->rollBack();
+//            $message = "Failed to get tickets for user " . $email . ": " . $e->getMessage();
+//            $this->logger->log_error($message);
+//        }
+//    }
 
     /****************************************
      *  COMMENT FUNCTIONS
