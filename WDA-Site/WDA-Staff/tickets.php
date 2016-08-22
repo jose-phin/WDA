@@ -1,4 +1,3 @@
-<!-- FAQ -->
 <!DOCTYPE html>
 
 <!-- Identifies user's location in website -->
@@ -14,8 +13,11 @@
     <title>Tickets &ndash; ITS Ticketing System | RMIT University </title>
 
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
-    <?php include "./assets/head_items.php" ?>
-    <link rel="stylesheet" href="./assets/css/tickets-style.css">
+    <?php include "../WDA-User/assets/head_items.php" ?>
+    <link rel="stylesheet" href="../WDA-User/assets/css/style.css">
+    <link rel="stylesheet" href="../WDA-User/assets/css/footer-style.css">
+    <link rel="stylesheet" href="../WDA-User/assets/css/navbar-style.css">
+    <link rel="stylesheet" href="../WDA-User/assets/css/tickets-style.css">
 
 </head>
 
@@ -24,7 +26,7 @@
         <div class="site-wide-container container">
 
             <!-- Navigation Bar -->
-            <?php include_once "navbar.php"; ?>
+            <?php include_once "../WDA-User/navbar.php"; ?>
 
             <div class="hero main-hero">
 
@@ -186,6 +188,6 @@
 </body>
 
 <!-- Footer -->
-<?php include "footer.php"; ?>
+<?php include "../WDA-User/footer.php"; ?>
 
 </html>

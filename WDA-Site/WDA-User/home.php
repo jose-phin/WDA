@@ -47,10 +47,10 @@
 
                 <div class="row btn-margin-fix">
                     <div class="col-sm-12 col-md-2 btn-col">
-                        <a href="report.php"><button class="btn btn-primary">Report an Issue</button></a>
+                        <a href="report-issue.php"><button class="btn btn-primary">Report an Issue</button></a>
 
                     </div>
-                    <div class="col-sm-12 col-md-2 btn-col ">
+                    <div class="col-sm-12 col-md-2 btn-col">
                             <button class="btn btn-secondary follow-up-home-button">Follow Up on Ticket</button>
                     </div>
                 </div>
@@ -95,6 +95,6 @@
 </body>
 
 <!-- Footer -->
-<?php include_once "footer.php"; ?>
+<?php include_once "./footer.php"; ?>
 
 </html>

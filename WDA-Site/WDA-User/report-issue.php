@@ -1,9 +1,8 @@
-<!-- FAQ -->
 <!DOCTYPE html>
 
 <!-- Identifies user's location in website -->
 <?php
-    $currPage = "report";
+    $currPage = "report-issue";
 ?>
 
 <html lang="en">
@@ -16,8 +15,9 @@
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
     <link rel="stylesheet" href="./assets/css/report-issue-style.css">
-    <script src="./assets/js/report_issue_scripts.js"></script>
+    <script src="./assets/js/report-issue-script.js"></script>
     <script src="./assets/js/eventHandler-form.js"></script>
+    <script src="./assets/js/submit-form-script.js"></script>
 </head>
 
 <body>
@@ -35,8 +35,9 @@
                 <h1 class="h1-subtitle">
                     We got yo back.
                 </h1>
-                <p>
+                <p><span class="hero-description">
                     Please fill out the form below, and we will endeavour to answer your enquiry within 48 hours.
+                    </span>
                 </p>
 
             <!-- End of hero div -->
@@ -44,10 +45,10 @@
 
             <!-- Instantiate Bootstrap's col-sm-4 grid -->
             <div class="row">
-
                     <!-- Form begins -->
-                    <form id="report-issue" name="reportIssueForm" method="post" action="" autocomplete="off" novalidate="novalidate">
+                    <form id="report-issue" name="reportIssueForm" class="result" method="post" autocomplete="off" novalidate="novalidate">
 
+                        <div class="contained">
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="firstname">First Name</label>*
@@ -60,6 +61,7 @@
                                 <label for="lastname">Last Name</label>*
                                 <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name">
                             </div>
+                        </div>
                         </div>
 
                         <div class="col-sm-8">
@@ -74,30 +76,23 @@
                                 <label for="enquiry">Type of Enquiry</label>*
                                 <select name="enquiry" class="form-control" id="enquiry">
                                     <option disabled selected value=""> -- Select an option -- </option>
+                                    <option>Blackboard</option>
                                     <option>General IT Enquiry</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                    <option>Option 4</option>
-                                    <option>Other (Please specify)</option>
+                                    <option>Google Mail</option>
+                                    <option>myRMIT</option>
+                                    <option>Other</option>
                                 </select>
-                            </div>
-
-                            <!-- Eventually, this will only show when "Other" is clicked -->
-                            <div class="form-group" style="display:none">
-                                <label for="other-enquiry">Other (Please specify)</label>
-                                <input type="other-enquiry" class="form-control" id="other-equiry" area-describedby="other-enquiry-help" placeholder="">
-                                <small id="other-enquiery-help" class="form-text text-muted">What?!</small>
                             </div>
 
                             <div class="form-group">
                                 <label for="os">Operating System</label>
-                                <select class="form-control" id="os">
-                                <option disabled selected value> -- Select an option -- </option>
-                                <option>Windows</option>
-                                <option>Mac OS</option>
-                                <option>Linux</option>
-                                <option>Ubuntu</option>
-                                <option>Other (Please specify)</option>
+                                <select name="os" class="form-control" id="os">
+                                <option disabled selected value=""> -- Select an option -- </option>
+                                    <option>Windows</option>
+                                    <option>macOS</option>
+                                    <option>Linux</option>
+                                    <option>Ubuntu</option>
+                                    <option>Other</option>
                                 </select>
                             </div>
 
@@ -115,13 +110,19 @@
 
                         </div><!-- End col-sm-8 -->
 
-                    </form>
-                    <!-- End form -->
+                    </form><!-- End form -->
 
+                    </div><!-- End row -->
+
+                    <div class="submitted">
+                        <hr><br>
+                        <p>Thank you for submitting a request.</p>
+                        <p class="result"></p>
                     </div>
-                </div>
-            </div>
 
+                </div>
+
+            </div>
 
         <!-- End of site-wide container -->
         </div>

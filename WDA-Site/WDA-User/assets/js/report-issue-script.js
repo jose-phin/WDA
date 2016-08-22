@@ -1,6 +1,6 @@
-/*Form validation*/
+/* Form validation */
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     $("#report-issue").validate({
         rules: {
