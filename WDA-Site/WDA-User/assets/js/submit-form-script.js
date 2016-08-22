@@ -6,13 +6,13 @@ $(document).ready(function() {
 
 	/* Process the form */
 	$(document).submit("#report-issue", function() {
-			
+
 			/* Serialised data */
 			var data = $("#report-issue").serialize();
 
-			$.ajax({		
+			$.ajax({
 				type: "POST",
-				url: "user/new",
+				url: "/user/new",
 				data: {
 					"user": {
 						"firstName": $("input[name=firstname]").val(),
@@ -30,9 +30,9 @@ $(document).ready(function() {
 						$(".submitted").fadeIn(500).show(function() {
 							$(".result").text(data);
 						});
-					});								
+					});
 				}
-			});	
+			});
 			return false;
 		});
 });
