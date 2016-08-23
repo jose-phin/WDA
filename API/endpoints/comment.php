@@ -32,7 +32,9 @@
     switch($endpoint) {
         case "/new":
             $result = $requestHandler->createNewComment();
-            $response = array( "commentId" => $result );
+            $response = ($result == FALSE)
+              ? array( "success" => $result )
+              : array( "success" => TRUE, "commentId" => $result );
             break;
         case "/viewall" :
             $response = $requestHandler->viewTicketAndComments();

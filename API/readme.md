@@ -137,7 +137,65 @@ This endpoint will close the ticket of the passed in ticketId
 }
 ```
 ### Comment
+This endpoint handles all of the comment related API calls
 #### New
+* **URL**
+```
+/comment/new
+```
+
+* **Description**
+
+This endpoint will create a new comment for the specified ticket, and if the
+commenting user does not exist in the database, should you provide a first
+name, a last name, and an email, the endpoint also create the user,
+then create the comment for the ticket
+
+* **Parameters**
+
+**Required**
+```javascript
+{
+  "user": [Object] {
+    "email": [String]
+  },
+  "comment": [Object] {
+    "ticketId": [String],
+    "comment": [String]
+  }
+}
+```
+
+**Optional**
+```javascript
+{
+  "user": [Object] {
+    "firstName": [String],
+    "lastName": [String]
+  }
+}
+```
+
+* **Success Response**
+
+*JSON* `{"success": true, "commentId": [String]}`
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "user":{
+        "email": "mysterious.challenger@secret.tree.co"
+    },
+    "comment":{
+        "ticketId": "6",
+        "comment": "Who am I? None of your business"
+    }
+}
+```
 #### View All
 ### User
 #### New
