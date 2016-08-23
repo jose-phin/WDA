@@ -30,27 +30,20 @@
   $endpoint = isset($_GET['endpoint'])? $_GET['endpoint'] : '';
 
   //if the url pointer to /ticket/new, create a new ticket
-  $result = null;
+  $response = null;
   switch($endpoint) {
     case "/new" :
       $result = $requestHandler->createNewTicket();
-      break;
-    case "/view" :
-      $result = $requestHandler->viewTicketAndComments();
+      $response = ($result == FALSE) ? array( "success" => $result ) : array("success" => TRUE, "ticketId" => $result);
       break;
     case "/close" :
       $result = $requestHandler->closeTicket();
+      $response = array( "success" => $result );
       break;
   };
 
-  //return the result of the ticket creation
-  $response = array( "success" => $result );
-
   //don't send anything if the user didn't hit a valid endpoint
-  if(isset($result)){
-    $fp = fopen('../../WDA-Site/WDA-User/assets/results.json', 'w');
-    fwrite($fp, json_encode($response));
-    fclose($fp);
+  if(isset($response)){
     echo json_encode($response);
   }
 ?>

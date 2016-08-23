@@ -19,9 +19,6 @@
 
   //don't send anything if the user didn't hit a valid endpoint
   if(isset($result)){
-    $fp = fopen('../../WDA-Site/WDA-User/assets/results.json', 'w');
-    fwrite($fp, json_encode($response));
-    fclose($fp);
     echo json_encode($response);
   }
 ?>

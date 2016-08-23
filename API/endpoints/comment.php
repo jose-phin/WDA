@@ -27,23 +27,20 @@
     //get the part of the url after .../ticket
     $endpoint = isset($_GET['endpoint'])? $_GET['endpoint'] : '';
 
-
     //if the url pointer to /comment/new, create a new ticket
-    $result = null;
+    $response = null;
     switch($endpoint) {
-        case "/new" :
+        case "/new":
             $result = $requestHandler->createNewComment();
+            $response = array( "commentId" => $result );
+            break;
+        case "/viewall" :
+            $response = $requestHandler->viewTicketAndComments();
             break;
     };
 
-    //return the comment ID, if -1 is returned, it failed
-    $response = array( "commentId" => $result );
-
     //don't send anything if the user didn't hit a valid endpoint
-    if(isset($result)){
-        $fp = fopen('../../WDA-Site/WDA-User/assets/results.json', 'w');
-        fwrite($fp, json_encode($response));
-        fclose($fp);
+    if(isset($response)){
         echo json_encode($response);
     }
 
