@@ -48,9 +48,10 @@ This endpoint is the main ticket creation and closing endpoint
 ```
 
 * **Description**
-This endpoint will create a new ticket for the specified user, and if the user
-does not exist in the database, should you provide a first name and a last
-name, the endpoint will also create the user, then create the ticket
+
+  This endpoint will create a new ticket for the specified user, and if the user
+  does not exist in the database, should you provide a first name and a last
+  name, the endpoint will also create the user, then create the ticket
 
 * **Parameters**
 
@@ -103,6 +104,38 @@ name, the endpoint will also create the user, then create the ticket
 }
 ```
 #### Close
+* **URL**
+```
+/ticket/close
+```
+
+* **Description**
+
+  This endpoint will close the ticket of the passed in ticketId
+
+* **Parameters**
+
+  **Required**
+  ```javascript
+{
+  "ticketId": [String]
+}
+  ```
+
+* **Success Response**
+
+  *JSON* `{"success": true}`
+
+* **Error Response**
+
+  *JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "ticketId": "477"
+}
+```
 ### Comment
 #### New
 #### View All
