@@ -21,9 +21,9 @@ $(document).ready(function() {
 						"email": $("input[name=email]").val()
 					},
 					"ticket": {
-						"osType": $("input[name=os]").val(),
-						"primaryIssue": $("input[name=enquiry]").val(),
-						"additionalNotes": $("input[name=description]").val()
+						"osType": $("#os").val(),
+						"primaryIssue": $("#enquiry").val(),
+						"additionalNotes": $("#description").val()
 					}
 				}),
 				success:  function(formData) {

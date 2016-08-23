@@ -1,7 +1,6 @@
 <?php
 
-  require($_SERVER['DOCUMENT_ROOT'].'/WDA/API/classes/HandleRequest.php');
-
+  require('../classes/HandleRequest.php');
   //create a request Handler
   $requestHandler = new HandleRequest();
 
@@ -19,5 +18,10 @@
   $response = array( "success" => $result );
 
   //don't send anything if the user didn't hit a valid endpoint
-  if(isset($result)) echo json_encode($response);
+  if(isset($result)){
+    $fp = fopen('../../WDA-Site/WDA-User/assets/results.json', 'w');
+    fwrite($fp, json_encode($response));
+    fclose($fp);
+    echo json_encode($response);
+  }
 ?>
