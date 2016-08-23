@@ -37,7 +37,10 @@
               : array( "success" => TRUE, "commentId" => $result );
             break;
         case "/viewall" :
-            $response = $requestHandler->viewTicketAndComments();
+            $result = $requestHandler->viewTicketAndComments();
+            $response = (isset($result['commentList']))
+              ? array( "success" => TRUE, "comments" => $result['commentList'] )
+              : array( "comments" => FALSE );
             break;
     };
 

@@ -197,5 +197,50 @@ then create the comment for the ticket
 }
 ```
 #### View All
+* **URL**
+```
+/comment/viewall
+```
+
+* **Description**
+
+This endpoint will return the comments for the requested ticket
+
+* **Parameters**
+
+**Required**
+```javascript
+{
+  "ticketId": [String]
+}
+```
+* **Success Response**
+
+*JSON*
+```javascript
+{
+  "success": true,
+  "comments": [Array] [
+    {
+      "comment_id": [String],
+      "comment_text": [String],
+      "user_id": [String],
+      "email": [String],
+      "is_its": [String]
+    }
+  ]
+}
+```
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "ticketId": "9001"
+}
+```
 ### User
 #### New
