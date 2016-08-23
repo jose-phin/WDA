@@ -12,8 +12,8 @@ $(document).ready(function() {
 
 			$.ajax({
 				type: "POST",
-        url: "/user/new",
-        contentType: 'application/json',
+		        url: "http://localhost:8888/WDA/API/endpoints/user.php?endpoint=new",
+		        contentType: 'application/json',
 				data: JSON.stringify({
 					"user": {
 						"firstName": $("input[name=firstname]").val(),
