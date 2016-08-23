@@ -53,7 +53,7 @@ does not exist in the database, should you provide a first name and a last
 name, the endpoint will also create the user, then create the ticket
 
 * **Parameters**
-**Required**
+  **Required**
 ```javascript
 {
   "user": [Object] {
@@ -67,7 +67,7 @@ name, the endpoint will also create the user, then create the ticket
 }
 ```
 
-**Optional**
+  **Optional**
 ```javascript
 {
   "user": [Object] {
