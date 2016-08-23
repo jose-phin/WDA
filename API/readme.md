@@ -40,6 +40,7 @@ $.ajax({
 ## Endpoints
 These are the following RESTful endpoints that you can access with POST requests
 ### Ticket
+---
 This endpoint is the main ticket creation and closing endpoint
 #### New
 * **URL**
@@ -137,6 +138,7 @@ This endpoint will close the ticket of the passed in ticketId
 }
 ```
 ### Comment
+---
 This endpoint handles all of the comment related API calls
 #### New
 * **URL**
@@ -243,6 +245,7 @@ This endpoint will return the comments for the requested ticket
 }
 ```
 ### User
+---
 #### New
 * **URL**
 ```
