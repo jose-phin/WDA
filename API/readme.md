@@ -44,7 +44,7 @@ This endpoint is the main ticket creation and closing endpoint
 #### New
 * **URL**
 ```
-<website>/ticket/new
+/ticket/new
 ```
 
 * **Description**
@@ -82,11 +82,11 @@ name, the endpoint will also create the user, then create the ticket
 
 * **Success Response**
 
-  *Content* `{"success": true, "ticketId": [String]}`
+  *JSON* `{"success": true, "ticketId": [String]}`
 
 * **Error Response**
 
-  *Content* `{"success": false}`
+  *JSON* `{"success": false}`
 
 * **Sample Call**
 ```javascript
