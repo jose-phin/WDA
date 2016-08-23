@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 			$.ajax({
 				type: "POST",
-        url: "http://localhost:8888/WDA/ticket/new,
+        url: "http://localhost:8888/WDA/ticket/new",
         contentType: 'application/json',
 				data: JSON.stringify({
 					"user": {
