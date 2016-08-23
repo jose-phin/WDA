@@ -54,28 +54,30 @@ name, the endpoint will also create the user, then create the ticket
 
 * **Parameters**
   **Required**
-```javascript
+  ```javascript
 {
   "user": [Object] {
     "email": [String]
   },
   "ticket": [Object] {
     "osType": [String],
-    "primaryIssue": [String],
-    "additionalNotes": [String]
+    "primaryIssue": [String]
   }
 }
-```
+  ```
 
   **Optional**
-```javascript
+  ```javascript
 {
   "user": [Object] {
     "firstName": [String],
     "lastName": [String]
+  },
+  "ticket": [Object] {
+    "additionalNotes": [String]
   }
 }
-```
+  ```
 
 * **Success Response**
   *Content* `{"success": true, "ticketId": [String]}`
@@ -93,8 +95,7 @@ name, the endpoint will also create the user, then create the ticket
     },
     "ticket":{
         "osType": "Mac",
-        "primaryIssue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla malesuada nisi eget egestas. Aenean sollicitudin euismod tellus, ac bibendum sapien. Nam vestibulum vestibulum nunc sit amet sagittis. Cras nec posuere erat. Sed laoreet odio et turpis vestibulum, in venenatis dolor egestas. Vivamus dui libero, maximus tristique faucibus et, facilisis eget augue. Aliquam vitae dignissim orci. Pellentesque enim urna, vulputate ut arcu accumsan, mattis scelerisque nisl. Quisque dui ipsum, tempor eu dolor vel, finibus euismod dui. Quisque in elit maximus, congue velit ac, porttitor lacus. Aenean malesuada mollis lacus, cursus iaculis metus sodales a. Sed pulvinar sodales lectus. Proin in tempor tellus, at ornare massa. Donec at diam orci. Donec mattis tellus nibh, quis auctor urna porta sit amet. Nullam vel malesuada orci. Vestibulum dolor erat, imperdiet ac leo quis, interdum pellentesque leo. Donec cursus ornare quam quis semper. Donec posuere ullamcorper odio id condimentum. In sit amet sem vulputate, laoreet nisi ac, cursus enim.",
-        "additionalNotes": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra pharetra ex, eget imperdiet elit hendrerit sit amet. Mauris ut."
+        "primaryIssue": "Lorem ipsum dolor sit amet."
     }
 }
 ```
