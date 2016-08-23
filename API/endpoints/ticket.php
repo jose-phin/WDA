@@ -22,9 +22,9 @@
 
  */
 
-  require($_SERVER['DOCUMENT_ROOT'].'/WDA/API/classes/HandleRequest.php');
-
- //create a request Handler
+  require($_SERVER['DOCUMENT_ROOT'].'/WDA/API/classes/HandleRequest.php')
+  ho json_encode($response);
+/create a request Handl
   $requestHandler = new HandleRequest();
 
   //get the part of the url after .../ticket
@@ -48,11 +48,6 @@
   $response = array( "success" => $result );
 
   //don't send anything if the user didn't hit a valid endpoint
-  if(isset($result)){
-  $fp = fopen('../../results.json', 'w');
-  fwrite($fp, json_encode($response));
-  fclose($fp);
-   echo json_encode($response);
-}
+  if(isset($result)) echo json_encode($response);
 
 ?>
