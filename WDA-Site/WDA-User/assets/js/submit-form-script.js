@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 			$.ajax({
 				type: "POST",
-		        url: "http://localhost:8888/WDA/API/endpoints/ticket.php?endpoint=new",
+		        url: "../../API/endpoints/ticket.php?endpoint=new",
 		        contentType: 'application/json',
 				data: JSON.stringify({
 					"user": {
@@ -26,10 +26,14 @@ $(document).ready(function() {
 						"additionalNotes": $("input[name=description]").val()
 					}
 				}),
-				success:  function(formData) {
+				success:  function(data) {
 					$("#report-issue").fadeOut(500).hide(function() {
 						$(".submitted").fadeIn(500).show(function() {
+
+							// Display response data
 							$(".result").text(data);
+
+
 						});
 					});
 				}
