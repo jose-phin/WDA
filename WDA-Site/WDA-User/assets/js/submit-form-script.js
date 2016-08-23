@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 			$.ajax({
 				type: "POST",
-		        url: "http://localhost:8888/WDA/API/endpoints/user.php?endpoint=new",
+		        url: "http://localhost:8888/WDA/API/endpoints/ticket.php?endpoint=new",
 		        contentType: 'application/json',
 				data: JSON.stringify({
 					"user": {
