@@ -39,7 +39,6 @@ $.ajax({
 
 ## Endpoints
 These are the following RESTful endpoints that you can access with POST requests
----
 ### Ticket
 This endpoint is the main ticket creation and closing endpoint
 #### New
