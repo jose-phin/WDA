@@ -34,7 +34,9 @@
   switch($endpoint) {
     case "/new" :
       $result = $requestHandler->createNewTicket();
-      $response = ($result == FALSE) ? array( "success" => $result ) : array("success" => TRUE, "ticketId" => $result);
+      $response = ($result == FALSE)
+        ? array( "success" => $result )
+        : array( "success" => TRUE, "ticketId" => $result );
       break;
     case "/close" :
       $result = $requestHandler->closeTicket();

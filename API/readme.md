@@ -244,3 +244,42 @@ This endpoint will return the comments for the requested ticket
 ```
 ### User
 #### New
+* **URL**
+```
+/user/new
+```
+
+* **Description**
+
+This endpoint will create a new user using the supplied information
+
+* **Parameters**
+
+**Required**
+```javascript
+{
+  "user": [Object] {
+    "firstName": [String],
+    "lastName": [String],
+    "email": [String]
+  }
+}
+```
+* **Success Response**
+
+*JSON* `{"success": true}`
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "user": {
+      "firstName": "SMOrc",
+      "lastName": "Hufferino",
+      "email": "me.go@face.com"
+    }
+}
+```

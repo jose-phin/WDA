@@ -32,7 +32,7 @@
     $user = $this->jsonRequest["user"];
 
     //create the user
-    return @parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
+    return parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
     }
 
     /**
