@@ -49,14 +49,14 @@ This endpoint is the main ticket creation and closing endpoint
 
 * **Description**
 
-  This endpoint will create a new ticket for the specified user, and if the user
-  does not exist in the database, should you provide a first name and a last
-  name, the endpoint will also create the user, then create the ticket
+This endpoint will create a new ticket for the specified user, and if the user
+does not exist in the database, should you provide a first name and a last
+name, the endpoint will also create the user, then create the ticket
 
 * **Parameters**
 
-  **Required**
-  ```javascript
+**Required**
+```javascript
 {
   "user": [Object] {
     "email": [String]
@@ -66,10 +66,10 @@ This endpoint is the main ticket creation and closing endpoint
     "primaryIssue": [String]
   }
 }
-  ```
+```
 
-  **Optional**
-  ```javascript
+**Optional**
+```javascript
 {
   "user": [Object] {
     "firstName": [String],
@@ -79,15 +79,15 @@ This endpoint is the main ticket creation and closing endpoint
     "additionalNotes": [String]
   }
 }
-  ```
+```
 
 * **Success Response**
 
-  *JSON* `{"success": true, "ticketId": [String]}`
+*JSON* `{"success": true, "ticketId": [String]}`
 
 * **Error Response**
 
-  *JSON* `{"success": false}`
+*JSON* `{"success": false}`
 
 * **Sample Call**
 ```javascript
@@ -111,11 +111,11 @@ This endpoint is the main ticket creation and closing endpoint
 
 * **Description**
 
-  This endpoint will close the ticket of the passed in ticketId
+This endpoint will close the ticket of the passed in ticketId
 
 * **Parameters**
 
-  **Required**
+**Required**
   ```javascript
 {
   "ticketId": [String]
@@ -124,11 +124,11 @@ This endpoint is the main ticket creation and closing endpoint
 
 * **Success Response**
 
-  *JSON* `{"success": true}`
+*JSON* `{"success": true}`
 
 * **Error Response**
 
-  *JSON* `{"success": false}`
+*JSON* `{"success": false}`
 
 * **Sample Call**
 ```javascript
