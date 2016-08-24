@@ -8,6 +8,7 @@ $(document).ready(function(){
         $(this).toggleClass("active");
     });
 
+    // Validation
     $("#user-login").validate({
         rules: {
             ticketID: {

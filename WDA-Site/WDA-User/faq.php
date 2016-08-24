@@ -53,7 +53,7 @@
                             Didn't find what you were looking for?
                         </div>
                         <div class="col-md-4 faq-ticket-button">
-                            <a href="report.php"><button class="btn btn-primary">Submit a Ticket</button></a>
+                            <a href="report-issue.php"><button class="btn btn-primary">Submit a Ticket</button></a>
                         </div>
 
                     </div>

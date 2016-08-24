@@ -1,4 +1,4 @@
-/* submit-form-script.js */
+/* new-ticket-form-script.js */
 
 $(document).ready(function() {
 
@@ -12,8 +12,8 @@ $(document).ready(function() {
 
 			$.ajax({
 				type: "POST",
-        url: "/WDA/ticket/new",
-        contentType: 'application/json',
+        		url: "/WDA/ticket/new",
+        		contentType: 'application/json',
 				data: JSON.stringify({
 					"user": {
 						"firstName": $("input[name=firstname]").val(),
@@ -29,7 +29,7 @@ $(document).ready(function() {
 				success:  function(formData) {
 					$("#report-issue").fadeOut(500).hide(function() {
 						$(".submitted").fadeIn(500).show(function() {
-							$(".result").text(data);
+							$(".result").text(formData);
 						});
 					});
 				}
