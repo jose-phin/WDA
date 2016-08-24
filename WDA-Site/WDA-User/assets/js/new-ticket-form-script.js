@@ -1,4 +1,4 @@
-/* submit-form-script.js */
+/* new-ticket-form-script.js */
 
 $(document).ready(function() {
 

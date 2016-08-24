@@ -15,9 +15,9 @@
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
     <link rel="stylesheet" href="./assets/css/report-issue-style.css">
-    <script src="./assets/js/report-issue-script.js"></script>
+    <script src="./assets/js/report-issue-validation.js"></script>
     <script src="./assets/js/eventHandler-form.js"></script>
-    <script src="./assets/js/submit-form-script.js"></script>
+    <script src="./assets/js/new-ticket-form-script.js"></script>
 </head>
 
 <body>
