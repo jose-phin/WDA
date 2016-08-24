@@ -113,7 +113,6 @@
       if($ticket === null) {
         return false;
       }
-      echo var_dump($ticket);
       $result = $this->db->updateTicket($ticketId, $ticket["os_type"], $ticket["primary_issue"],$ticket["additional_notes"], "Resolved",$ticket["submitter_id"]);
 
       return $result;

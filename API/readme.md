@@ -2,80 +2,286 @@
 This API will allow you to interact with the database VIA AJAX calls,
 this API is designed to be used with JSON POST requests and uses RESTful API
 URL names
+
+## Contents
+* [How to use](https://github.com/chloe747/WDA/tree/feature/REST-API/API#how-to-use-the-api)
+* [Endpoints](https://github.com/chloe747/WDA/tree/feature/REST-API/API#endpoints)
+* [Ticket](https://github.com/chloe747/WDA/tree/feature/REST-API/API#ticket)
+  * [new](https://github.com/chloe747/WDA/tree/feature/REST-API/API#new)
+  * [close](https://github.com/chloe747/WDA/tree/feature/REST-API/API#close)
+* [Comment](https://github.com/chloe747/WDA/tree/feature/REST-API/API#comment)
+  * [new](https://github.com/chloe747/WDA/tree/feature/REST-API/API#new-1)
+  * [viewall](https://github.com/chloe747/WDA/tree/feature/REST-API/API#view-all)
+* [User](https://github.com/chloe747/WDA/tree/feature/REST-API/API#user)
+  * [new](https://github.com/chloe747/WDA/tree/feature/REST-API/API#new-2)
+
 ## How to use the API
 In order to send an AJAX call to this API, an example of sending an Jquery AJAX
 call would be
-```
-//NOTE: HAVENT TESTED IF THIS EXACT SYNTAX WORKS FROM A PHP FILE, ONLY IN POSTMAN!!!!!
-
-$.post("user/new", {
-  "user": {
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "XxSephiroth477xX@hotmail.com"
-  }
+```javascript
+$.ajax({
+  type: "POST",
+  url: "/WDA/ticket/new",
+  contentType: 'application/json',
+  data: JSON.stringify({
+    "user": {
+      "email": "Email Here"
+    },
+    "ticket": {
+      "osType": "OS Type here"
+      "primaryIssue": "Write about issue here",
+      "additionalNotes": "Additional Notes Here"
+    }
+  }),
+  //callback function
 });
 ```
 
-##Endpoints
-###User
-This endpoint deals with setting and getting user information
-####new
+## Endpoints
+These are the following RESTful endpoints that you can access with POST requests
+### Ticket
+This endpoint is the main ticket creation and closing endpoint
+#### New
+* **URL**
 ```
-localhost/user/new
+/ticket/new
 ```
-This endpoint will attempt to create a new user with the given params
 
-```
+* **Description**
+
+This endpoint will create a new ticket for the specified user, and if the user
+does not exist in the database, should you provide a first name and a last
+name, the endpoint will also create the user, then create the ticket
+
+* **Parameters**
+
+**Required**
+```javascript
 {
-  "user": {
-    "firstName": "User's First Name",
-    "lastName": "User's Last Name",
-    "email": "The user's email address"    
-  }
-}
-```
-
-and will return a response object
-
-```
-//if the user was created successfully
-{"success": true}
-
-//else, if the user was not created
-{"success": false}
-```
-
-###ticket
-####new
-```
-localhost/ticket/new
-```
-This endpoint will attempt to create a new ticket for the specified user with
- the given params, if the user does not exist, this endpoint call will attempt
- to create the user
-
-```
-{
-  "user": {
-    "firstName": "User's First Name (NOT NEEDED IF USER EXISTS)",
-    "lastName": "User's Last Name (NOT NEEDED IF USER EXISTS)",
-    "email": "The user's email address"    
+  "user": [Object] {
+    "email": [String]
   },
-  "ticket": {
-    "osType": "The users Operating System",
-    "primaryIssue": "the issue the user is having",
-    "additionalNotes": "Any additional notes for the user's issue"
+  "ticket": [Object] {
+    "osType": [String],
+    "primaryIssue": [String]
   }
 }
 ```
 
-and will return a response object
-
+**Optional**
+```javascript
+{
+  "user": [Object] {
+    "firstName": [String],
+    "lastName": [String]
+  },
+  "ticket": [Object] {
+    "additionalNotes": [String]
+  }
+}
 ```
-//if the ticket was created successfully
-{"success": true}
 
-//else, if the ticket was not created
-{"success": false}
+* **Success Response**
+
+*JSON* `{"success": true, "ticketId": [String]}`
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "user":{
+        "firstName":"John",
+        "lastName":"Doe",
+        "email":"poo@ko.com"
+    },
+    "ticket":{
+        "osType": "Mac",
+        "primaryIssue": "Lorem ipsum dolor sit amet."
+    }
+}
+```
+#### Close
+* **URL**
+```
+/ticket/close
+```
+
+* **Description**
+
+This endpoint will close the ticket of the passed in ticketId
+
+* **Parameters**
+
+**Required**
+  ```javascript
+{
+  "ticketId": [String]
+}
+  ```
+
+* **Success Response**
+
+*JSON* `{"success": true}`
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "ticketId": "477"
+}
+```
+---
+### Comment
+This endpoint handles all of the comment related API calls
+#### New
+* **URL**
+```
+/comment/new
+```
+
+* **Description**
+
+This endpoint will create a new comment for the specified ticket, and if the
+commenting user does not exist in the database, should you provide a first
+name, a last name, and an email, the endpoint also create the user,
+then create the comment for the ticket
+
+* **Parameters**
+
+**Required**
+```javascript
+{
+  "user": [Object] {
+    "email": [String]
+  },
+  "comment": [Object] {
+    "ticketId": [String],
+    "comment": [String]
+  }
+}
+```
+
+**Optional**
+```javascript
+{
+  "user": [Object] {
+    "firstName": [String],
+    "lastName": [String]
+  }
+}
+```
+
+* **Success Response**
+
+*JSON* `{"success": true, "commentId": [String]}`
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "user":{
+        "email": "mysterious.challenger@secret.tree.co"
+    },
+    "comment":{
+        "ticketId": "6",
+        "comment": "Who am I? None of your business"
+    }
+}
+```
+#### View All
+* **URL**
+```
+/comment/viewall
+```
+
+* **Description**
+
+This endpoint will return the comments for the requested ticket
+
+* **Parameters**
+
+**Required**
+```javascript
+{
+  "ticketId": [String]
+}
+```
+* **Success Response**
+
+*JSON*
+```javascript
+{
+  "success": true,
+  "comments": [Array] [
+    {
+      "comment_id": [String],
+      "comment_text": [String],
+      "user_id": [String],
+      "email": [String],
+      "is_its": [String]
+    }
+  ]
+}
+```
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "ticketId": "9001"
+}
+```
+---
+### User
+#### New
+* **URL**
+```
+/user/new
+```
+
+* **Description**
+
+This endpoint will create a new user using the supplied information
+
+* **Parameters**
+
+**Required**
+```javascript
+{
+  "user": [Object] {
+    "firstName": [String],
+    "lastName": [String],
+    "email": [String]
+  }
+}
+```
+* **Success Response**
+
+*JSON* `{"success": true}`
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "user": {
+      "firstName": "SMOrc",
+      "lastName": "Hufferino",
+      "email": "me.go@face.com"
+    }
+}
 ```

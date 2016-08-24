@@ -32,7 +32,7 @@
     $user = $this->jsonRequest["user"];
 
     //create the user
-    return @parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
+    return parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
     }
 
     /**
@@ -66,7 +66,8 @@
       }
 
       //create the ticket
-      $couldCreateTicket = parent::createTicket($userId, $ticket['osType'], $ticket['primaryIssue'], $ticket['additionalNotes']);
+      $aditionalNotes = isset($ticket['additionalNotes']) ? $ticket['additionalNotes'] : "";
+      $couldCreateTicket = parent::createTicket($userId, $ticket['osType'], $ticket['primaryIssue'], $aditionalNotes);
 
       return $couldCreateTicket;
     }
