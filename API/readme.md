@@ -8,6 +8,7 @@ URL names
 * [Endpoints](https://github.com/chloe747/WDA/tree/feature/REST-API/API#endpoints)
 * [Ticket](https://github.com/chloe747/WDA/tree/feature/REST-API/API#ticket)
   * [new](https://github.com/chloe747/WDA/tree/feature/REST-API/API#new)
+  * [view](https://github.com/chloe747/WDA/tree/feature/REST-API/API#view)
   * [close](https://github.com/chloe747/WDA/tree/feature/REST-API/API#close)
 * [Comment](https://github.com/chloe747/WDA/tree/feature/REST-API/API#comment)
   * [new](https://github.com/chloe747/WDA/tree/feature/REST-API/API#new-1)
@@ -101,6 +102,52 @@ name, the endpoint will also create the user, then create the ticket
         "osType": "Mac",
         "primaryIssue": "Lorem ipsum dolor sit amet."
     }
+}
+```
+#### View
+* **URL**
+```
+/ticket/view
+```
+
+* **Description**
+
+This endpoint will give you the ticket information for a ticketId supplied
+
+* **Parameters**
+
+**Required**
+```javascript
+{
+  "ticketId": [String]
+}
+```
+
+* **Success Response**
+
+*JSON*
+```javascript
+{
+  "success": true,
+  "ticket"[Object] {
+    "ticket_id": [String],
+    "os_type": [String],
+    "primary_issue": [String],
+    "additional_notes": [String],
+    "status": [String],
+    "submitter_id": [String]    
+  }
+}
+```
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "ticketId": "477"
 }
 ```
 #### Close

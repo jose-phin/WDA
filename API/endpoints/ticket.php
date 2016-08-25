@@ -1,27 +1,5 @@
 <?php
 
-/* Format of the request for
-  /new
-  {
-    "user":{
-        "firstName":"John",
-        "lastName":"Doe",
-        "email":"poo@ko.com"
-    },
-    "ticket":{
-        "osType": "Mac",
-        "primaryIssue": "Issue here",
-        "additionalNotes": "Addition notes here"
-    }
-  }
-
-  /view && /close
-  {
-    "ticketId": 1
-  }
-
- */
-
   require('../classes/HandleRequest.php');
  //create a request Handler
   $requestHandler = new HandleRequest();
@@ -41,6 +19,12 @@
     case "/close" :
       $result = $requestHandler->closeTicket();
       $response = array( "success" => $result );
+      break;
+    case "/view" :
+      $result = $requestHandler->viewTicketAndComments();
+      $response = (isset($result['ticketInfo']) && $result['ticketInfo'] != FALSE)
+        ? array( "success" => TRUE, "ticket" => $result['ticketInfo'] )
+        : array( "success" => FALSE );
       break;
   };
 
