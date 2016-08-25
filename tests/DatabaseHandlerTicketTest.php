@@ -27,12 +27,12 @@ class DatabaseHandlerTicketTest extends TestCase
 
     public function testCreateTicketWithValidSubmitterIDReturnsExpectedId()
     {
-        $this->assertEquals(self::$dbh->createTicket("Mac OSX", "It won't turn on!", "", "Pending", 1), 1);
+        $this->assertEquals(self::$dbh->createTicket("My Mac isn't working", "Mac OSX", "It won't turn on!", "", "Pending", 1), 1);
     }
 
     public function testCreateTicketWithInvalidSubmitterIDReturnsNegative()
     {
-        $this->assertEquals(self::$dbh->createTicket("Windows", "Help!", "", "Pending", 2), -1);
+        $this->assertEquals(self::$dbh->createTicket("My Windows computer isn't working", "Windows", "Help!", "", "Pending", 2), -1);
     }
 
     public function testGetTicketWithValidIDReturnsNotNull()
@@ -46,19 +46,19 @@ class DatabaseHandlerTicketTest extends TestCase
     }
 
     public function testUpdateTicketWithValidTicketIDAndSubmitterIDReturnsTrue() {
-        $this->assertTrue(self::$dbh->updateTicket(1, "Ubuntu", "It won't turn on!", "", "Pending", 1));
+        $this->assertTrue(self::$dbh->updateTicket(1, "My Ubuntu machine doesn't work", "Ubuntu", "It won't turn on!", "", "Pending", 1));
     }
 
     public function testUpdateTicketWithValidTicketIDInvalidSubmitterIDReturnsFalse() {
-        $this->assertFalse(self::$dbh->updateTicket(1, "Ubuntu", "It won't turn on!", "", "Pending", 2));
+        $this->assertFalse(self::$dbh->updateTicket(1, "My Ubuntu machine doesn't work", "Ubuntu", "It won't turn on!", "", "Pending", 2));
     }
 
     public function testUpdateTicketWithInvalidTicketIDReturnsFalse() {
-        $this->assertFalse(self::$dbh->updateTicket(2, "Ubuntu", "It won't turn on!", "", "Pending", 1));
+        $this->assertFalse(self::$dbh->updateTicket(2, "My Ubuntu machine doesn't work", "Ubuntu", "It won't turn on!", "", "Pending", 1));
     }
 
     public function testGetUserTicketsValidEmailReturnsCorrectCount() {
-        self::$dbh->createTicket("Mac OSX", "It won't turn on again!", "", "Pending", 1);
+        self::$dbh->createTicket("My Mac machine doesn't work", "Mac OSX", "It won't turn on again!", "", "Pending", 1);
 
         $this->assertCount(2, self::$dbh->getAllTicketsForUser("jsnow@gmail.com"));
     }
