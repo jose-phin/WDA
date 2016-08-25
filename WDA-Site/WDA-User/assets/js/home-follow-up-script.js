@@ -30,23 +30,14 @@ $(document).ready(function(){
 
   			$.ajax({
   				type: "POST",
-          		url: "/WDA/ticket/new",
+          		url: "/WDA/ticket/view",
           		contentType: 'application/json',
   				data: JSON.stringify({
-  			// 		"user": {
-  			// 			"firstName": $("input[name=firstname]").val(),
-  			// 			"lastName": $("input[name=lastname]").val(),
-  			// 			"email": $("input[name=email]").val()
-  			// 		},
-  			// 		"ticket": {
-  			// 			"osType": $("#os").val(),
-  			// 			"primaryIssue": $("#enquiry").val(),
-  			// 			"additionalNotes": $("#description").val()
-  			// 		}
+						"ticketId": $("#ticketId-input").val()
   				}),
   				success:  function(formData) {
-  					$("#report-issue").fadeOut(500).hide(function() {
-  						$(".submitted").fadeIn(500).show(function() {
+  					$("#user-login").fadeOut(500).hide(function() {
+  						$(".TEST").fadeIn(500).show(function() {
   							$(".result").text(formData);
   						});
   					});

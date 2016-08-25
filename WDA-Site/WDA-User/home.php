@@ -76,7 +76,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ticketID">Ticket ID</label>*
-                                <input type="text" class="form-control" id="ticketID" name="ticketID" placeholder="Enter your Ticket ID">
+                                <input type="text" class="form-control" id="ticketId-input" name="ticketID" placeholder="Enter your Ticket ID">
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,10 @@
                     <button type="submit" class="btn btn-primary">Check your Ticket</button>
 
                 </form>
-
+                <div class="TEST">
+                    <p class="result">
+                    </p>
+                </div>
 
             <!-- End of container div -->
             </div>
