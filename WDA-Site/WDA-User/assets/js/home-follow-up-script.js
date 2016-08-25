@@ -1,6 +1,10 @@
 
 $(document).ready(function(){
 
+    // Hide input error message on default
+    // $("#ticket-notfound-error").addClass("hidden");
+    $("#ticket-notfound-error").hide();
+
     // Toggle slide down hero div for pseudo-login
     $(".follow-up-home-button").click(function(){
         $(".follow-up-hero-div").slideToggle("fast", "swing");
@@ -36,11 +40,15 @@ $(document).ready(function(){
 						"ticketId": $("#ticketId-input").val()
   				}),
   				success:  function(formData) {
-  					$("#user-login").fadeOut(500).hide(function() {
-  						$(".TEST").fadeIn(500).show(function() {
-  							$(".result").text(formData);
-  						});
-  					});
+                    var ticket = jQuery.parseJSON(formData);
+                    if (ticket.success === false){
+                        $("#ticket-notfound-error").show();
+                    }
+                    if (ticket.success === true){
+                        // SEND DATA via GET
+                        
+
+                    }
   				}
   			});
   			return false;
