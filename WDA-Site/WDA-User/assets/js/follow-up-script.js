@@ -35,7 +35,7 @@ $(document).ready(function(){
             }
             if (ticket.success === true){
                 console.log(ticket.ticket);
-                $(".user-ticket-ticketTitle").val();
+                $(".user-ticket-ticketTitle").text(ticket.ticket.subject);
                 $(".user-ticket-ticketId").text("Ticket ID: #"+ticket.ticket.ticket_id);
 
                 $(".user-ticket-issueCategory").text(ticket.ticket.primary_issue);
@@ -55,6 +55,5 @@ $(document).ready(function(){
 
 
 function replaceTicketStatus($ticketStatus){
-    console.log($ticketStatus);
     $('.status').replaceWith("<span class='status "+"status-"+$ticketStatus+" user-ticket-status'>"+$ticketStatus+"</span>");
 }
