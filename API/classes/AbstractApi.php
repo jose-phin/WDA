@@ -64,7 +64,7 @@
      *
      * @return bool
      */
-    public function createTicket($userId, $subject,  $osType, $primaryIssue, $additionalNotes) {
+    public function createTicket($userId, $subject, $osType, $primaryIssue, $additionalNotes) {
 
       $result = $this->db->createTicket(
           $osType,

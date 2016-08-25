@@ -67,7 +67,11 @@
 
       //create the ticket
       $aditionalNotes = isset($ticket['additionalNotes']) ? $ticket['additionalNotes'] : "";
-      $couldCreateTicket = parent::createTicket($userId, $ticket['subject'], $ticket['osType'], $ticket['primaryIssue'], $aditionalNotes);
+      $couldCreateTicket = parent::createTicket($userId,
+                                    $ticket['subject'],
+                                    $ticket['osType'],
+                                    $ticket['primaryIssue'],
+                                    $aditionalNotes);
 
       return $couldCreateTicket;
     }
