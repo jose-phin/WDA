@@ -73,6 +73,7 @@ class DatabaseHandler
 
             $this->db->exec("CREATE TABLE IF NOT EXISTS tickets (
                             ticket_id INTEGER PRIMARY KEY,
+                            subject TEXT NOT NULL,
                             os_type TEXT NOT NULL,
                             primary_issue TEXT NOT NULL,
                             additional_notes TEXT NOT NULL,
@@ -330,16 +331,17 @@ class DatabaseHandler
      * @param $submitterId int
      * @return int the newly created Ticket ID, or -1 if unable to create the ticket
      */
-    function createTicket($osType, $primaryIssue, $additionalNotes, $status = "Pending", $submitterId)
+    function createTicket($osType, $subject, $primaryIssue, $additionalNotes, $status = "Pending", $submitterId)
     {
         try {
             $this->db->beginTransaction();
 
-            $insert = "INSERT INTO tickets (os_type, primary_issue, additional_notes, status, submitter_id)
-                      VALUES (:os_type, :primary_issue, :additional_notes, :status, :submitter_id)";
+            $insert = "INSERT INTO tickets (os_type, subject, primary_issue, additional_notes, status, submitter_id)
+                      VALUES (:os_type, :subject, :primary_issue, :additional_notes, :status, :submitter_id)";
             $stmt = $this->db->prepare($insert);
 
             $stmt->bindParam(':os_type', $osType);
+            $stmt->bindParam(':subject', $subject);
             $stmt->bindParam(':primary_issue', $primaryIssue);
             $stmt->bindParam(':additional_notes', $additionalNotes);
             $stmt->bindParam(':status', $status);
@@ -394,6 +396,7 @@ class DatabaseHandler
      * Updates a ticket with a specified ID in the Tickets table
      *
      * @param $ticketId int
+     * @param $subject String
      * @param $osType String
      * @param $primaryIssue String
      * @param $additionalNotes String
@@ -401,13 +404,14 @@ class DatabaseHandler
      * @param $submitterId int
      * @return bool True if successfully updated, False otherwise
      */
-    function updateTicket($ticketId, $osType, $primaryIssue, $additionalNotes, $status, $submitterId)
+    function updateTicket($ticketId, $subject, $osType, $primaryIssue, $additionalNotes, $status, $submitterId)
     {
         try {
             $this->db->beginTransaction();
 
             $update = "UPDATE tickets SET
                         os_type = :os_type,
+                        subject = :subject,
                         primary_issue = :primary_issue,
                         additional_notes = :additional_notes,
                         status = :status,
@@ -417,6 +421,7 @@ class DatabaseHandler
             $stmt = $this->db->prepare($update);
 
             $stmt->bindParam(':os_type', $osType);
+            $stmt->bindParam(':subject', $subject);
             $stmt->bindParam(':primary_issue', $primaryIssue);
             $stmt->bindParam(':additional_notes', $additionalNotes);
             $stmt->bindParam(':status', $status);
