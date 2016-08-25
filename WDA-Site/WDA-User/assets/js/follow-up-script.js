@@ -1,6 +1,6 @@
 // This javascript file retrieves json data from DB
 // and populate the page with data
-
+var ticket, comments;
 $(document).ready(function(){
 
     $(".ticket-notFound-message").hide();
@@ -24,7 +24,7 @@ $(document).ready(function(){
         }),
         success:  function(formData) {
 
-            var ticket = jQuery.parseJSON(formData);
+            ticket = jQuery.parseJSON(formData);
             if (ticket.success === false){
                 console.log("ticket not found");
                 $(".user-ticket-ticketTitle").text("Ticket does not exist.");
@@ -40,7 +40,9 @@ $(document).ready(function(){
 
                 $(".user-ticket-issueCategory").text(ticket.ticket.primary_issue);
                 $(".user-ticket-osType").text(ticket.ticket.os_type);
-                $(".user-ticket-originalMessage").text(ticket.ticket.additional_notes);
+
+                var additionalNotes = ticket.ticket.additional_notes.replace(/(\r\n|\n|\r)/g,"<br />");
+                $(".user-ticket-originalMessage").html(additionalNotes);
 
                 // Set ticket status
                 replaceTicketStatus(ticket.ticket.status);

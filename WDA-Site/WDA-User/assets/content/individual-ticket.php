@@ -62,18 +62,26 @@
           </p>
           <!-- End of info row 4 -->
         </div>
+
+        <!-- Replies -->
+        <div class="row individual-ticket-info-row reply-main-container">
+        </div>
       <!-- End of ticket info  -->
       </div>
 
       <!-- Add comment -->
-      <form id="add-comment-form" name="addCommentForm" method="post" action="" autocomplete="off" novalidate="novalidate">
+      <form id="add-comment-form" name="addCommentForm" method="post" autocomplete="off" novalidate="novalidate">
         <div class="panel-footer panel-comment">
-
           <p class="ticket-info-header-text">
             Reply
           </p>
-          <textarea class="form-control" id="new-message" name="new-message" rows="5" placeholder="Provide more details here..."></textarea>
-          <button type="submit" class="btn btn-primary add-reply-button">Add Reply</button>
+          <textarea class="form-control" id="newMessage" name="newMessage" rows="5" placeholder="Provide more details here..."></textarea>
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary add-reply-button">Add Reply</button>
+            </div>
+          </div>
+
         </div>
       </form>
 
