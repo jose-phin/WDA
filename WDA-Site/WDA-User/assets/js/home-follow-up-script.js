@@ -29,29 +29,28 @@ $(document).ready(function(){
     // Process form
     $(document).submit("#user-login", function() {
 
-  			/* Serialised data */
-  			var data = $("#user-login").serialize();
+        /* Serialised data */
+        var data = $("#user-login").serialize();
 
-  			$.ajax({
-  				type: "POST",
-          		url: "/WDA/ticket/view",
-          		contentType: 'application/json',
-  				data: JSON.stringify({
-						"ticketId": $("#ticketId-input").val()
-  				}),
-  				success:  function(formData) {
-                    var ticket = jQuery.parseJSON(formData);
-                    if (ticket.success === false){
-                        $("#ticket-notfound-error").show();
-                    }
-                    if (ticket.success === true){
-                        // SEND DATA via GET
-                        
-
-                    }
-  				}
-  			});
-  			return false;
-  		});
+        $.ajax({
+            type: "POST",
+            url: "/WDA/ticket/view",
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "ticketId": $("#ticketId-input").val()
+            }),
+            success:  function(formData) {
+                var ticket = jQuery.parseJSON(formData);
+                if (ticket.success === false){
+                    $("#ticket-notfound-error").show();
+                }
+                if (ticket.success === true){
+                    window.location = '/WDA/WDA-Site/WDA-User/user-ticket.php?ticketId='
+                    + ticket.ticket.ticket_id;
+                }
+            }
+        });
+        return false;
+    });
 
 });

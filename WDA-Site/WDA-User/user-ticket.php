@@ -16,6 +16,7 @@
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
     <link rel="stylesheet" href="./assets/css/individual-ticket-style.css">
+    <script src="./assets/js/follow-up-script.js"></script>
 
 </head>
 
@@ -29,7 +30,7 @@
 
             <div class="hero main-hero">
 
-                <h2>
+                <h2 class="user-ticket-ticketTitle">
                     {{Ticket Title}}
                 </h2>
 
