@@ -64,10 +64,11 @@
      *
      * @return bool
      */
-    public function createTicket($userId, $osType, $primaryIssue, $additionalNotes) {
+    public function createTicket($userId, $subject, $osType, $primaryIssue, $additionalNotes) {
 
       $result = $this->db->createTicket(
           $osType,
+          $subject,
           $primaryIssue,
           $additionalNotes,
           "pending",
@@ -113,7 +114,13 @@
       if($ticket === null) {
         return false;
       }
-      $result = $this->db->updateTicket($ticketId, $ticket["os_type"], $ticket["primary_issue"],$ticket["additional_notes"], "Resolved",$ticket["submitter_id"]);
+      $result = $this->db->updateTicket($ticketId,
+                                        $ticket['subject'],
+                                        $ticket["os_type"],
+                                        $ticket["primary_issue"],
+                                        $ticket["additional_notes"],
+                                        "Resolved",
+                                        $ticket["submitter_id"]);
 
       return $result;
     }
@@ -123,12 +130,5 @@
       return $result;
     }
 
-    public function getTicketHandler() {
-      return $this->ticketHandler;
-    }
-
-    public function getUserHandler() {
-      return $this->userHandler;
-    }
   }
 ?>

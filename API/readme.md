@@ -64,6 +64,7 @@ name, the endpoint will also create the user, then create the ticket
   },
   "ticket": [Object] {
     "osType": [String],
+    "subject": [String],
     "primaryIssue": [String]
   }
 }
@@ -100,7 +101,8 @@ name, the endpoint will also create the user, then create the ticket
     },
     "ticket":{
         "osType": "Mac",
-        "primaryIssue": "Lorem ipsum dolor sit amet."
+        "subject": "Cockatiels",
+        "primaryIssue": "Birb lel"
     }
 }
 ```
@@ -131,6 +133,7 @@ This endpoint will give you the ticket information for a ticketId supplied
   "success": true,
   "ticket"[Object] {
     "ticket_id": [String],
+    "subject": [String],
     "os_type": [String],
     "primary_issue": [String],
     "additional_notes": [String],
