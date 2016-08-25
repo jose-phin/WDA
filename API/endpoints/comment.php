@@ -40,7 +40,7 @@
             $result = $requestHandler->viewTicketAndComments();
             $response = (isset($result['commentList']))
               ? array( "success" => TRUE, "comments" => $result['commentList'] )
-              : array( "comments" => FALSE );
+              : array( "success" => FALSE );
             break;
     };
 
