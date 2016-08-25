@@ -46,6 +46,7 @@ $(document).ready(function(){
 
                 // Set ticket status
                 replaceTicketStatus(ticket.ticket.status);
+                getAllReplies();
             }
         }
     });

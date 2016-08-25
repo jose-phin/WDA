@@ -43,6 +43,7 @@ $(document).ready(function(){
                 }
                 if (comment.success === true){
                     showLatestReply();
+                    $("#newMessage").val('');
                 }
             }
         });
@@ -80,9 +81,9 @@ function displayAllReplies(){
     $newHtmlRowTail = '</p></div>';
     $.each(comments.comments, function(i, item){
         $(".reply-main-container").append(
-            $newHtmlRow+item.comment_text+$newHtmlRowTail
+            $newHtmlRowHead+item.comment_text+$newHtmlRowTail
         );
-        // console.log("i: "+i+" item: "+item.comment_text);
+
     });
 }
 
