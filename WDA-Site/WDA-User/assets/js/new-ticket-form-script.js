@@ -23,6 +23,7 @@ $(document).ready(function() {
 					"ticket": {
 						"osType": $("#os").val(),
 						"primaryIssue": $("#enquiry").val(),
+			            // "subject": $("#subject").val(),
 						"additionalNotes": $("#description").val()
 					}
 				}),

@@ -10,8 +10,8 @@
           <p class="col-md-12 ticket-info-header-text">
             Full Name
           </p>
-          <p class="col-md-12">
-            John Appleseed
+          <p class="col-md-12 user-ticket-fullName">
+            First Last Name
           </p>
           <!-- End of info row 1 -->
         </div>
@@ -22,7 +22,7 @@
             <p class="ticket-info-header-text">
               Category
             </p>
-            <p class="issue-category">
+            <p class="user-ticket-issueCategory">
               {{Issue Category}}
             </p>
           </div>
@@ -32,7 +32,7 @@
             <p class="ticket-info-header-text">
               OS
             </p>
-            <p class="issue-category">
+            <p class="user-ticket-osType">
               {{Operating System}}
             </p>
           </div>
@@ -57,7 +57,7 @@
           <p class="col-md-12 ticket-info-header-text">
             Message
           </p>
-          <p class="col-md-12 original-message">
+          <p class="col-md-12 user-ticket-originalMessage">
             {{Original ticket message by user}}
           </p>
           <!-- End of info row 4 -->

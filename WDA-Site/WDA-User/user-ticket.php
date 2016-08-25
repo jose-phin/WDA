@@ -35,36 +35,39 @@
                 </h2>
 
                 <div class="row">
+                    <h4 class="col-sm-12 ticket-notFound-message">
+                        You're not supposed to be here :(
+                    </h4>
                     <div class="col-sm-2">
-                        <h4>
+                        <h4 class="user-ticket-ticketId">
                             {{Ticket ID: #12345}}
                         </h4>
                     </div>
                     <!-- Ticket status -->
                     <div class="col-sm-2">
-                        <span class="status status-unresolved">Unresolved</span>
+                        <span class="status" id="user-ticket-status">{{Status}}</span>
                     </div>
                 </div>
 
                 <!-- Instantiate Bootstrap's md-10 grid -->
-                <div class="row">
+                <div class="row ticket-content-container">
                     <div class="col-md-10">
                         <!-- User ticket contents -->
                         <?php include './assets/content/individual-ticket.php' ?>
 
-                        <!-- Return home button -->
-                        <div class="row btn-margin-fix">
-                            <div class="col-sm-12 col-md-2 btn-col ">
-                                <a href="./home.php">
-                                    <button class="btn btn-secondary follow-up-home-button">Return Home</button>
-                                </a>
-                            </div>
-                        </div>
+
                     <!-- End of col-md-10 -->
                     </div>
                 <!-- End of content row -->
                 </div>
-
+                <!-- Return home button -->
+                <div class="row btn-margin-fix">
+                    <div class="col-sm-12 col-md-2 btn-col ">
+                        <a href="./home.php">
+                            <button class="btn btn-secondary follow-up-home-button">Return Home</button>
+                        </a>
+                    </div>
+                </div>
             <!-- End of hero div -->
             </div>
 
