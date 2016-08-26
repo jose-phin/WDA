@@ -116,13 +116,24 @@
       return $result;
     }
 
+    /**
+     * Get ticket information by Id
+     *
+     * @param $ticketId string
+     * @return object for ticket information
+     */
     public function getTicketInfo($ticketId) {
       $result = $this->db->getTicket($ticketId);
       return $result;
     }
 
+    /**
+     * Change ticket status by Id
+     *
+     * @param $ticketId string
+     * @return false | true if succeded/failed
+     */
     public function closeTicketDB($ticketId){
-
       $ticket = $this->db->getTicket($ticketId);
       if($ticket === null) {
         return false;
@@ -138,8 +149,13 @@
       return $result;
     }
 
-    public function getAllTickets() {
-      $result = $this->db->getTicket();
+    /**
+     * Get all ticket
+     *
+     * @return array of objects which has ticket information
+     */
+    public function getAllTicketsInSystem(){
+      $result = $this->db->getAllTicketsInSystem();
       return $result;
     }
 
