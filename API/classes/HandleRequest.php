@@ -128,6 +128,30 @@
       return $resultArray;
     }
 
+  /**
+   * View the tickets and the submitter information
+   *
+   * @return false if ticket number or user isn't found, else returns array with information
+   */
+    public function viewTicketAndUser() {
+        $ticket = $this->jsonRequest["ticketId"];
+
+        $ticketInfo = parent::getTicketInfo($ticket);
+
+        if($ticketInfo === -1) {
+            return false;
+        }
+
+        $userInfo = parent::getUserInfoById($ticketInfo['submitter_id']);
+
+        if($userInfo === NULL) {
+            return false;
+        }
+
+        $userAndTicketInfo = array("ticketInfo" => $ticketInfo, "userInfo" => $userInfo);
+        return $userAndTicketInfo;
+    }
+
     /**
      * Close ticket
      *

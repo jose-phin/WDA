@@ -55,6 +55,19 @@
     }
 
     /**
+     * Get a user information by supplying the user's ID from the current database instance
+     *
+     * @param $id string - the users id
+     * @return object|null - Will return the User information, else will return null if user does not exist
+     */
+    public function getUserInfoById($id) {
+      $user = $this->db->getUser($id);
+      return isset($user)
+          ? $user
+          : null;
+    }
+
+    /**
      * Create a new ticket for the user into the database
      *
      * @param $userId int - the user's ID

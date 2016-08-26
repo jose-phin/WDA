@@ -18,5 +18,10 @@
   //don't send anything if the user didn't hit a valid endpoint
   if(isset($response)){
     echo json_encode($response);
+  } else {
+    header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+    // Write a notfound page and include it here
+    // include("notFound.php");
+
   }
 ?>
