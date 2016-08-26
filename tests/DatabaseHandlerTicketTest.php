@@ -74,4 +74,15 @@ class DatabaseHandlerTicketTest extends TestCase
     public function testDeleteTicketWithValidTicketIDReturnsTrue() {
         $this->assertTrue(self::$dbh->deleteTicket(1));
     }
+
+    // List all tickets tests
+    public function testGetAllTicketsForSystemReturnsCorrectCount() {
+        $this->assertCount(1, self::$dbh->getAllTicketsInSystem());
+    }
+
+    public function testGetAllTicketsInSystemEmptyReturnsEmpty() {
+        self::$dbh->deleteTicket(2);
+
+        $this->assertCount(0, self::$dbh->getAllTicketsInSystem());
+    }
 }
