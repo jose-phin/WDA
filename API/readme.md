@@ -153,6 +153,60 @@ This endpoint will give you the ticket information for a ticketId supplied
     "ticketId": "477"
 }
 ```
+#### Ticket and User Info
+* **URL**
+```
+/ticket/ticketUser
+```
+
+* **Description**
+
+This endpoint will give you the ticket information for a ticketId supplied and the user who submitted it 
+
+* **Parameters**
+
+**Required**
+  ```javascript
+{
+  "ticketId": [String]
+}
+  ```
+
+* **Success Response**
+
+*JSON* 
+  ```javascript
+{
+  "success": true,
+  "ticket"[Object] {
+    "ticket_id": [String],
+    "subject": [String],
+    "os_type": [String],
+    "primary_issue": [String],
+    "additional_notes": [String],
+    "status": [String],
+    "submitter_id": [String]    
+  },
+  "user"[Object]{
+      "firstName": [String],
+      "lastName": [String],
+      "email": [String],
+      "is_its" : [String] 
+  }
+}
+  ```
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "ticketId": "477"
+}
+```
+
 #### Close
 * **URL**
 ```

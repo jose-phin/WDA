@@ -26,10 +26,22 @@
         ? array( "success" => TRUE, "ticket" => $result['ticketInfo'] )
         : array( "success" => FALSE );
       break;
+    case "/ticketUser" :
+      $result = $requestHandler->viewTicketAndUser();
+      $response = ((isset($result['ticketInfo']) && $result['ticketInfo'] != FALSE)
+                    && isset($result['userInfo']) && $result['userInfo']
+                  ) ? array( "success" => TRUE, "ticket" => $result['ticketInfo'], "user" => $result['userInfo'])
+                    : array( "success" => FALSE );
+      break;
   };
 
   //don't send anything if the user didn't hit a valid endpoint
   if(isset($response)){
     echo json_encode($response);
+  } else {
+    header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+    // Write a notfound page and include it here
+    // include("notFound.php");
+
   }
 ?>
