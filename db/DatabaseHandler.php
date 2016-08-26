@@ -480,16 +480,16 @@ class DatabaseHandler
      * Fetches all tickets submitted by a user with a given email
      *
      * @param $email
-     * @return array|null returns a 2D array of tickets, or null if unable to fetch tickets
+     * @return array returns a 2D array of tickets, or an empty array if unable to fetch tickets
      */
     function getAllTicketsForUser($email)
     {
-        try {
-            $tickets = [];
+        $tickets = [];
 
+        try {
             $this->db->beginTransaction();
 
-            $query = "SELECT tickets.* FROM tickets
+            $query = "SELECT tickets.*, users.email FROM tickets
                       INNER JOIN users ON tickets.submitter_id = users.user_id
                       WHERE users.email = :email;";
 
@@ -504,13 +504,48 @@ class DatabaseHandler
                 array_push($tickets, $row);
             }
 
-            return $tickets;
-
         } catch (Exception $e) {
             $this->db->rollBack();
             $message = "Failed to get tickets for user " . $email . ": " . $e->getMessage();
             $this->logger->log_error($message);
         }
+
+        return $tickets;
+    }
+
+    /**
+     * Fetches all tickets currently in the system.
+     *
+     * @return array returns a 2D array of tickets and their details, or an empty array if unable to fetch tickets
+     * Ticket detail array looks like: [ticket_id, subject, os_type, primary_issue, additional_notes, status, email]
+     */
+    function getAllTicketsInSystem()
+    {
+        $tickets = [];
+
+        try {
+            $this->db->beginTransaction();
+
+            $query = "SELECT tickets.*, users.email FROM tickets
+                      INNER JOIN users ON tickets.submitter_id = users.user_id";
+
+            $stmt = $this->db->prepare($query);
+
+            $stmt->execute();
+            $this->db->commit();
+
+            // Move through the results of the query, adding the next assoc array to the tickets master array
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($tickets, $row);
+            }
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $message = "Failed to get tickets in the system: " . $e->getMessage();
+            $this->logger->log_error($message);
+        }
+
+        return $tickets;
     }
 
 //    function getSortedTickets($sortType = null, $email, $ticketId)
