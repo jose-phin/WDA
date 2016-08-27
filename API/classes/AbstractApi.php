@@ -117,13 +117,13 @@
     }
 
     public function getTicketInfo($ticketId) {
-      $result = $this->db->getTicket($ticketId);
+      $result = $this->db->getTicketById($ticketId);
       return $result;
     }
 
     public function closeTicketDB($ticketId){
 
-      $ticket = $this->db->getTicket($ticketId);
+      $ticket = $this->db->getTicketById($ticketId);
       if($ticket === null) {
         return false;
       }
@@ -139,7 +139,7 @@
     }
 
     public function getAllTickets() {
-      $result = $this->db->getTicket();
+      $result = $this->db->getAllTicketsInSystem();
       return $result;
     }
 
