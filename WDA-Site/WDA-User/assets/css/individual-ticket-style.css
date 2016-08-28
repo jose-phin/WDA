@@ -24,6 +24,10 @@
   margin-top: 50px;
 }
 
+.ticket-content-container{
+  margin-top: 10px;
+}
+
 .ticket-info-header-text{
   font-family: "Karla", sans-serif;
   font-weight: 700;

@@ -17,6 +17,9 @@ $(document).ready(function() {
             enquiry: {
                 required: true
             },
+            subject: {
+                required: true
+            },
             description: {
                 required: true
             }
@@ -34,6 +37,9 @@ $(document).ready(function() {
             },
             enquiry: {
                 required: "Please choose an enquiry type from the drop down menu."
+            },
+            subject: {
+                required: "Please provide a concise title for your issue."
             },
             description: {
                 required: "Please provide a description of your issue."
