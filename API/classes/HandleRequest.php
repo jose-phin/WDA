@@ -153,6 +153,13 @@
     }
 
     /**
+     * View the all tickets and the submitter information
+     */
+    public function viewAllTickets() {
+        return parent::getAllTicketsInSystem();
+    }
+
+    /**
      * Close ticket
      *
      * @return false if ticket number isnt found
