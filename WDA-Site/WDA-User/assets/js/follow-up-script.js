@@ -17,7 +17,7 @@ $(document).ready(function(){
 
     $.ajax({
         type: "POST",
-        url: "/WDA/ticket/view",
+        url: "/WDA/ticket/ticketUser",
         contentType: 'application/json',
         data: JSON.stringify({
             "ticketId": ticketID.toString()
@@ -38,9 +38,11 @@ $(document).ready(function(){
                 $(".user-ticket-ticketTitle").text(ticket.ticket.subject);
                 $(".user-ticket-ticketId").text("Ticket ID: #"+ticket.ticket.ticket_id);
 
+                console.log(ticket.user);
+                $(".user-ticket-fullName").text(ticket.user.first_name+" "+ticket.user.last_name);
                 $(".user-ticket-issueCategory").text(ticket.ticket.primary_issue);
                 $(".user-ticket-osType").text(ticket.ticket.os_type);
-
+                
                 var additionalNotes = ticket.ticket.additional_notes.replace(/(\r\n|\n|\r)/g,"<br />");
                 $(".user-ticket-originalMessage").html(additionalNotes);
 

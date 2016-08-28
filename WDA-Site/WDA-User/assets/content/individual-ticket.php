@@ -43,10 +43,10 @@
 
         <div class="row individual-ticket-info-row">
           <p class="col-md-12 ticket-info-header-text">
-            Date
+            Email
           </p>
-          <p class="col-md-12">
-            {{DD/MM/YYYY}}
+          <p class="col-md-12 user-ticket-email">
+            {{user@email.com}}
           </p>
           <!-- End of info row 3 -->
         </div>
