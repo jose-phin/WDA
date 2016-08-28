@@ -39,13 +39,13 @@
                     <h4 class="col-sm-12 ticket-notFound-message">
                         You're not supposed to be here :(
                     </h4>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3 col-md-2">
                         <h4 class="user-ticket-ticketId">
                             {{Ticket ID: #12345}}
                         </h4>
                     </div>
                     <!-- Ticket status -->
-                    <div class="col-sm-2">
+                    <div class="col-sm-3 col-md-2">
                         <span class="status" id="user-ticket-status">{{Status}}</span>
                     </div>
                 </div>

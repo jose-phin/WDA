@@ -34,11 +34,11 @@ $(document).ready(function(){
                 $(".ticket-content-container").hide();
             }
             if (ticket.success === true){
-                console.log(ticket.ticket);
+
                 $(".user-ticket-ticketTitle").text(ticket.ticket.subject);
                 $(".user-ticket-ticketId").text("Ticket ID: #"+ticket.ticket.ticket_id);
 
-                console.log(ticket.user);
+
                 $(".user-ticket-fullName").text(ticket.user.first_name+" "+ticket.user.last_name);
                 $(".user-ticket-issueCategory").text(ticket.ticket.primary_issue);
                 $(".user-ticket-osType").text(ticket.ticket.os_type);

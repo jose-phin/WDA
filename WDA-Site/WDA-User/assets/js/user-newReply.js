@@ -18,7 +18,8 @@ $(document).ready(function(){
     // Process form
     $(document).submit("#add-comment-form", function(e) {
         e.preventDefault();
-        console.log(ticket.ticket.ticket_id);
+
+
         /* Serialised data */
         var data = $(this).serialize();
 
@@ -28,7 +29,7 @@ $(document).ready(function(){
             contentType: 'application/json',
             data: JSON.stringify({
                 "user":{
-                    "email": "john@apple.com"
+                    "email": ticket.user.email
                 },
                 "comment":{
                     "ticketId": ticket.ticket.ticket_id,
@@ -77,12 +78,18 @@ function getAllReplies(){
 
 function displayAllReplies(){
 
-    $newHtmlRowHead = '<div class="new-reply-container"><legend class="reply-separator"></legend><p class="col-md-12 ticket-info-header-text">{{Full Name}} added:</p><p class="col-md-12 new-reply-text">';
+    $newHtmlRowHead = '<div class="new-reply-container"><legend class="reply-separator"></legend><p class="col-md-12 ticket-info-header-text reply-header">';
+    $newHtmlRowName = ' added:'+'</p><p class="col-md-12 new-reply-text">';
     $newHtmlRowTail = '</p></div>';
     $.each(comments.comments, function(i, item){
+
         $(".reply-main-container").append(
-            $newHtmlRowHead+item.comment_text+$newHtmlRowTail
+            $newHtmlRowHead+item.email+$newHtmlRowName+item.comment_text+$newHtmlRowTail
         );
+
+        if (item.is_its == 1){
+            $(".reply-header").addClass("reply-header-its");
+        }
 
     });
 }
@@ -103,11 +110,16 @@ function showLatestReply(){
             }
             if (comments.success === true){
                 var totalComments = comments.comments.length;
+                console.log(comments);
 
-                $newHtmlRowHead = '<div class="new-reply-container"><legend class="reply-separator"></legend><p class="col-md-12 ticket-info-header-text">{{Full Name}} added:</p><p class="col-md-12 new-reply-text">';
+
+                $newHtmlRowHead = '<div class="new-reply-container"><legend class="reply-separator"></legend><p class="col-md-12 ticket-info-header-text reply-header">';
+                $newHtmlRowName = ' added:'+'</p><p class="col-md-12 new-reply-text">';
                 $newHtmlRowTail = '</p></div>';
 
-                $(".reply-main-container").append($newHtmlRowHead+comments.comments[totalComments-1].comment_text+$newHtmlRowTail);
+                $latestReplyDiv = $newHtmlRowHead+comments.comments[totalComments-1].email+$newHtmlRowName+comments.comments[totalComments-1].comment_text+$newHtmlRowTail;
+                $($latestReplyDiv).hide().appendTo(".reply-main-container").fadeIn();
+
             }
         }
     });
