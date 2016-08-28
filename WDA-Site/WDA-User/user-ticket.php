@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./assets/css/individual-ticket-style.css">
     <script src="./assets/js/follow-up-script.js"></script>
     <script src="./assets/js/user-newReply.js"></script>
+    <script src="./assets/js/eventHandler-form.js"></script>
 
 </head>
 

@@ -13,4 +13,12 @@ $(document).ready(function(){
 			$(this).submit();
 		}
 	});
+
+  $("#add-comment-form").keydown(function(e) {
+
+		if((e.keyCode == 13 && (e.metaKey||e.ctrlKey) )){
+			e.preventDefault();
+			$(this).submit();
+		}
+	});
 });
