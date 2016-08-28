@@ -42,7 +42,7 @@ $(document).ready(function(){
                 $(".user-ticket-fullName").text(ticket.user.first_name+" "+ticket.user.last_name);
                 $(".user-ticket-issueCategory").text(ticket.ticket.primary_issue);
                 $(".user-ticket-osType").text(ticket.ticket.os_type);
-                
+                $(".user-ticket-email").text(ticket.user.email);
                 var additionalNotes = ticket.ticket.additional_notes.replace(/(\r\n|\n|\r)/g,"<br />");
                 $(".user-ticket-originalMessage").html(additionalNotes);
 
