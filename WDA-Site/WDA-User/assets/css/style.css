@@ -40,6 +40,14 @@ for readability.
         padding-right: 5%;
     }
 
+    p.hero-description{
+      padding-right: 5%!important;
+    }
+
+    h1{
+      font-size: 4em;
+    }
+
 }
 
 /* Fixes margin on buttons, optimised for mobile */

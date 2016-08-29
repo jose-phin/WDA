@@ -3,6 +3,19 @@
 var ticket, comments;
 $(document).ready(function(){
 
+
+
+  $(function() {
+    $('.btn-closeBtn').hover(function() {
+      $('#closeBtn-icon').css('color', 'white');
+    }, function() {
+      // on mouseout, reset the background colour
+      $('#closeBtn-icon').css('color', '');
+    });
+  });
+
+
+
     $(".ticket-notFound-message").hide();
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
     sURLVariables = sPageURL.split('?');
@@ -31,10 +44,11 @@ $(document).ready(function(){
                 $(".user-ticket-ticketId").hide();
                 $(".ticket-notFound-message").show();
                 $(".status").hide();
+                $(".btn-closeBtn").hide();
                 $(".ticket-content-container").hide();
             }
             if (ticket.success === true){
-
+              console.log(ticket);
                 $(".user-ticket-ticketTitle").text(ticket.ticket.subject);
                 $(".user-ticket-ticketId").text("Ticket ID: #"+ticket.ticket.ticket_id);
 
@@ -60,5 +74,8 @@ $(document).ready(function(){
 
 
 function replaceTicketStatus($ticketStatus){
-    $('.status').replaceWith("<span class='status "+"status-"+$ticketStatus+" user-ticket-status'>"+$ticketStatus+"</span>");
+  if ($ticketStatus != "pending" && $ticketStatus != "Pending"){
+    $(".btn-closeBtn").hide();
+  }
+  $('.status').replaceWith("<span class='status "+"status-"+$ticketStatus.toLowerCase()+" user-ticket-status'>"+$ticketStatus+"</span>");
 }
