@@ -79,13 +79,13 @@ function getAllReplies(){
 
 function displayAllReplies(){
 
-    $newHtmlRowHead = '<div class="new-reply-container"><legend class="reply-separator"></legend><p class="col-md-12 ticket-info-header-text reply-header">';
-    $newHtmlRowName = ' added:'+'</p><p class="col-md-12 new-reply-text">';
+    $newHtmlRowHead = '<legend class="reply-separator"></legend><div class=" col-md-12 new-reply-container"><p class="ticket-info-header-text reply-header">';
+    $newHtmlRowName = ' added:'+'</p><p class="new-reply-text">';
     $newHtmlRowTail = '</p></div>';
     $.each(comments.comments, function(i, item){
 
         $(".reply-main-container").append(
-            $newHtmlRowHead+item.email+$newHtmlRowName+item.comment_text+$newHtmlRowTail
+            $newHtmlRowHead+item.email+$newHtmlRowName+item.comment_text.replace(/(\r\n|\n|\r)/g,"<br />")+$newHtmlRowTail
         );
 
         if (item.is_its == 1){
@@ -114,12 +114,24 @@ function showLatestReply(){
                 console.log(comments);
 
 
-                $newHtmlRowHead = '<div class="new-reply-container"><legend class="reply-separator"></legend><p class="col-md-12 ticket-info-header-text reply-header">';
-                $newHtmlRowName = ' added:'+'</p><p class="col-md-12 new-reply-text">';
+                $newHtmlRowHead = '<legend class="reply-separator"></legend><div class="new-reply-container col-md-12"><p class="ticket-info-header-text reply-header">';
+                $newHtmlRowName = ' added:'+'</p><p class="new-reply-text">';
                 $newHtmlRowTail = '</p></div>';
 
-                $latestReplyDiv = $newHtmlRowHead+comments.comments[totalComments-1].email+$newHtmlRowName+comments.comments[totalComments-1].comment_text+$newHtmlRowTail;
+                $latestReplyDiv = $newHtmlRowHead+comments.comments[totalComments-1].email+$newHtmlRowName+comments.comments[totalComments-1].comment_text.replace(/(\r\n|\n|\r)/g,"<br />")+$newHtmlRowTail;
                 $($latestReplyDiv).hide().appendTo(".reply-main-container").fadeIn();
+                $('.new-reply-container:last').css('background','linear-gradient(180deg, rgba(255,222,42, 0.5) 0%, white )');
+                $('.new-reply-container:last-child p').css('padding-left','40px');
+
+                $('.new-reply-container:last')
+                .delay(800)
+                .queue(function (next) {
+                    $(this).css({
+                        background: 'white',
+                    });
+                    next();
+                    $('.new-reply-container:last-child p').css('padding-left','15px');
+                });
 
             }
         }
