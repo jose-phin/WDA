@@ -76,6 +76,7 @@ $(document).ready(function(){
 function replaceTicketStatus($ticketStatus){
   if ($ticketStatus != "pending" && $ticketStatus != "Pending"){
     $(".btn-closeBtn").hide();
+    $("#add-comment-form").hide();
   }
   $('.status').replaceWith("<span class='status "+"status-"+$ticketStatus.toLowerCase()+" user-ticket-status'>"+$ticketStatus+"</span>");
 }
