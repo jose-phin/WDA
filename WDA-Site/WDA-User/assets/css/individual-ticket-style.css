@@ -159,10 +159,19 @@ button.btn-closeBtn:hover{
   color: #525252;
 }
 
-/*.reply-separator{
+.reply-separator{
   margin: 0;
+  float: none;
 }
 .new-reply-container{
   background: white;
   padding: 20px 0 20px 0;
-}*/
+}
+
+.new-reply-container:last-child{
+  padding-bottom: 0;
+}
+
+.new-reply-container p{
+  padding-left: 15px;
+}

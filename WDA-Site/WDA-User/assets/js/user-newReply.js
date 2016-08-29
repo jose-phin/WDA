@@ -79,8 +79,8 @@ function getAllReplies(){
 
 function displayAllReplies(){
 
-    $newHtmlRowHead = '<div class="new-reply-container"><legend class="reply-separator"></legend><p class="col-md-12 ticket-info-header-text reply-header">';
-    $newHtmlRowName = ' added:'+'</p><p class="col-md-12 new-reply-text">';
+    $newHtmlRowHead = '<legend class="reply-separator"></legend><div class=" col-md-12 new-reply-container"><p class="ticket-info-header-text reply-header">';
+    $newHtmlRowName = ' added:'+'</p><p class="new-reply-text">';
     $newHtmlRowTail = '</p></div>';
     $.each(comments.comments, function(i, item){
 
@@ -114,8 +114,8 @@ function showLatestReply(){
                 console.log(comments);
 
 
-                $newHtmlRowHead = '<div class="new-reply-container"><legend class="reply-separator"></legend><p class="col-md-12 ticket-info-header-text reply-header">';
-                $newHtmlRowName = ' added:'+'</p><p class="col-md-12 new-reply-text">';
+                $newHtmlRowHead = '<legend class="reply-separator"></legend><div class="new-reply-container col-md-12"><p class="ticket-info-header-text reply-header">';
+                $newHtmlRowName = ' added:'+'</p><p class="new-reply-text">';
                 $newHtmlRowTail = '</p></div>';
 
                 $latestReplyDiv = $newHtmlRowHead+comments.comments[totalComments-1].email+$newHtmlRowName+comments.comments[totalComments-1].comment_text+$newHtmlRowTail;
