@@ -3,14 +3,15 @@
     margin-top: 30px;
 }
 
-.contained {
+/* THIS DIV DISABLES THE ENTIRE FORM ON MOBILE!!!!! */
+/* @JACQUELINE */
+/*.contained {
     display: block;
     float: left;
     width: 100%;
-}
+}*/
 
 /*This will control the style of form validation errors*/
 .error {
     color: #D0021B;
 }
-

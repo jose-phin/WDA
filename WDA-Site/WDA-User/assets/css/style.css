@@ -4,6 +4,7 @@
     font-size: 15px;
     color: black;
     -webkit-font-smoothing: antialiased;
+    word-wrap: break-word;
 }
 
 body{
@@ -45,7 +46,10 @@ for readability.
     }
 
     h1{
-      font-size: 4em;
+      font-size: 3em!important;
+    }
+    h1.h1-subtitle{
+      font-size: 1.5em!important;
     }
 
 }
