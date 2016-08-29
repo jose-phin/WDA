@@ -85,7 +85,7 @@ function displayAllReplies(){
     $.each(comments.comments, function(i, item){
 
         $(".reply-main-container").append(
-            $newHtmlRowHead+item.email+$newHtmlRowName+item.comment_text+$newHtmlRowTail
+            $newHtmlRowHead+item.email+$newHtmlRowName+item.comment_text.replace(/(\r\n|\n|\r)/g,"<br />")+$newHtmlRowTail
         );
 
         if (item.is_its == 1){
@@ -118,7 +118,7 @@ function showLatestReply(){
                 $newHtmlRowName = ' added:'+'</p><p class="col-md-12 new-reply-text">';
                 $newHtmlRowTail = '</p></div>';
 
-                $latestReplyDiv = $newHtmlRowHead+comments.comments[totalComments-1].email+$newHtmlRowName+comments.comments[totalComments-1].comment_text+$newHtmlRowTail;
+                $latestReplyDiv = $newHtmlRowHead+comments.comments[totalComments-1].email+$newHtmlRowName+comments.comments[totalComments-1].comment_text.replace(/(\r\n|\n|\r)/g,"<br />")+$newHtmlRowTail;
                 $($latestReplyDiv).hide().appendTo(".reply-main-container").fadeIn();
 
             }
