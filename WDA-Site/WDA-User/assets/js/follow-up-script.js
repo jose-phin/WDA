@@ -1,6 +1,6 @@
 // This javascript file retrieves json data from DB
 // and populate the page with data
-var ticket, comments;
+var ticket, comments, ticketStatusClass;
 $(document).ready(function(){
 
 
@@ -74,9 +74,24 @@ $(document).ready(function(){
 
 
 function replaceTicketStatus($ticketStatus){
+  $ticketStatus = $ticketStatus.toLowerCase();
+
+  if ($ticketStatus == "pending"){
+    var ticketStatusClass = "pending";
+  }
+  if ($ticketStatus == "in progress"){
+    var ticketStatusClass = "in-progress";
+  }
+  if ($ticketStatus == "resolved"){
+    var ticketStatusClass = "resolved";
+  }
+  if ($ticketStatus == "unresolved"){
+    var ticketStatusClass = "unresolved";
+  }
   if ($ticketStatus != "pending" && $ticketStatus != "Pending"){
     $(".btn-closeBtn").hide();
     $("#add-comment-form").hide();
   }
-  $('.status').replaceWith("<span class='status "+"status-"+$ticketStatus.toLowerCase()+" user-ticket-status'><i class='fa fa-circle fa-1 fa-statusTag' aria-hidden='true'></i>"+$ticketStatus+"</span>");
+  console.log(ticketStatusClass);
+  $('.status').replaceWith("<span class='status "+"status-"+ticketStatusClass+" user-ticket-status'><i class='fa fa-circle fa-1 fa-statusTag' aria-hidden='true'></i>"+$ticketStatus+"</span>");
 }

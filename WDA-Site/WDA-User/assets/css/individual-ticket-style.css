@@ -108,8 +108,8 @@ p.reply-header{
 }
 
 .status-resolved {
-  background-color: #409e3f;
-  border: 1px solid #398439;
+  background-color: #19C37F;
+  border: 1px solid #19C37F;
 }
 
 .status-unresolved {
@@ -159,10 +159,24 @@ button.btn-closeBtn:hover{
   color: #525252;
 }
 
-/*.reply-separator{
+.reply-separator{
   margin: 0;
+  float: none;
 }
 .new-reply-container{
-  background: white;
+  background-color: white;
   padding: 20px 0 20px 0;
-}*/
+}
+
+.new-reply-container:last-child{
+  padding-bottom: 0;
+}
+
+.new-reply-container p{
+  padding-left: 15px;
+  transition: padding-left 0.5s ease-in-out;
+}
+
+p.new-reply-text{
+  margin-bottom:0;
+}
