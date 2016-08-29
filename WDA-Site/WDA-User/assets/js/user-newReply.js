@@ -4,7 +4,8 @@ $(document).ready(function(){
     $("#add-comment-form").validate({
         rules: {
             newMessage: {
-                required: true
+                required: true,
+                minlength: 10
             },
         },
         messages: {

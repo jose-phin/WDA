@@ -16,6 +16,18 @@
           <!-- End of info row 1 -->
         </div>
 
+
+        <div class="row individual-ticket-info-row">
+          <p class="col-md-12 ticket-info-header-text">
+            Email
+          </p>
+          <p class="col-md-12 user-ticket-email">
+            {{user@email.com}}
+          </p>
+          <!-- End of info email row -->
+        </div>
+
+
         <div class="row individual-ticket-info-row">
           <!-- Category -->
           <div class="col-md-4">
@@ -37,19 +49,10 @@
             </p>
           </div>
 
-          <!-- End of info row 2 -->
+          <!-- End of tech info row -->
         </div>
 
 
-        <div class="row individual-ticket-info-row">
-          <p class="col-md-12 ticket-info-header-text">
-            Email
-          </p>
-          <p class="col-md-12 user-ticket-email">
-            {{user@email.com}}
-          </p>
-          <!-- End of info row 3 -->
-        </div>
 
 
         <!-- Message -->

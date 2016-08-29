@@ -16,16 +16,21 @@
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
     <link rel="stylesheet" href="./assets/css/individual-ticket-style.css">
+    <link rel="stylesheet" href="./assets/css/closeTicket-style.css">
     <script src="./assets/js/follow-up-script.js"></script>
     <script src="./assets/js/user-newReply.js"></script>
     <script src="./assets/js/eventHandler-form.js"></script>
-
+    <script src="./assets/js/ticketStatus-handler.js"></script>
 </head>
 
 <body>
+    <?php include "assets/content/closeTicket-modal.php"; ?>
     <div class="home-body content">
 
         <div class="site-wide-container container">
+
+
+
 
             <!-- Navigation Bar -->
             <?php include "navbar.php"; ?>
@@ -46,8 +51,11 @@
                         </h4>
                     </div>
                     <!-- Ticket status -->
-                    <div class="col-sm-3 col-md-2">
+                    <div class="col-xs-5 col-sm-2 col-md-2">
                         <span class="status" id="user-ticket-status">{{Status}}</span>
+                    </div>
+                    <div class="col-xs-3 col-sm-2 col-md-3">
+                        <button class="btn btn-closeBtn" data-toggle="modal" data-target="#closeTicket-modal" data-keyboard="true" id="user-closeTicket-btn" onclick="this.blur();"><i class="fa fa-times" id="closeBtn-icon"></i> Close Ticket</button>
                     </div>
                 </div>
 

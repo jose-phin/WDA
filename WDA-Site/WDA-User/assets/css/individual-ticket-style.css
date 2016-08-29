@@ -134,3 +134,28 @@
   background-color: #f0ad4e;
   border: 1px solid #eea236;
 }
+
+.error{
+  color: #D0021B;
+}
+
+button.btn-closeBtn{
+  padding: 6px 20px;
+  margin-top: 4px;
+  background-color: transparent;
+  border-color: #525252;
+  border-radius: 3.5px;
+  color: #525252;
+}
+
+button.btn-closeBtn:hover{
+  background-color: #D0021B;
+  border-color: #D0021B;
+  color: white;
+
+}
+
+#closeBtn-icon{
+  margin-right: 10px;
+  color: #525252;
+}

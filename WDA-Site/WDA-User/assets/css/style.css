@@ -4,6 +4,7 @@
     font-size: 15px;
     color: black;
     -webkit-font-smoothing: antialiased;
+    word-wrap: break-word;
 }
 
 body{
@@ -38,6 +39,17 @@ for readability.
 
     .text-container{
         padding-right: 5%;
+    }
+
+    p.hero-description{
+      padding-right: 5%!important;
+    }
+
+    h1{
+      font-size: 3em!important;
+    }
+    h1.h1-subtitle{
+      font-size: 1.5em!important;
     }
 
 }
