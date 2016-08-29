@@ -120,6 +120,18 @@ function showLatestReply(){
 
                 $latestReplyDiv = $newHtmlRowHead+comments.comments[totalComments-1].email+$newHtmlRowName+comments.comments[totalComments-1].comment_text+$newHtmlRowTail;
                 $($latestReplyDiv).hide().appendTo(".reply-main-container").fadeIn();
+                $('.new-reply-container:last').css('background','linear-gradient(180deg, rgba(255,222,42, 0.5) 0%, white )');
+                $('.new-reply-container:last-child p').css('padding-left','40px');
+
+                $('.new-reply-container:last')
+                .delay(800)
+                .queue(function (next) {
+                    $(this).css({
+                        background: 'white',
+                    });
+                    next();
+                    $('.new-reply-container:last-child p').css('padding-left','15px');
+                });
 
             }
         }
