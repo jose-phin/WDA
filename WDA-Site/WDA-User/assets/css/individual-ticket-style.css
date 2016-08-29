@@ -175,3 +175,7 @@ button.btn-closeBtn:hover{
 .new-reply-container p{
   padding-left: 15px;
 }
+
+p.new-reply-text{
+  margin-bottom:0;
+}
