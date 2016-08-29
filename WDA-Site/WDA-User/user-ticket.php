@@ -51,7 +51,7 @@
                         </h4>
                     </div>
                     <!-- Ticket status -->
-                    <div class="col-xs-4 col-sm-2 col-md-2">
+                    <div class="col-xs-5 col-sm-2 col-md-2">
                         <span class="status" id="user-ticket-status">{{Status}}</span>
                     </div>
                     <div class="col-xs-3 col-sm-2 col-md-3">
