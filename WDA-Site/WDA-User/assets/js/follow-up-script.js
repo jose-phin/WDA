@@ -78,5 +78,5 @@ function replaceTicketStatus($ticketStatus){
     $(".btn-closeBtn").hide();
     $("#add-comment-form").hide();
   }
-  $('.status').replaceWith("<span class='status "+"status-"+$ticketStatus.toLowerCase()+" user-ticket-status'><i class='fa fa-circle fa-1 fa-statusTag' aria-hidden='true'></i>"+$ticketStatus+"</span>");
+  $('.status').replaceWith("<span class='status "+"status-"+$ticketStatus.toLowerCase()+" user-ticket-status'>"+$ticketStatus+"</span>");
 }

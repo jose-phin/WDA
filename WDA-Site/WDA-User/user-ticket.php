@@ -52,9 +52,7 @@
                     </div>
                     <!-- Ticket status -->
                     <div class="col-xs-5 col-sm-2 col-md-2">
-                        <span class="status" id="user-ticket-status">
-                          <i class="fa fa-circle fa-1" aria-hidden="true"></i>
-                          {{Status}}</span>
+                        <span class="status" id="user-ticket-status">{{Status}}</span>
                     </div>
                     <div class="col-xs-3 col-sm-2 col-md-3">
                         <button class="btn btn-closeBtn" data-toggle="modal" data-target="#closeTicket-modal" data-keyboard="true" id="user-closeTicket-btn" onclick="this.blur();"><i class="fa fa-times" id="closeBtn-icon"></i> Close Ticket</button>

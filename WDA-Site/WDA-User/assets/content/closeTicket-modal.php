@@ -7,8 +7,7 @@
         <div class="modal-body">
          <p class="modal-title-text">
             Are you sure that you want to close this ticket?</p>
-         <p>
-            Closed tickets cannot be re-opened,
+         <p>Closed tickets cannot be re-opened,
             and no further follow-ups will be made.</p>
         </div>
         <div class="modal-footer btn-margin-fix">
