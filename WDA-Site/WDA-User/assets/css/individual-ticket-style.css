@@ -2,27 +2,6 @@
     for the user's individual tickets
 */
 
-/*Heading styles*/
-.faq-title{
-  color: #2C35E4;
-  position: relative;
-}
-
-.faq-title:before{
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 11px;
-  height: 1px;
-  width: 58%;
-  border-bottom: 25px solid yellow;
-  z-index: -1;
-}
-
-
-.faq-header{
-  margin-top: 50px;
-}
 
 .ticket-content-container{
   margin-top: 10px;
@@ -36,6 +15,10 @@
   margin-bottom: 0;
 }
 
+.user-ticket-ticketId{
+  font-weight: 700;
+  font-size: 1em;
+}
 
 .faq-ticket-text, .faq-ticket-button{
   display: inline-block;
@@ -102,17 +85,26 @@
   margin-bottom: 20px;
 }
 
+p.reply-header{
+  font-size: 0.85em;
+
+
+}
+
 /* Status */
 .status {
   display: block;
-  font-size: 16px;
-  margin-top: 4px;
   padding-top: 6px;
-  width: 110px;
+  width: 120px;
   height: 35px;
-  border-radius: 2px;
   color: #fff;
   text-align: center;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 100px;
+  font-size: 0.9em;
+  vertical-align: middle;
 }
 
 .status-resolved {
@@ -128,11 +120,20 @@
 .status-in-progress {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
+
 }
 
 .status-pending {
-  background-color: #f0ad4e;
-  border: 1px solid #eea236;
+  background-color: #ffc82b;
+  border: 1px solid #ffc82b;
+  color: black;
+}
+
+.fa-statusTag{
+  margin-right: 10px;
+  font-size: 12px;
+  vertical-align: middle;
+  color: #f6f6f6;
 }
 
 .error{
@@ -141,7 +142,6 @@
 
 button.btn-closeBtn{
   padding: 6px 20px;
-  margin-top: 4px;
   background-color: transparent;
   border-color: #525252;
   border-radius: 3.5px;
@@ -152,10 +152,17 @@ button.btn-closeBtn:hover{
   background-color: #D0021B;
   border-color: #D0021B;
   color: white;
-
 }
 
 #closeBtn-icon{
   margin-right: 10px;
   color: #525252;
 }
+
+/*.reply-separator{
+  margin: 0;
+}
+.new-reply-container{
+  background: white;
+  padding: 20px 0 20px 0;
+}*/
