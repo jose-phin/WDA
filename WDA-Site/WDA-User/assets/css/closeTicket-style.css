@@ -34,7 +34,7 @@
     backdrop-filter: blur(10px);
 }
 
-@media (max-width: 978px) {
+@media (max-width: 441px) {
     .closeTicket-modal{
         width: 100%;
     }
