@@ -33,6 +33,12 @@
                   ) ? array( "success" => TRUE, "ticket" => $result['ticketInfo'], "user" => $result['userInfo'])
                     : array( "success" => FALSE );
       break;
+    case "/viewAll" :
+      $result = $requestHandler->viewAllTickets();
+      $response = isset($result)
+                  ? array("success" => TRUE, "tickets" => $result)
+                  : array("success" => FALSE);
+      break;
   };
 
   //don't send anything if the user didn't hit a valid endpoint

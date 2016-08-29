@@ -103,6 +103,15 @@
                                     Dtails such as computer names, website paths, account numbers,
                                     and error numbers will help us to resolve your issue more efficiently.
                                 </p>
+
+                                <!-- Ticket Subject -->
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>*
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter your issue subject">
+                                </div>
+
+                                <!-- Description -->
+                                <label for="subject">Description</label>*
                                 <textarea class="form-control" id="description" name="description" rows="5" placeholder="Provide more details here..."></textarea>
                             </div>
 

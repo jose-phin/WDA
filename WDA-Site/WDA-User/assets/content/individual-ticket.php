@@ -10,8 +10,8 @@
           <p class="col-md-12 ticket-info-header-text">
             Full Name
           </p>
-          <p class="col-md-12">
-            John Appleseed
+          <p class="col-md-12 user-ticket-fullName">
+            First Last Name
           </p>
           <!-- End of info row 1 -->
         </div>
@@ -22,7 +22,7 @@
             <p class="ticket-info-header-text">
               Category
             </p>
-            <p class="issue-category">
+            <p class="user-ticket-issueCategory">
               {{Issue Category}}
             </p>
           </div>
@@ -32,7 +32,7 @@
             <p class="ticket-info-header-text">
               OS
             </p>
-            <p class="issue-category">
+            <p class="user-ticket-osType">
               {{Operating System}}
             </p>
           </div>
@@ -43,10 +43,10 @@
 
         <div class="row individual-ticket-info-row">
           <p class="col-md-12 ticket-info-header-text">
-            Date
+            Email
           </p>
-          <p class="col-md-12">
-            {{DD/MM/YYYY}}
+          <p class="col-md-12 user-ticket-email">
+            {{user@email.com}}
           </p>
           <!-- End of info row 3 -->
         </div>
@@ -57,23 +57,31 @@
           <p class="col-md-12 ticket-info-header-text">
             Message
           </p>
-          <p class="col-md-12 original-message">
+          <p class="col-md-12 user-ticket-originalMessage">
             {{Original ticket message by user}}
           </p>
           <!-- End of info row 4 -->
+        </div>
+
+        <!-- Replies -->
+        <div class="row individual-ticket-info-row reply-main-container">
         </div>
       <!-- End of ticket info  -->
       </div>
 
       <!-- Add comment -->
-      <form id="add-comment-form" name="addCommentForm" method="post" action="" autocomplete="off" novalidate="novalidate">
+      <form id="add-comment-form" name="addCommentForm" method="post" autocomplete="off" novalidate="novalidate">
         <div class="panel-footer panel-comment">
-
           <p class="ticket-info-header-text">
             Reply
           </p>
-          <textarea class="form-control" id="new-message" name="new-message" rows="5" placeholder="Provide more details here..."></textarea>
-          <button type="submit" class="btn btn-primary add-reply-button">Add Reply</button>
+          <textarea class="form-control" id="newMessage" name="newMessage" rows="5" placeholder="Provide more details here..."></textarea>
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary add-reply-button">Add Reply</button>
+            </div>
+          </div>
+
         </div>
       </form>
 

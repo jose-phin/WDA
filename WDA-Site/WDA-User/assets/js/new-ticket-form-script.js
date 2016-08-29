@@ -23,13 +23,14 @@ $(document).ready(function() {
 					"ticket": {
 						"osType": $("#os").val(),
 						"primaryIssue": $("#enquiry").val(),
+			            "subject": $("input[name=subject]").val(),
 						"additionalNotes": $("#description").val()
 					}
 				}),
 				success:  function(formData) {
 					$("#report-issue").fadeOut(500).hide(function() {
 						$(".submitted").fadeIn(500).show(function() {
-							$(".result").text(formData);
+							$(".result").text(data);
 						});
 					});
 				}

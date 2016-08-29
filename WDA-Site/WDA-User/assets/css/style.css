@@ -18,6 +18,11 @@ body{
     padding-bottom: 100px;
 }
 
+.hidden{
+  display: none;
+}
+
+
 /* Pulls texts leftwards and break on 40% browser length
 for readability.
 */
