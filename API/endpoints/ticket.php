@@ -33,6 +33,10 @@
                   ) ? array( "success" => TRUE, "ticket" => $result['ticketInfo'], "user" => $result['userInfo'])
                     : array( "success" => FALSE );
       break;
+    case "/update" :
+      $result = $requestHandler->updateTicket();
+      $response = array("success" => $result);
+      break;
     case "/viewAll" :
       $result = $requestHandler->viewAllTickets();
       $response = isset($result)
