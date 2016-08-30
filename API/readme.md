@@ -118,12 +118,9 @@ name, the endpoint will also create the user, then create the ticket
 
 This endpoint will update the specified ticket id with the filled out fields
 that are filled out in the JSON, if you omit any ticket fields in the JSON
-other than the ticket_id field, then the update function will reuse the existing
+other than the ticketId field, then the update function will reuse the existing
 value that is already stored in the database
 
-*NOTE, THIS ENDPOINT CALL USES DIFFERENT VARIABLE NAMES BECAUSE OF HOW IT
-UPDATES, SO DON'T MAKE SURE YOU USE VARIABLE NAMES LIKE ticket_id INSTEAD OF
-ticketId*
 
 * **Parameters**
 
@@ -131,7 +128,7 @@ ticketId*
 ```javascript
 {
   "ticket": [Object] {
-    "ticket_id": [String]
+    "ticketId": [String]
   }
 }
 ```
@@ -141,11 +138,11 @@ ticketId*
 {
   "ticket": [Object] {
     "subject": [String],
-    "os_type": [String],
-    "primary_issue": [String],
-    "additional_notes": [String],
+    "osType": [String],
+    "primaryIssue": [String],
+    "additionalNotes": [String],
     "status": [String],
-    "submitter_id": [String]
+    "submitterId": [String]
   }
 }
 ```
@@ -163,7 +160,7 @@ ticketId*
 //to just update the status
 {
     "ticket":{
-        "ticket_id": "477",
+        "ticketId": "477",
         "status": "Resolved"
     }
 }
@@ -171,9 +168,9 @@ ticketId*
 //update a few fields and keep the REST-API
 {
     "ticket":{
-        "ticket_id": "477",
-        "primary_issue": "hello world yay",
-        "additional_notes": "more notes than i've taken in classes!"
+        "ticketId": "477",
+        "primaryIssue": "hello world yay",
+        "additionalNotes": "more notes than i've taken in classes!"
     }
 }
 ```
