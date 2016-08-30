@@ -123,7 +123,7 @@
      * @return object for ticket information
      */
     public function getTicketInfo($ticketId) {
-      $result = $this->db->getTicket($ticketId);
+      $result = $this->db->getTicketById($ticketId);
       return $result;
     }
 
@@ -134,7 +134,7 @@
      * @return false | true if succeded/failed
      */
     public function closeTicketDB($ticketId){
-      $ticket = $this->db->getTicket($ticketId);
+      $ticket = $this->db->getTicketById($ticketId);
       if($ticket === null) {
         return false;
       }
