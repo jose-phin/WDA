@@ -8,6 +8,7 @@ URL names
 * [Endpoints](https://github.com/chloe747/WDA/tree/feature/REST-API/API#endpoints)
 * [Ticket](https://github.com/chloe747/WDA/tree/feature/REST-API/API#ticket)
   * [new](https://github.com/chloe747/WDA/tree/feature/REST-API/API#new)
+  * [update](https://github.com/chloe747/WDA/tree/feature/REST-API/API#update)
   * [view](https://github.com/chloe747/WDA/tree/feature/REST-API/API#view)
   * [close](https://github.com/chloe747/WDA/tree/feature/REST-API/API#close)
 * [Comment](https://github.com/chloe747/WDA/tree/feature/REST-API/API#comment)
