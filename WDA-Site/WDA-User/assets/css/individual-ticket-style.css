@@ -87,7 +87,7 @@
 
 p.reply-header{
   font-size: 0.85em;
-
+  display: inline-block;
 
 }
 
@@ -166,6 +166,7 @@ button.btn-closeBtn:hover{
 .new-reply-container{
   background-color: white;
   padding: 20px 0 20px 0;
+  transition: border-top 0.2s ease-in;
 }
 
 .new-reply-container:last-child{
@@ -175,9 +176,18 @@ button.btn-closeBtn:hover{
 .new-reply-container p{
   padding-left: 15px;
   padding-right: 15px;
-  transition: padding-left 0.5s ease-in-out;
+  transition: padding-left 0.2s ease-in-out;
 }
 
 p.new-reply-text{
   margin-bottom:0;
+}
+
+.new-reply-bullet{
+  opacity: 1;
+  color: #FFBD2B;
+  display: inline-block;
+  padding-left: 15px;
+  font-size: 0.5em;
+  transition: all 0.2s ease-in-out;
 }
