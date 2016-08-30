@@ -92,8 +92,8 @@
       $userId = parent::getUserIdByEmail($user['email']);
 
       if(!isset($userId)) {
-
-        $couldCreateUser = parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
+        $isITS = isset($user["is_its"]) ? $user["is_its"] : FALSE;
+        $couldCreateUser = parent::createUserDB($user["firstName"], $user["lastName"], $user["email"],$isITS);
 
         if(!$couldCreateUser) return false;
 
