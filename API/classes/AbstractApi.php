@@ -29,7 +29,7 @@
      *
      * @return bool - true is user was created, false if user was not created
      */
-    public function createUserDB($firstName, $lastName, $email) {
+    public function createUserDB($firstName, $lastName, $email, $isITS) {
 
       $result = $this->db->createUser(
         $firstName,
