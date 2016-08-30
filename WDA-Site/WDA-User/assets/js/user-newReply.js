@@ -114,24 +114,35 @@ function showLatestReply(){
                 console.log(comments);
 
 
-                $newHtmlRowHead = '<legend class="reply-separator"></legend><div class="new-reply-container col-md-12"><p class="ticket-info-header-text reply-header">';
+                $newHtmlRowHead = '<legend class="reply-separator"></legend><div class="new-reply-container col-md-12"><i class="fa fa-circle fa-1 new-reply-bullet"></i><p class="ticket-info-header-text reply-header">';
                 $newHtmlRowName = ' added:'+'</p><p class="new-reply-text">';
                 $newHtmlRowTail = '</p></div>';
 
                 $latestReplyDiv = $newHtmlRowHead+comments.comments[totalComments-1].email+$newHtmlRowName+comments.comments[totalComments-1].comment_text.replace(/(\r\n|\n|\r)/g,"<br />")+$newHtmlRowTail;
                 $($latestReplyDiv).hide().appendTo(".reply-main-container").fadeIn();
-                $('.new-reply-container:last').css('background','linear-gradient(180deg, rgba(255,222,42, 0.5) 0%, white )');
-                $('.new-reply-container:last-child p').css('padding-left','40px');
+
+                $('.new-reply-container:last').css('border-top','2px solid #2C35E4');
+                $('.new-reply-container:last-child p').css('padding-left','20px');
 
                 $('.new-reply-container:last')
-                .delay(800)
+                .delay(1200)
                 .queue(function (next) {
                     $(this).css({
-                        background: 'white',
+                        'border-top': 'none',
                     });
-                    next();
+                    $('.new-reply-bullet').css({
+                        'opacity': '0',
+                    });
                     $('.new-reply-container:last-child p').css('padding-left','15px');
+                    next();
+                })
+                .delay(1)
+                .queue(function (next){
+                    $('.new-reply-bullet').css({
+                        'display': 'none',
+                    });
                 });
+
 
             }
         }
