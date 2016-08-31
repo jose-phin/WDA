@@ -18,7 +18,7 @@ class DatabaseHandlerCommentTest extends TestCase
     {
         self::$dbh = new DatabaseHandler("test_database", true);
         self::$dbh->createUser("Jon", "Snow", "jsnow@gmail.com", 0);
-        self::$dbh->createTicket("Mac OSX", "It won't turn on!", "", "Pending", 1);
+        self::$dbh->createTicket("Mac OSX", "My Mac doesn't work!", "It won't turn on!", "", 1);
     }
 
     public static function tearDownAfterClass()

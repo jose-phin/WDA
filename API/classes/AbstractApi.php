@@ -84,7 +84,6 @@
           $subject,
           $primaryIssue,
           $additionalNotes,
-          "pending",
           $userId
         );
 

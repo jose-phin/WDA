@@ -149,10 +149,10 @@ class DatabaseHandler
             }
 
             $stmt->bindParam(':is_its', $its);
-
             $stmt->execute();
 
             $this->db->commit();
+            $this->logger->log_info("Successfully created new user " . $email);
             return true;
 
         } catch (Exception $e) {
@@ -270,8 +270,10 @@ class DatabaseHandler
 
             // Check to see if the UPDATE affected any rows
             if ($stmt->rowCount() != 0) {
+                $this->logger->log_info("Successfully updated user " . $email);
                 return true;
             } else {
+                $this->logger->log_error("Failed to update user " . $email . ". Rows were not affected.");
                 return false;
             }
 
@@ -304,6 +306,7 @@ class DatabaseHandler
             $this->db->commit();
 
             if ($stmt->rowCount() != 0) {
+                $this->logger->log_error("Successfully deleted user " . $email);
                 return true;
             } else {
                 return false;
@@ -313,6 +316,7 @@ class DatabaseHandler
             $this->db->rollBack();
             $message = "Failed to delete user: " . $e->getMessage();
             $this->logger->log_error($message);
+            return false;
         }
 
     }
@@ -325,13 +329,14 @@ class DatabaseHandler
      * Creates a new ticket in the Tickets table
      *
      * @param $osType String
+     * @param $subject String
      * @param $primaryIssue String
      * @param $additionalNotes String
-     * @param $status String (OPTIONAL) will default to 'Pending' if not provided
      * @param $submitterId int
+     * @param $status String (OPTIONAL) will default to 'Pending' if not provided
      * @return int the newly created Ticket ID, or -1 if unable to create the ticket
      */
-    function createTicket($osType, $subject, $primaryIssue, $additionalNotes, $status = "Pending", $submitterId)
+    function createTicket($osType, $subject, $primaryIssue, $additionalNotes, $submitterId, $status = "Pending")
     {
         try {
             $this->db->beginTransaction();
@@ -348,10 +353,11 @@ class DatabaseHandler
             $stmt->bindParam(':submitter_id', $submitterId);
 
             $stmt->execute();
-
             $ticketId = $this->db->lastInsertId();
 
             $this->db->commit();
+
+            $this->logger->log_info("Successfully created ticket for user " . $submitterId . " with ID of " . $ticketId);
             return $ticketId;
 
         } catch (Exception $e) {
@@ -388,6 +394,7 @@ class DatabaseHandler
             $this->db->rollBack();
             $message = "Failed to get ticket by id: " . $e->getMessage();
             $this->logger->log_error($message);
+            return null;
         }
     }
 
@@ -504,8 +511,10 @@ class DatabaseHandler
             $this->db->commit();
 
             if ($stmt->rowCount() != 0) {
+                $this->logger->log_info("Successfully updated ticket with ID " . $ticketId);
                 return true;
             } else {
+                $this->logger->log_error("Failed to update ticket with ID " . $ticketId . ". Rows were unaffected!");
                 return false;
             }
 
@@ -536,8 +545,10 @@ class DatabaseHandler
             $this->db->commit();
 
             if ($stmt->rowCount() != 0) {
+                $this->logger->log_info("Successfully deleted ticket with ID " . $ticketId);
                 return true;
             } else {
+                $this->logger->log_error("Failed to delete ticket with ID " . $ticketId . ". Rows were unaffected!");
                 return false;
             }
 
@@ -545,45 +556,15 @@ class DatabaseHandler
             $this->db->rollBack();
             $message = "Failed to delete ticket: " . $e->getMessage();
             $this->logger->log_error($message);
+
+            return false;
         }
     }
 
-//    function getSortedTickets($sortType = null, $email, $ticketId)
-//    {
-//        try {
-//            $tickets = [];
-//            $query = null;
-//
-//            switch ($sortType) {
-//                case :
-//                    break;
-//                default :
-//                    $query = "SELECT * FROM tickets";
-//                    break;
-//            }
-//
-//            $stmt = $this->db->prepare($query);
-//
-//            $stmt->execute();
-//            $this->db->commit();
-//
-//            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-//                array_push($tickets, $row);
-//            }
-//
-//            return $tickets;
-//
-//        } catch (Exception $e) {
-//            $this->db->rollBack();
-//            $message = "Failed to get tickets for user " . $email . ": " . $e->getMessage();
-//            $this->logger->log_error($message);
-//        }
-//    }
 
     /****************************************
      *  COMMENT FUNCTIONS
      ****************************************/
-
 
     /**
      * Adds a new comment to a ticket
@@ -622,6 +603,7 @@ class DatabaseHandler
 
             $this->db->commit();
 
+            $this->logger->log_info("Successfully created comment " . $commentId . " for Ticket " . $ticketId);
             return $commentId;
 
         } catch (Exception $e) {
@@ -660,6 +642,8 @@ class DatabaseHandler
             $this->db->rollBack();
             $message = "Failed to get comment: " . $e->getMessage();
             $this->logger->log_error($message);
+
+            return null;
         }
     }
 
@@ -684,8 +668,10 @@ class DatabaseHandler
             $this->db->commit();
 
             if ($stmt->rowCount() != 0) {
+                $this->logger->log_info("Successfully updated Comment " . $commentId);
                 return true;
             } else {
+                $this->logger->log_error("Failed to update Comment " . $commentId);
                 return false;
             }
 
@@ -693,6 +679,8 @@ class DatabaseHandler
             $this->db->rollBack();
             $message = "Failed to update comment: " . $e->getMessage();
             $this->logger->log_error($message);
+
+            return false;
         }
 
     }
@@ -717,8 +705,10 @@ class DatabaseHandler
             $this->db->commit();
 
             if ($stmt->rowCount() != 0) {
+                $this->logger->log_info("Successfully deleted Comment " . $commentId);
                 return true;
             } else {
+                $this->logger->log_error("Failed to delete Comment " . $commentId);
                 return false;
             }
 
@@ -765,6 +755,8 @@ class DatabaseHandler
             $this->db->rollBack();
             $message = "Failed to get comments for ticket: " . $ticketId . $e->getMessage();
             $this->logger->log_error($message);
+
+            return null;
         }
     }
 }
