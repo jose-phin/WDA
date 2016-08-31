@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../WDA-User/assets/css/footer-style.css">
     <link rel="stylesheet" href="../WDA-User/assets/css/navbar-style.css">
     <link rel="stylesheet" href="../WDA-User/assets/css/tickets-style.css">
+    <script src="dummy.js"></script>
 
 </head>
 
@@ -42,145 +43,33 @@
 
 
             <!-- Instantiate Bootstrap's md-12 grid -->
+
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12" id="insert-div">
+                    <!-- Tickets table begin -->
+                    <div class="ticket-header">
+                    <h5 class="ticket-header-text">
+                        Tickets
+                    </h5>
+                    </div>
 
-            <!-- Tickets table begin -->
-            <div class="ticket-header">
-            <h5 class="ticket-header-text">
-                Tickets
-            </h5>
+                    <!-- Table begins -->
+                    <table class="table ticket-table" style="border-collapse:collapse;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Category</th>
+                            <th>OS</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                        <tbody id="table-body">
+                        </div>
+                    </table>
+                </div>
             </div>
-
-            <!-- Ticket table begins -->
-            <table class="table ticket-table" style="border-collapse:collapse;">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Subject</th>
-                    <th>Status</th>
-                    <th>Category</th>
-                    <th>OS</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <!-- Row 1 -->
-                <tr data-toggle="collapse" data-target="#ticket1" class="accordion-toggle">
-                    <td>1</td>
-                    <td>
-                        <span class="ticket-name">VirtualBox Error</span><br>
-                        <span class="small">Username (user.name@mail.com)</span>
-                    </td>
-                    <td>
-                        <span class="status status-unresolved">Unresolved</span>
-                    </td>
-                    <td>Software</td>
-                    <td>Windows</td>
-                    <td>18-08-16</td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="ticket-description">
-                        <div class="accordion-body collapse" id="ticket1">
-                            <p class="ticket-hidden">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </td>
-                </tr>
-                
-                <!-- Row 2 -->
-                <tr data-toggle="collapse" data-target="#ticket2" class="accordion-toggle">
-                    <td>2</td>
-                    <td>
-                        <span class="ticket-name">Can't log into Blackboard</span><br>
-                        <span class="small">Username (user.name@mail.com)</span>
-                    </td>
-                    <td>
-                        <span class="status status-pending">Pending</span>
-                    </td>
-                    <td>Blackboard</td>
-                    <td>macOS</td>
-                    <td>17-08-16</td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="ticket-description">
-                        <div id="ticket2" class="accordion-body collapse">
-                            <p class="ticket-hidden">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Row 3 -->
-                <tr data-toggle="collapse" data-target="#ticket3" class="accordion-toggle">
-                    <td>3</td>
-                    <td>
-                        <span class="ticket-name">Forgot RMIT student email password</span><br>
-                        <span class="small">Username (user.name@mail.com)</span>
-                    </td>
-                    <td>
-                        <span class="status status-resolved">Resolved</span>
-                    </td>
-                    <td>Email</td>
-                    <td>Linux</td>
-                    <td>03-08-16</td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="ticket-description">
-                        <div id="ticket3" class="accordion-body collapse">
-                            <p class="ticket-hidden">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Row 4 -->
-                <tr data-toggle="collapse" data-target="#ticket4" class="accordion-toggle">
-                    <td>4</td>
-                    <td>
-                        <span class="ticket-name">Problems with Google Mail SMTP</span><br>
-                        <span class="small">Username (user.name@mail.com)</span>
-                    </td>
-                    <td>
-                        <span class="status status-in-progress">In Progress</span>
-                    </td>
-                    <td>Software</td>
-                    <td>Windows</td>
-                    <td>29-07-16</td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="ticket-description">
-                        <div id="ticket4" class="accordion-body collapse">
-                            <p class="ticket-hidden">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-
-            </div>
-        </div>
-
 
         <!-- End of site-wide container -->
         </div>
