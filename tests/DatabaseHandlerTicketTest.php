@@ -29,12 +29,12 @@ class DatabaseHandlerTicketTest extends TestCase
 
     public function testCreateTicketWithValidSubmitterIDReturnsExpectedId()
     {
-        $this->assertEquals(self::$dbh->createTicket("My Mac isn't working", "Mac OSX", "It won't turn on!", "", "Pending", 1), 1);
+        $this->assertEquals(self::$dbh->createTicket("My Mac isn't working", "Mac OSX", "It won't turn on!", "", 1), 1);
     }
 
     public function testCreateTicketWithInvalidSubmitterIDReturnsNegative()
     {
-        $this->assertEquals(self::$dbh->createTicket("My Windows computer isn't working", "Windows", "Help!", "", "Pending", 2), -1);
+        $this->assertEquals(self::$dbh->createTicket("My Windows computer isn't working", "Windows", "Help!", "", 2), -1);
     }
 
     // Fetch Ticket tests
@@ -50,7 +50,7 @@ class DatabaseHandlerTicketTest extends TestCase
     }
 
     public function testGetUserTicketsValidEmailReturnsCorrectCount() {
-        self::$dbh->createTicket("My Mac machine doesn't work", "Mac OSX", "It won't turn on again!", "", "Pending", 1);
+        self::$dbh->createTicket("My Mac machine doesn't work", "Mac OSX", "It won't turn on again!", "", 1);
 
         $this->assertCount(2, self::$dbh->getTicketsByEmail("jsnow@gmail.com"));
     }
