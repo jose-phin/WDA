@@ -3,15 +3,16 @@
     margin-top: 30px;
 }
 
-/* THIS DIV DISABLES THE ENTIRE FORM ON MOBILE!!!!! */
-/* @JACQUELINE */
-/*.contained {
-    display: block;
-    float: left;
-    width: 100%;
-}*/
-
 /*This will control the style of form validation errors*/
 .error {
     color: #D0021B;
+}
+
+/* Submission */
+.user-responses {
+    display: block;
+    border: 1px solid red;
+    background-color: #fff;
+    min-height: 300px;
+    border-top: 2px solid #000;
 }

@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 
-	$(".submitted").hide();
+	$("#submitted").hide();
 
 	/* Process the form */
 	$(document).submit("#report-issue", function() {
@@ -16,21 +16,35 @@ $(document).ready(function() {
         		contentType: 'application/json',
 				data: JSON.stringify({
 					"user": {
-						"firstName": $("input[name=firstname]").val(),
-						"lastName": $("input[name=lastname]").val(),
-						"email": $("input[name=email]").val()
+						"firstName": $("#firstname").val(),
+						"lastName": $("#lastname").val(),
+						"email": $("#email").val()
 					},
 					"ticket": {
 						"osType": $("#os").val(),
 						"primaryIssue": $("#enquiry").val(),
-			            "subject": $("input[name=subject]").val(),
+			            "subject": $("#subject").val(),
 						"additionalNotes": $("#description").val()
 					}
 				}),
-				success:  function(formData) {
+				success: function(formData) {
 					$("#report-issue").fadeOut(500).hide(function() {
-						$(".submitted").fadeIn(500).show(function() {
-							$(".result").text(data);
+						$("#submitted").fadeIn(500).show(function() {
+
+							var name = $("#firstname").val() + " " + $("#lastname").val();
+							var email = $("#email").val();
+							var enquiry = $("#enquiry").val();
+							var os = $("#os").val();
+							var subject = $("#subject").val();
+							var additionalNotes = $("#description").val();
+
+							$(".user-ticket-fullName").append(name);
+							$(".user-ticket-email").append(email);
+							$(".user-ticket-enquiryIssue").append(enquiry);
+							$(".user-ticket-osType").append(os);
+							$(".user-ticket-subject").append(subject);
+							$(".user-ticket-additionalNotes").append(additionalNotes);
+
 						});
 					});
 				}

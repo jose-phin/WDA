@@ -15,6 +15,7 @@
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
     <link rel="stylesheet" href="./assets/css/report-issue-style.css">
+    <link rel="stylesheet" href="./assets/css/individual-ticket-style.css">
     <script src="./assets/js/report-issue-validation.js"></script>
     <script src="./assets/js/eventHandler-form.js"></script>
     <script src="./assets/js/new-ticket-form-script.js"></script>
@@ -40,101 +41,170 @@
                     </span>
                 </p>
 
-            <!-- End of hero div -->
-            </div>
+            </div><!-- End of hero div -->
+
 
             <!-- Instantiate Bootstrap's col-sm-4 grid -->
             <div class="row">
                     <!-- Form begins -->
-                    <form id="report-issue" name="reportIssueForm" class="result" method="post" autocomplete="off" novalidate="novalidate">
+                <form id="report-issue" name="reportIssueForm" class="result" method="post" autocomplete="off" novalidate="novalidate">
 
-                        <div class="contained">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="firstname">First Name</label>*
-                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your first name">
-                            </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="firstname">First Name</label>*
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your first name">
                         </div>
-
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="lastname">Last Name</label>*
-                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name">
-                            </div>
-                        </div>
-                        </div>
-
-                        <div class="col-sm-8">
-                            <div class="form-group">
-                                <label for="email">Email Address</label>*
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-8">
-                            <div class="form-group">
-                                <label for="enquiry">Type of Enquiry</label>*
-                                <select name="enquiry" class="form-control" id="enquiry">
-                                    <option disabled selected value=""> -- Select an option -- </option>
-                                    <option>Blackboard</option>
-                                    <option>General IT Enquiry</option>
-                                    <option>Google Mail</option>
-                                    <option>myRMIT</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="os">Operating System</label>
-                                <select name="os" class="form-control" id="os">
-                                <option disabled selected value=""> -- Select an option -- </option>
-                                    <option>Windows</option>
-                                    <option>macOS</option>
-                                    <option>Linux</option>
-                                    <option>Ubuntu</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group text-description">
-                                <legend>Issue Description*</legend>
-                                <p>
-                                    Please provide more details of your issue in the text box below.
-                                    Dtails such as computer names, website paths, account numbers,
-                                    and error numbers will help us to resolve your issue more efficiently.
-                                </p>
-
-                                <!-- Ticket Subject -->
-                                <div class="form-group">
-                                    <label for="subject">Subject</label>*
-                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter your issue subject">
-                                </div>
-
-                                <!-- Description -->
-                                <label for="subject">Description</label>*
-                                <textarea class="form-control" id="description" name="description" rows="5" placeholder="Provide more details here..."></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
-
-                        </div><!-- End col-sm-8 -->
-
-                    </form><!-- End form -->
-
-                    </div><!-- End row -->
-
-                    <div class="submitted">
-                        <hr><br>
-                        <p>Thank you for submitting a request.</p>
-                        <p class="result"></p>
                     </div>
 
-                </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="lastname">Last Name</label>*
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name">
+                        </div>
+                    </div>
 
-            </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>*
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address">
+                        </div>
+                    </div>
 
-        <!-- End of site-wide container -->
-        </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="enquiry">Type of Enquiry</label>*
+                            <select name="enquiry" class="form-control" id="enquiry">
+                                <option disabled selected value=""> -- Select an option -- </option>
+                                <option>Blackboard</option>
+                                <option>General IT Enquiry</option>
+                                <option>Google Mail</option>
+                                <option>myRMIT</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="os">Operating System</label>
+                            <select name="os" class="form-control" id="os">
+                            <option disabled selected value=""> -- Select an option -- </option>
+                                <option>Windows</option>
+                                <option>macOS</option>
+                                <option>Linux</option>
+                                <option>Ubuntu</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group text-description">
+                            <legend>Issue Description*</legend>
+                            <p>
+                                Please provide more details of your issue in the text box below.
+                                Details such as computer names, website paths, account numbers,
+                                and error numbers will help us to resolve your issue more efficiently.
+                            </p>
+
+                            <!-- Ticket Subject -->
+                            <div class="form-group">
+                                <label for="subject">Subject</label>*
+                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter your issue subject">
+                            </div>
+
+                            <!-- Description -->
+                            <label for="subject">Description</label>*
+                            <textarea class="form-control" id="description" name="description" rows="5" placeholder="Provide more details here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                    </div><!-- End col-sm-8 -->
+
+                </form><!-- End form -->
+
+            </div><!-- help -->
+
+                    <!-- Submitted information from user -->
+            <div id="submitted">
+                <div class="col-md-10" style="padding-left:0">
+
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+
+                                <div class="panel-body">
+
+                                    <h3>Thank you for your submission!</h3><br/>
+
+                                    <!-- Name -->
+                                    <div class="row individual-ticket-info-row">
+                                        <p class="col-md-12 ticket-info-header-text">
+                                            Full Name
+                                        </p>
+                                        <p class="col-md-12 user-ticket-fullName">
+                                            <!-- FULL NAME -->
+                                        </p>
+                                        <!-- End of info row 1 -->
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="row individual-ticket-info-row">
+                                        <p class="col-md-12 ticket-info-header-text">
+                                                Email
+                                            </p>
+                                            <p class="col-md-12 user-ticket-email">
+                                                <!-- EMAIL -->
+                                        </p>
+                                    </div>
+
+                                    <!-- Enquiry and OS -->
+                                    <div class="row individual-ticket-info-row">
+                                        <!-- Enquiry -->
+                                        <div class="col-md-4">
+                                            <p class="ticket-info-header-text">
+                                            Enquiry
+                                            </p>
+                                            <p class="user-ticket-enquiryIssue">
+                                                <!-- ENQUIRY -->
+                                            </p>
+                                        </div>
+
+                                        <!-- OS -->
+                                        <div class="col-md-4">
+                                            <p class="ticket-info-header-text">
+                                            OS
+                                            </p>
+                                            <p class="user-ticket-osType">
+                                                <!-- OS -->
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Subject and Message -->
+                                    <div class="row individual-ticket-info-row">
+                                        <p class="col-md-12 ticket-info-header-text">
+                                            Subject
+                                        </p>
+                                        <p class="col-md-12 user-ticket-subject">
+                                            <!-- SUBJECT -->
+                                        </p><br>
+                                        <p class="col-md-12 ticket-info-header-text">
+                                            Additional Notes
+                                        </p>
+                                        <p class="col-md-12 user-ticket-additionalNotes">
+                                            <!-- ADDITIONAL NOTES -->
+                                        </p>
+                                    </div> <!-- End subject and message -->
+
+                                </div> <!-- End panel body -->
+
+                            </div> <!-- End panel -->
+                        </div><!-- End panel group -->
+
+                        </div>
+
+                    </div> <!-- End submitted information div -->
+           
+            </div><!-- End col-md-10 -->
+
+        </div> <!-- End of site-wide container -->
     </div>
 </body>
 
