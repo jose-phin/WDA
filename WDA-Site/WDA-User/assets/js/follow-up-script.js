@@ -3,8 +3,6 @@
 var ticket, comments, ticketStatusClass;
 $(document).ready(function(){
 
-
-
   $(function() {
     $('.btn-closeBtn').hover(function() {
       $('#closeBtn-icon').css('color', 'white');
@@ -13,8 +11,6 @@ $(document).ready(function(){
       $('#closeBtn-icon').css('color', '');
     });
   });
-
-
 
     $(".ticket-notFound-message").hide();
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -26,7 +22,6 @@ $(document).ready(function(){
     else{
         var ticketID = sURLVariables[0].split('=')[1];
     }
-
 
     $.ajax({
         type: "POST",

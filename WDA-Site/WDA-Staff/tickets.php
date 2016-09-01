@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../WDA-User/assets/css/footer-style.css">
     <link rel="stylesheet" href="../WDA-User/assets/css/navbar-style.css">
     <link rel="stylesheet" href="../WDA-User/assets/css/tickets-style.css">
-    <script src="dummy.js"></script>
+    <script src="../WDA-User/assets/js/view-all-tickets.js"></script>
 
 </head>
 
@@ -59,13 +59,13 @@
                         <tr>
                             <th>#</th>
                             <th>Subject</th>
-                            <th>Status</th>
                             <th>Category</th>
                             <th>OS</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                         <tbody id="table-body">
-                        </div>
+                        </tbody>
                     </table>
                 </div>
             </div>

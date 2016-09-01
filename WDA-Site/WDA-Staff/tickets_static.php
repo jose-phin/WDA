@@ -68,57 +68,51 @@
             <tbody>
 
                 <!-- Row 1 -->
-                <tr data-toggle="collapse" data-target="#ticket1" class="accordion-toggle">
+                <tr data-toggle="collapse" data-target="#ticket1">
                     <td>1</td>
                     <td>
                         <span class="ticket-name">VirtualBox Error</span><br>
                         <span class="small">Username (user.name@mail.com)</span>
                     </td>
                     <td>
-                        <span class="status status-unresolved">Unresolved</span>
+                        <!-- Drop down begins -->
+                        <div class="dropdown">
+                            <div class="btn-group">
+                            <div class="btn dropdown-toggle status-pending" type="button" id="dropdown-status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Pending
+                                <span class="caret"></span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown1">
+                                <li><a>Pending</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a>In progress</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a>Resolved</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a>Unresolved</a></li>
+                            </ul>
+                            </div>
+                        </div>
+                        <!-- Dropdown ends -->
                     </td>
                     <td>Software</td>
                     <td>Windows</td>
                     <td>18-08-16</td>
                 </tr>
-                <tr>
-                    <td colspan="6" class="ticket-description">
-                        <div class="accordion-body collapse" id="ticket1">
-                            <p class="ticket-hidden">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </td>
-                </tr>
                 
                 <!-- Row 2 -->
-                <tr data-toggle="collapse" data-target="#ticket2" class="accordion-toggle">
+                <tr data-toggle="collapse" data-target="#ticket2">
                     <td>2</td>
                     <td>
                         <span class="ticket-name">Can't log into Blackboard</span><br>
                         <span class="small">Username (user.name@mail.com)</span>
                     </td>
                     <td>
-                        <span class="status status-pending">Pending</span>
+                        <span class="status status-unresolved">Unresolved</span>
                     </td>
                     <td>Blackboard</td>
                     <td>macOS</td>
                     <td>17-08-16</td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="ticket-description">
-                        <div id="ticket2" class="accordion-body collapse">
-                            <p class="ticket-hidden">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </td>
                 </tr>
 
                 <!-- Row 3 -->
@@ -149,7 +143,7 @@
                 </tr>
 
                 <!-- Row 4 -->
-                <tr data-toggle="collapse" data-target="#ticket4" class="accordion-toggle">
+                <tr data-toggle="collapse" data-target="#ticket4">
                     <td>4</td>
                     <td>
                         <span class="ticket-name">Problems with Google Mail SMTP</span><br>
@@ -161,18 +155,6 @@
                     <td>Software</td>
                     <td>Windows</td>
                     <td>29-07-16</td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="ticket-description">
-                        <div id="ticket4" class="accordion-body collapse">
-                            <p class="ticket-hidden">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </td>
                 </tr>
             </tbody>
         </table>
@@ -190,5 +172,54 @@
 
 <!-- Footer -->
 <?php include "../WDA-User/footer.php"; ?>
+
+<script>
+
+/* Send the status to the database */
+function sendStatus() {
+
+    $.ajax({
+        type: "POST",
+        url: "/WDA/ticket/change", /* DO WE HAVE AN ENDPOINT FOR THIS????? */
+        contentType: "application/json",
+        data: JSON.stringify({
+            "status": $("div[class^='status-'],div[class*=' status-']").text()
+        })
+    });
+
+    console.log($("div[class^='status-'],div[class*=' status-']").text());
+
+}
+
+/* Update the status button in the table */
+$(".dropdown-menu li a").click(function(){
+
+  var selectedStatus = $(this).text();
+  
+  function replaceClass(selectedStatus, newStatus) {
+      $("#dropdown-status").removeClass().addClass(newStatus);
+      $(".dropdown-menu").parents(".btn-group").find(".dropdown-toggle").html(selectedStatus + " <span class=\"caret\"></span>");
+      sendStatus();      
+  }
+  
+  if (selectedStatus === "In progress") {
+      replaceClass(selectedStatus, "btn dropdown-toggle status-in-progress selected");
+  }
+
+  if (selectedStatus === "Pending") {
+      replaceClass(selectedStatus, "btn dropdown-toggle status-pending selected");
+  }
+
+  if (selectedStatus === "Resolved") {
+      replaceClass(selectedStatus, "btn dropdown-toggle status-resolved selected");
+  }
+
+  if (selectedStatus === "Unresolved") {
+      replaceClass(selectedStatus, "btn dropdown-toggle status-unresolved selected");
+  }
+
+});
+
+</script>
 
 </html>
