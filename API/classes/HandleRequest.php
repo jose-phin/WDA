@@ -153,6 +153,36 @@
     }
 
     /**
+     * Update the target ticket with the following information
+     */
+     public function updateTicket() {
+
+       $ticket = $this->jsonRequest["ticket"];
+
+       //make sure we got the ticket id
+       if(!isset($ticket['ticketId'])) return false;
+
+       //check to see we have all of the needed fields to update the ticket,
+       //if not, then just fill those fields with what the ticket already has
+       $oldTicket = parent::getTicketInfo($ticket['ticketId']);
+
+       if(!isset($ticket['subject'])) $ticket['subject'] = $oldTicket['subject'];
+       if(!isset($ticket['osType'])) $ticket['osType'] = $oldTicket['os_type'];
+       if(!isset($ticket['primaryIssue'])) $ticket['primaryIssue'] = $oldTicket['primary_issue'];
+       if(!isset($ticket['additionalNotes'])) $ticket['additionalNotes'] = $oldTicket['additional_notes'];
+       if(!isset($ticket['status'])) $ticket['status'] = $oldTicket['status'];
+       if(!isset($ticket['submitterId'])) $ticket['submitterId'] = $oldTicket['submitter_id'];
+
+       return parent::updateTicketDB($ticket['ticketId'],
+                                      $ticket['subject'],
+                                      $ticket['osType'],
+                                      $ticket['primaryIssue'],
+                                      $ticket['additionalNotes'],
+                                      $ticket['status'],
+                                      $ticket['submitterId']);
+     }
+
+    /**
      * View the all tickets and the submitter information
      */
     public function viewAllTickets() {

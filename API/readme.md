@@ -8,6 +8,7 @@ URL names
 * [Endpoints](https://github.com/chloe747/WDA/tree/feature/REST-API/API#endpoints)
 * [Ticket](https://github.com/chloe747/WDA/tree/feature/REST-API/API#ticket)
   * [new](https://github.com/chloe747/WDA/tree/feature/REST-API/API#new)
+  * [update](https://github.com/chloe747/WDA/tree/feature/REST-API/API#update)
   * [view](https://github.com/chloe747/WDA/tree/feature/REST-API/API#view)
   * [close](https://github.com/chloe747/WDA/tree/feature/REST-API/API#close)
 * [Comment](https://github.com/chloe747/WDA/tree/feature/REST-API/API#comment)
@@ -106,6 +107,73 @@ name, the endpoint will also create the user, then create the ticket
     }
 }
 ```
+
+#### Update
+* **URL**
+```
+/ticket/update
+```
+
+* **Description**
+
+This endpoint will update the specified ticket id with the filled out fields
+that are filled out in the JSON, if you omit any ticket fields in the JSON
+other than the ticketId field, then the update function will reuse the existing
+value that is already stored in the database
+
+
+* **Parameters**
+
+**Required**
+```javascript
+{
+  "ticket": [Object] {
+    "ticketId": [String]
+  }
+}
+```
+
+**Optional**
+```javascript
+{
+  "ticket": [Object] {
+    "subject": [String],
+    "osType": [String],
+    "primaryIssue": [String],
+    "additionalNotes": [String],
+    "status": [String],
+    "submitterId": [String]
+  }
+}
+```
+
+* **Success Response**
+
+*JSON* `{"success": true}`
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+//to just update the status
+{
+    "ticket":{
+        "ticketId": "477",
+        "status": "Resolved"
+    }
+}
+
+//update a few fields and keep the REST-API
+{
+    "ticket":{
+        "ticketId": "477",
+        "primaryIssue": "hello world yay",
+        "additionalNotes": "more notes than i've taken in classes!"
+    }
+}
+```
 #### View
 * **URL**
 ```
@@ -197,7 +265,7 @@ This endpoint will give you the ticket information for all ticket submitted tick
 
 * **Description**
 
-This endpoint will give you the ticket information for a ticketId supplied and the user who submitted it 
+This endpoint will give you the ticket information for a ticketId supplied and the user who submitted it
 
 * **Parameters**
 
@@ -210,7 +278,7 @@ This endpoint will give you the ticket information for a ticketId supplied and t
 
 * **Success Response**
 
-*JSON* 
+*JSON*
   ```javascript
 {
   "success": true,
@@ -227,7 +295,7 @@ This endpoint will give you the ticket information for a ticketId supplied and t
       "firstName": [String],
       "lastName": [String],
       "email": [String],
-      "is_its" : [String] 
+      "is_its" : [String]
   }
 }
   ```
