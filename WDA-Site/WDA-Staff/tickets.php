@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="../WDA-User/assets/css/tickets-style.css">
 
 </head>
-<!-- after i get the data -->
-<!-- -->
+
 <body>
     <div class="content">
         <div class="site-wide-container container">
