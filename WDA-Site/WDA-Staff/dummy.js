@@ -1,14 +1,12 @@
 $(document).ready(function() {
 
-    console.log("Entered JavaScript!");
-
     var dummyData = [
 
         {
             "user": {
                 "firstName": "George",
                 "lastName": "Clooney",
-                "email": "georgio.cloonio@gmail.com"
+                "email": "ladies_man@hotmail.com"
             },
             "ticket": {
                 "osType": "macOS",
@@ -21,7 +19,7 @@ $(document).ready(function() {
             "user": {
                 "firstName": "Lizard",
                 "lastName": "Queen",
-                "email": "xXx_Slytherinz_xXx@hotmail.com"
+                "email": "SssSSsssSS01@hotmail.com"
             },
             "ticket": {
                 "osType": "Linux",
@@ -34,7 +32,7 @@ $(document).ready(function() {
             "user": {
                 "firstName": "Jennifer",
                 "lastName": "Aniston",
-                "email": "hot_frendz_69@mail.com"
+                "email": "freindz_4eva@mail.com"
             },
             "ticket": {
                 "osType": "Windows",
@@ -45,41 +43,25 @@ $(document).ready(function() {
 
     ]
 
+    var rowNum = 1;
+
     for (var i = 0; i < dummyData.length; i++) {
 
         var tableRow = "<tr data-toggle=\"collapse\" class=\"accordion-toggle\">";
-
-        // Name
-        if (dummyData[i]["user"].firstName != "" || dummyData[i]["user"].lastName != "") {
-            var tableName = "<td>" + dummyData[i]["user"].firstName + " " + dummyData[i]["user"].lastName + "</td>";
-        }
-       
-        // Email
-        var tableEmail = "<td><span class=\"small\">" + dummyData[i]["user"].email + "</td>";
-
-        // OS
-        var tableOS = "<td>" + dummyData[i]["ticket"].osType + "</td>";
-
-        // Subject
-        var tableSubject = "<td>" + dummyData[i]["ticket"].subject + "</td>";
-       
-        // Primary Issue
-        var tablePrimaryIssue  = "<td><span class=\"ticket-name\">" + dummyData[i]["ticket"].primaryIssue + "</span></td>";
-
-        // Additional notes
-        if (dummyData[i]["ticket"].additionalNotes != "") {
-            var tableAdditionalNotes  = "<td>" + dummyData[i]["ticket"].additionalNotes + "</td>";
-        }
-
-        // Status [STATIC]
-        var tableStatus = "<td><span class=\"status status-pending\">Pending</span></td>";
-
-        // Date [STATIC]
-        var tableDate = "<td>Aug 31, 2016</td>"
-
+        var rowNumString = "<td>" + rowNum.toString() + "</td>";
+        var name = dummyData[i]["user"].firstName + " " + dummyData[i]["user"].lastName;
+        var email = dummyData[i]["user"].email;
+        var os = "<td>" + dummyData[i]["ticket"].osType + "</td>";
+        var subject = "<td>" + dummyData[i]["ticket"].subject + "</td>";
+        var primaryIssue  = "<td><span class=\"ticket-name\">" + dummyData[i]["ticket"].primaryIssue + "<br></span>" + 
+                            "<span class=\"small\">" + name + " (" + email + ")</span></td>";
+        var additionalNotes  = "<td>" + dummyData[i]["ticket"].additionalNotes + "</td>";
+        var status = "<td><span class=\"status status-pending\">Pending</span></td>"; /* Static */
         var tableRowEnd = "</tr>";
 
-        $("#table-body").append(tableRow + tableName + tablePrimaryIssue + tableStatus + tableSubject + tableOS + tableDate + tableRowEnd);
+        $("#table-body").append(tableRow + rowNumString + primaryIssue + status + subject + os + tableRowEnd);
+        rowNum++;
+
     }
 
 });

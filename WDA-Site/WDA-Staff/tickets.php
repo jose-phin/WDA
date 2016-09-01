@@ -62,7 +62,6 @@
                             <th>Status</th>
                             <th>Category</th>
                             <th>OS</th>
-                            <th>Date</th>
                         </tr>
                     </thead>
                         <tbody id="table-body">
