@@ -13,6 +13,7 @@ URL names
   * [close](https://github.com/chloe747/WDA/tree/feature/REST-API/API#close)
 * [Comment](https://github.com/chloe747/WDA/tree/feature/REST-API/API#comment)
   * [new](https://github.com/chloe747/WDA/tree/feature/REST-API/API#new-1)
+  * [Staff Comment](https://github.com/chloe747/WDA/tree/feature/REST-API/API#staff-comment)
   * [viewall](https://github.com/chloe747/WDA/tree/feature/REST-API/API#view-all)
 * [User](https://github.com/chloe747/WDA/tree/feature/REST-API/API#user)
   * [new](https://github.com/chloe747/WDA/tree/feature/REST-API/API#new-2)
