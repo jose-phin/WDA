@@ -53,7 +53,6 @@
       if(!isset($userId)) {
         //if the user does not exist, create the user
         $couldCreateUser = parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
-        echo var_dump($couldCreateUser);
         //if we could not create the user, return false
         if(!$couldCreateUser) return false;
 
