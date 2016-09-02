@@ -14,10 +14,9 @@
 
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "../WDA-User/assets/head_items.php" ?>
-    <link rel="stylesheet" href="../WDA-User/assets/css/style.css">
-    <link rel="stylesheet" href="../WDA-User/assets/css/footer-style.css">
-    <link rel="stylesheet" href="../WDA-User/assets/css/navbar-style.css">
-    <link rel="stylesheet" href="../WDA-User/assets/css/tickets-style.css">
+
+    <!-- Page specific css -->
+    <link rel="stylesheet" href="/WDA/WDA-Site/WDA-Staff/assets/css/tickets-style.css">
 
 </head>
 <!-- after i get the data -->
@@ -99,7 +98,7 @@
                     <td>Windows</td>
                     <td>18-08-16</td>
                 </tr>
-                
+
                 <!-- Row 2 -->
                 <tr data-toggle="collapse" data-target="#ticket2">
                     <td>2</td>
@@ -195,13 +194,13 @@ function sendStatus() {
 $(".dropdown-menu li a").click(function(){
 
   var selectedStatus = $(this).text();
-  
+
   function replaceClass(selectedStatus, newStatus) {
       $("#dropdown-status").removeClass().addClass(newStatus);
       $(".dropdown-menu").parents(".btn-group").find(".dropdown-toggle").html(selectedStatus + " <span class=\"caret\"></span>");
-      sendStatus();      
+      sendStatus();
   }
-  
+
   if (selectedStatus === "In progress") {
       replaceClass(selectedStatus, "btn dropdown-toggle status-in-progress selected");
   }
