@@ -30,7 +30,7 @@
 
             <div class="hero main-hero">
 
-                <h1>
+                <h1 class="hero-title">
                     Report an Issue
                 </h1>
                 <h1 class="h1-subtitle">
@@ -131,10 +131,20 @@
 
                                 <div class="panel-body">
 
-                                    <h3>Thank you for your submission!</h3><br/>
+                                    <!-- Ticket ID -->
+                                    <div class="row individual-ticket-info-row receipt-ticketIdRow">
+                                        <p class="col-md-12 ticket-info-header-text">
+                                            Ticket ID
+                                        </p>
+                                        <p class="col-md-12 user-ticket-ticketId">
+                                            <!-- Ticket ID -->
+                                        </p>
+                                        <!-- End of ticket id info row -->
+
+                                    </div>
 
                                     <!-- Name -->
-                                    <div class="row individual-ticket-info-row">
+                                    <div class="row individual-ticket-info-row receipt-ticketNameRow">
                                         <p class="col-md-12 ticket-info-header-text">
                                             Full Name
                                         </p>
@@ -186,7 +196,7 @@
                                             <!-- SUBJECT -->
                                         </p><br>
                                         <p class="col-md-12 ticket-info-header-text">
-                                            Additional Notes
+                                            Message
                                         </p>
                                         <p class="col-md-12 user-ticket-additionalNotes">
                                             <!-- ADDITIONAL NOTES -->

@@ -23,6 +23,10 @@ body{
   display: none;
 }
 
+.clear-legend{
+  margin: 0;
+  float: none;
+}
 
 /* Pulls texts leftwards and break on 40% browser length
 for readability.
@@ -57,7 +61,7 @@ for readability.
 /* Fixes margin on buttons, optimised for mobile */
 .btn-margin-fix > .btn-col{
     margin-top: 10px;
-    margin-right: 10px;
+    margin-right: 30px;
 }
 
 
