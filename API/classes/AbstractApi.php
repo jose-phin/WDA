@@ -19,7 +19,6 @@
       if (isset($this->db)) $this->db->__destruct();
     }
 
-
     /**
      * Create a non-staff user and add them to the databaseName
      *
@@ -29,13 +28,33 @@
      *
      * @return bool - true is user was created, false if user was not created
      */
-    public function createUserDB($firstName, $lastName, $email, $isITS) {
+    public function createUserDB($firstName, $lastName, $email) {
 
       $result = $this->db->createUser(
         $firstName,
         $lastName,
         $email,
         FALSE
+      );
+      return $result;
+    }
+
+    /**
+     * Create a staff user and add them to the database
+     *
+     * @param $firstName string - The user's first name
+     * @param $lastName string - The user's last name
+     * @param $email string - The user's email name
+     *
+     * @return bool - true is user was created, false if user was not created
+     */
+    public function createStaffDB($firstName, $lastName, $email) {
+
+      $result = $this->db->createUser(
+        $firstName,
+        $lastName,
+        $email,
+        TRUE
       );
       return $result;
     }
