@@ -15,7 +15,7 @@
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
     <link rel="stylesheet" href="./assets/css/report-issue-style.css">
-    <link rel="stylesheet" href="./assets/css/individual-ticket-style.css">
+    <link rel="stylesheet" href="/WDA/WDA-Site/global-assets/css/individual-ticket-style.css">
     <script src="./assets/js/report-issue-validation.js"></script>
     <script src="./assets/js/eventHandler-form.js"></script>
     <script src="./assets/js/new-ticket-form-script.js"></script>
@@ -201,7 +201,7 @@
                         </div>
 
                     </div> <!-- End submitted information div -->
-           
+
             </div><!-- End col-md-10 -->
 
         </div> <!-- End of site-wide container -->
