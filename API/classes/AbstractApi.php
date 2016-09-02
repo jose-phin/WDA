@@ -84,7 +84,6 @@
           $subject,
           $primaryIssue,
           $additionalNotes,
-          "pending",
           $userId
         );
 
@@ -124,6 +123,35 @@
      */
     public function getTicketInfo($ticketId) {
       $result = $this->db->getTicketById($ticketId);
+      return $result;
+    }
+
+    /**
+     * Update an existing ticket with the passed in information
+     *
+     * @param $ticketId string
+     * @param $subject string
+     * @param $osType string
+     * @param $primaryIssue string
+     * @param $additionalNotes string
+     * @param $status string
+     * @param $submitterId string
+     *
+     * @return false | true if succeded/failed
+     */
+    public function updateTicketDB($ticketId, $subject, $osType, $primaryIssue, $additionalNotes, $status, $submitterId){
+      $ticket = $this->db->getTicketById($ticketId);
+      if($ticket === null) {
+        return false;
+      }
+      $result = $this->db->updateTicket($ticketId,
+                                        $subject,
+                                        $osType,
+                                        $primaryIssue,
+                                        $additionalNotes,
+                                        $status,
+                                        $submitterId);
+
       return $result;
     }
 
