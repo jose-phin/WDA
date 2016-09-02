@@ -15,22 +15,20 @@
 
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
-    <link rel="stylesheet" href="./assets/css/individual-ticket-style.css">
-    <link rel="stylesheet" href="./assets/css/closeTicket-style.css">
+    <link rel="stylesheet" href="/WDA/WDA-Site/global-assets/css/individual-ticket-style.css">
     <script src="./assets/js/follow-up-script.js"></script>
-    <script src="./assets/js/user-newReply.js"></script>
-    <script src="./assets/js/eventHandler-form.js"></script>
-    <script src="./assets/js/ticketStatus-handler.js"></script>
+
+    <script src="./assets/js/staff-newReply.js"></script>
+
+    <script src="/WDA/WDA-Site/global-assets/js/eventHandler-form.js"></script>
+    <script src="./assets/js/staff-ticketStatus-handler.js"></script>
 </head>
 
 <body>
-    <?php include "assets/content/closeTicket-modal.php"; ?>
+
     <div class="home-body content">
 
         <div class="site-wide-container container">
-
-
-
 
             <!-- Navigation Bar -->
             <?php include "content/navbar.php"; ?>
@@ -65,7 +63,7 @@
                 <div class="row ticket-content-container">
                     <div class="col-md-10">
                         <!-- User ticket contents -->
-                        <?php include './assets/content/individual-ticket.php' ?>
+                        <?php include 'content/individual-ticket.php' ?>
 
 
                     <!-- End of col-md-10 -->
