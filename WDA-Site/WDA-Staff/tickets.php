@@ -13,11 +13,11 @@
     <title>Tickets &ndash; ITS Ticketing System | RMIT University </title>
 
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
-    <?php include "../WDA-User/assets/head_items.php" ?>
-    <link rel="stylesheet" href="../WDA-User/assets/css/style.css">
-    <link rel="stylesheet" href="../WDA-User/assets/css/footer-style.css">
-    <link rel="stylesheet" href="../WDA-User/assets/css/navbar-style.css">
-    <link rel="stylesheet" href="../WDA-User/assets/css/tickets-style.css">
+    <?php include "../WDA-Staff/assets/head_items.php" ?>
+
+    <!-- Page specific css -->
+    <link rel="stylesheet" href="/WDA/WDA-Site/WDA-Staff/assets/css/tickets-style.css">
+
     <script src="../WDA-User/assets/js/view-all-tickets.js"></script>
 
 </head>
@@ -27,7 +27,7 @@
         <div class="site-wide-container container">
 
             <!-- Navigation Bar -->
-            <?php include_once "../WDA-User/navbar.php"; ?>
+            <?php include_once "../WDA-Staff/content/navbar.php"; ?>
 
             <div class="hero main-hero">
 
@@ -76,6 +76,6 @@
 </body>
 
 <!-- Footer -->
-<?php include "../WDA-User/footer.php"; ?>
+<?php include "../WDA-STaff/content/footer.php"; ?>
 
 </html>
