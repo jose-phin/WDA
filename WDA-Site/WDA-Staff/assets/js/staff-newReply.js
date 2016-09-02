@@ -26,12 +26,9 @@ $(document).ready(function(){
 
         $.ajax({
             type: "POST",
-            url: "/WDA/comment/new",
+            url: "/WDA/comment/staff",
             contentType: 'application/json',
             data: JSON.stringify({
-                "user":{
-                    "email": ticket.user.email
-                },
                 "comment":{
                     "ticketId": ticket.ticket.ticket_id,
                     "comment": $("#newMessage").val()
