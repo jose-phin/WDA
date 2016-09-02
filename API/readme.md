@@ -405,6 +405,47 @@ then create the comment for the ticket
     }
 }
 ```
+#### Staff Comment
+* **URL**
+```
+/comment/staff
+```
+
+* **Description**
+
+This endpoint will create a new comment for the specified ticket under the dummy
+staff member account. If you do not have a dummy staff member already in the
+database, this will also create a dummy staff member for you in the database
+
+* **Parameters**
+
+**Required**
+```javascript
+{
+  "comment": [Object] {
+    "ticketId": [String],
+    "comment": [String]
+  }
+}
+```
+
+* **Success Response**
+
+*JSON* `{"success": true, "commentId": [String]}`
+
+* **Error Response**
+
+*JSON* `{"success": false}`
+
+* **Sample Call**
+```javascript
+{
+    "comment":{
+        "ticketId": "6",
+        "comment": "You're Fired M8"
+    }
+}
+```
 #### View All
 * **URL**
 ```

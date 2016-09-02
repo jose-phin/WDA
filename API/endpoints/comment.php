@@ -36,6 +36,12 @@
               ? array( "success" => $result )
               : array( "success" => TRUE, "commentId" => $result );
             break;
+        case "/staff":
+            $result = $requestHandler->createNewStaffComment();
+            $response = ($result == FALSE)
+              ? array( "success" => $result )
+              : array( "success" => TRUE, "commentId" => $result );
+            break;
         case "/viewall" :
             $result = $requestHandler->viewTicketAndComments();
             $response = (isset($result['commentList']))
