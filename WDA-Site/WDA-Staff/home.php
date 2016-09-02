@@ -44,7 +44,7 @@
 
                 <div class="row btn-margin-fix">
                     <div class="col-sm-12 col-md-2 btn-col">
-                        <a href="tickets.php"><button class="btn btn-secondary ticketsList-home-button">Start Now</button></a>
+                        <a href="tickets.php"><button class="btn btn-primary ticketsList-home-button">Start Now</button></a>
                     </div>
                 </div>
             <!-- End of hero div -->
