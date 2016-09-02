@@ -48,13 +48,12 @@
 
       //if the user or the ticket data is not set, return false
       if( !isset($user) || !isset($ticket) ) return false;
-
       //check to see if the user is already in the databaseName
       $userId = parent::getUserIdByEmail($user['email']);
       if(!isset($userId)) {
         //if the user does not exist, create the user
         $couldCreateUser = parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
-
+        echo var_dump($couldCreateUser);
         //if we could not create the user, return false
         if(!$couldCreateUser) return false;
 
@@ -92,8 +91,8 @@
       $userId = parent::getUserIdByEmail($user['email']);
 
       if(!isset($userId)) {
-        $isITS = isset($user["is_its"]) ? $user["is_its"] : FALSE;
-        $couldCreateUser = parent::createUserDB($user["firstName"], $user["lastName"], $user["email"],$isITS);
+
+        $couldCreateUser = parent::createUserDB($user["firstName"], $user["lastName"], $user["email"]);
 
         if(!$couldCreateUser) return false;
 
@@ -106,9 +105,42 @@
         return false;
       }
 
-      $couldCreateNewComment = parent::createComment($ticketId, $comment["comment"],$userId);
+      $couldCreateNewComment = parent::createComment($ticketId, $comment["comment"], $userId);
       return $couldCreateNewComment;
     }
+
+    /**
+     * Create a new comment under the dummy staff account
+     *
+     * @return bool
+     * @note we can remove the create user later
+     */
+     public function createNewStaffComment() {
+       $comment = $this->jsonRequest["comment"];
+
+       //if the user or the ticket data is not set, return false
+       if( !isset($comment) )return false;
+
+       $userId = parent::getUserIdByEmail("staff@wda.its.com");
+
+       if(!isset($userId)) {
+
+         $couldCreateUser = parent::createStaffDB("Dummy", "Staff", "staff@wda.its.com");
+
+         if(!$couldCreateUser) return false;
+
+         $userId = parent::getUserIdByEmail("staff@wda.its.com");
+
+         if(!isset($userId)) return false;
+       }
+       $ticketId = intval($comment['ticketId']);
+       if(is_nan($ticketId)) {
+         return false;
+       }
+
+       $couldCreateNewComment = parent::createComment($ticketId, $comment["comment"], $userId);
+       return $couldCreateNewComment;
+     }
 
     /**
      * View the tickets and their comments
