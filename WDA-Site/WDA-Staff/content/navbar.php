@@ -12,14 +12,14 @@
             <span class="icon-bar"></span>
         </button>
     </div>
-<!-- 
+<!--
     <div class="collapse navbar-collapse" id="navbar-collapse">
 
         <ul class="nav navbar-nav navbar-right">
             <li class="navbar-user-li">
                 <a
-                    <?php echo ($currPage == '-') ? "class='active'" : ""; ?>
-                    href="#">
+
+                    
                     <span class="fa fa-sign-in icon"></span> Login
                 </a>
             </li>
