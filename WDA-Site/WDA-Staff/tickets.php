@@ -17,8 +17,7 @@
 
     <!-- Page specific css -->
     <link rel="stylesheet" href="/WDA/WDA-Site/WDA-Staff/assets/css/tickets-style.css">
-
-    <script src="../WDA-User/assets/js/view-all-tickets.js"></script>
+    <script src="/WDA/WDA-Site/WDA-Staff/assets/js/view-all-tickets.js"></script>
 
 </head>
 
@@ -76,6 +75,6 @@
 </body>
 
 <!-- Footer -->
-<?php include "../WDA-STaff/content/footer.php"; ?>
+<?php include "../WDA-Staff/content/footer.php"; ?>
 
 </html>
