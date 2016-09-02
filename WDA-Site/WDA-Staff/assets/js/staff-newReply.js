@@ -77,17 +77,21 @@ function getAllReplies(){
 function displayAllReplies(){
 
     $newHtmlRowHead = '<legend class="reply-separator"></legend><div class=" col-md-12 new-reply-container"><p class="ticket-info-header-text reply-header">';
+    $newHtmlRowHeadITS = '<legend class="reply-separator"></legend><div class=" col-md-12 new-reply-container"><p class="ticket-info-header-text reply-header reply-header-its">';
     $newHtmlRowName = ' added:'+'</p><p class="new-reply-text">';
     $newHtmlRowTail = '</p></div>';
     $.each(comments.comments, function(i, item){
 
+    if (item.is_its == 1){
+        $(".reply-main-container").append(
+            $newHtmlRowHeadITS+item.email+$newHtmlRowName+item.comment_text.replace(/(\r\n|\n|\r)/g,"<br />")+$newHtmlRowTail
+        );
+    }
+    else{
         $(".reply-main-container").append(
             $newHtmlRowHead+item.email+$newHtmlRowName+item.comment_text.replace(/(\r\n|\n|\r)/g,"<br />")+$newHtmlRowTail
         );
-
-        if (item.is_its == 1){
-            $(".reply-header").addClass("reply-header-its");
-        }
+    }
 
     });
 }
@@ -111,7 +115,7 @@ function showLatestReply(){
                 console.log(comments);
 
 
-                $newHtmlRowHead = '<legend class="reply-separator"></legend><div class="new-reply-container col-md-12"><i class="fa fa-circle fa-1 new-reply-bullet"></i><p class="ticket-info-header-text reply-header">';
+                $newHtmlRowHead = '<legend class="reply-separator"></legend><div class="new-reply-container col-md-12"><i class="fa fa-circle fa-1 new-reply-bullet"></i><p class="ticket-info-header-text reply-header reply-header-its">';
                 $newHtmlRowName = ' added:'+'</p><p class="new-reply-text">';
                 $newHtmlRowTail = '</p></div>';
 
