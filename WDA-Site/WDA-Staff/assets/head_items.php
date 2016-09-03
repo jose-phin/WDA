@@ -26,3 +26,4 @@
 <link rel="stylesheet" href="/WDA/WDA-Site/global-assets/css/style.css">
 <link rel="stylesheet" href="./assets/css/staff-navbar-style.css">
 <link rel="stylesheet" href="/WDA/WDA-Site/global-assets/css/footer-style.css">
+<link rel="stylesheet" href="./assets/css/staff-site-style.css">

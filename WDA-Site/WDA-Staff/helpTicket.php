@@ -56,15 +56,6 @@
                           <span class="status-text">{{Status}}</span></span>
                     </div>
 
-                    <!--
-                    WARNING WARNING WARNING WARNING
-                    PLEASE MAKE NECESSARY CHANGES ON::
-                    WDA-STAFF/ASSETS/JS/STAFF-TICKETSTATUS-HANDLER.JS
-
-                    READ THE FUNCTIONS AND MAKE CHANGES
-                    WHEN IT'S WORKING PLEASE REMOVE THE ORIGINAL TICKET-STATUS DIV
-                    
-                    -->
 
                     <!-- Drop down for status begins -->
                     <div class="col-xs-5 col-sm-2 col-md-2 dropdown">
@@ -73,7 +64,7 @@
                                 Update status
                                 <span class="caret"></span>
                             </div>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown">
+                            <ul class="dropdown-menu" id="changeStatus-dropdown" aria-labelledby="dropdown">
                                 <li><a>Pending</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a>In progress</a></li>
@@ -86,9 +77,6 @@
                     </div>
                     <!-- Dropdown ends -->
 
-                    <div class="col-xs-3 col-sm-2 col-md-3">
-                        <button class="btn btn-closeBtn" data-toggle="modal" data-target="#closeTicket-modal" data-keyboard="true" id="user-closeTicket-btn" onclick="this.blur();"><i class="fa fa-times" id="closeBtn-icon"></i> Close Ticket</button>
-                    </div>
                 </div>
 
                 <!-- Instantiate Bootstrap's md-10 grid -->
