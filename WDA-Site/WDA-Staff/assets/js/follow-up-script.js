@@ -79,14 +79,13 @@ function replaceTicketStatus($ticketStatus){
   }
   if ($ticketStatus == "resolved"){
     var ticketStatusClass = "resolved";
+    $("#add-comment-form").hide();
   }
   if ($ticketStatus == "unresolved"){
     var ticketStatusClass = "unresolved";
-  }
-  if ($ticketStatus != "pending" && $ticketStatus != "Pending"){
-    $(".btn-closeBtn").hide();
     $("#add-comment-form").hide();
   }
+
   console.log(ticketStatusClass);
   $('.status').replaceWith("<span class='status "+"status-"+ticketStatusClass+" user-ticket-status'><i class='fa fa-circle fa-1 fa-statusTag' aria-hidden='true'></i>"+$ticketStatus+"</span>");
 }
