@@ -97,28 +97,3 @@ button.navbar-toggle.collapsed{
 a.active > .fa {
     color: white;
 }
-
-
-
-/* Dropdown status */
-.dropdown-menu > li a{
-    font-weight: 700;
-    letter-spacing: -0.03em;
-}
-
-.btn-group.open .dropdown-toggle{
-    background: #e9021e;
-    color: white!important;
-    border-color: #e9021e!important;
-    box-shadow: none;
-}
-
-.caret{
-    transition: transform 0.2s ease-in-out;
-}
-
-.btn-group.open .dropdown-toggle > .caret{
-    border-top-color: white!important;
-    transform: rotate(180deg);
-    transition: all 0.2s ease-in-out;
-}
