@@ -30,8 +30,8 @@ $(document).ready(function(){
 
     });
 
-
-
+    /* @JACQUI */
+    /* THIS IS NOT WORKING :( */
     /* Update the status button in the table */
     $(".dropdown-menu li a").click(function(){
 
