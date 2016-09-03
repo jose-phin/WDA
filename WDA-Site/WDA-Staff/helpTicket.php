@@ -63,7 +63,7 @@
 
                     READ THE FUNCTIONS AND MAKE CHANGES
                     WHEN IT'S WORKING PLEASE REMOVE THE ORIGINAL TICKET-STATUS DIV
-                    
+
                     -->
 
                     <!-- Drop down for status begins -->
@@ -73,7 +73,7 @@
                                 Update status
                                 <span class="caret"></span>
                             </div>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown">
+                            <ul class="dropdown-menu" id="changeStatus-dropdown" aria-labelledby="dropdown">
                                 <li><a>Pending</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a>In progress</a></li>

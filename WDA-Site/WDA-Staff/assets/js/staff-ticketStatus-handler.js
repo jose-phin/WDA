@@ -30,33 +30,7 @@ $(document).ready(function(){
 
     });
 
-    /* Send status to database */
-    function sendStatus() {
 
-        $.ajax({
-            type: "POST",
-            url: "/WDA/ticket/update",
-            contentType: "application/json",
-            data: {
-                "ticket": {
-                        "ticketId": ticket.ticket.ticket_id.toString(), // PLS CONFIRM THIS WORKS
-                        "status": ticket.ticket.status.toString()       // PLS CONFIRM THIS ALSO WORKS
-                    }                
-            },
-            success: function(formData) {
-                response = jQuery.parseJSON(formData);
-
-                if (response.success === false) {
-                    console.log("Ticket status failed to update!");
-                }
-
-                if (response.success === true) {
-                    console.log("Ticket status updated!");
-                }
-            }
-        });
-
-    }
 
     /* Update the status button in the table */
     $(".dropdown-menu li a").click(function(){
@@ -66,7 +40,7 @@ $(document).ready(function(){
         function replaceClass(selectedStatus, newStatus) {
             $("#user-ticket-status").removeClass().addClass(newStatus);
             $("#user-ticket-status").find(".status-text").text(selectedStatus);
-            sendStatus();
+            sendStatus(selectedStatus);
         }
 
         if (selectedStatus === "In progress") {
@@ -88,3 +62,33 @@ $(document).ready(function(){
     });
 
 });
+
+
+/* Send status to database */
+function sendStatus(selectedStatus) {
+
+    $.ajax({
+        type: "POST",
+        url: "/WDA/ticket/update",
+        contentType: "application/json",
+        data: JSON.stringify({ // FIXED! - dennis
+            "ticket": {
+                    "ticketId": ticket.ticket.ticket_id.toString(),
+                    "status": selectedStatus.toLowerCase() // FIXED! - dennis
+                }
+        }),
+        success: function(formData) {
+            response = jQuery.parseJSON(formData);
+
+            console.log(response);
+            if (response.success === false) {
+                console.log("Ticket status failed to update!");
+            }
+
+            if (response.success === true) {
+                console.log("Ticket status updated!");
+            }
+        }
+    });
+
+}
