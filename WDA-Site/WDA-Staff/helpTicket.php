@@ -11,30 +11,27 @@
 <head>
 
     <!-- Site metadata -->
-    <title>Your Ticket - ITS Ticketing System | RMIT University </title>
+    <title>Help Ticket - ITS Ticketing Staff | RMIT University </title>
 
     <!-- Global head items such as jQuery, Bootstrap, CSS, etc -->
     <?php include "./assets/head_items.php" ?>
-
     <link rel="stylesheet" href="/WDA/WDA-Site/global-assets/css/individual-ticket-style.css">
-    <link rel="stylesheet" href="./assets/css/closeTicket-style.css">
     <script src="./assets/js/follow-up-script.js"></script>
-    <script src="./assets/js/user-newReply.js"></script>
-    <script src="./assets/js/eventHandler-form.js"></script>
-    <script src="./assets/js/ticketStatus-handler.js"></script>
+
+    <script src="./assets/js/staff-newReply.js"></script>
+
+    <script src="/WDA/WDA-Site/global-assets/js/eventHandler-form.js"></script>
+    <script src="./assets/js/staff-ticketStatus-handler.js"></script>
 </head>
 
 <body>
-    <?php include "assets/content/closeTicket-modal.php"; ?>
+
     <div class="home-body content">
 
         <div class="site-wide-container container">
 
-
-
-
             <!-- Navigation Bar -->
-            <?php include "navbar.php"; ?>
+            <?php include "content/navbar.php"; ?>
 
             <div class="hero main-hero">
 
@@ -57,6 +54,36 @@
                           <i class="fa fa-circle fa-1" aria-hidden="true"></i>
                           {{Status}}</span>
                     </div>
+
+                    <!--
+                    WARNING WARNING WARNING WARNING
+                    PLEASE MAKE NECESSARY CHANGES ON::
+                    WDA-STAFF/ASSETS/JS/STAFF-TICKETSTATUS-HANDLER.JS
+
+                    READ THE FUNCTIONS AND MAKE CHANGES
+                    WHEN IT'S WORKING PLEASE REMOVE THE ORIGINAL TICKET-STATUS DIV
+                    -->
+
+                    <!-- Drop down for status begins -->
+                    <div class="col-xs-5 col-sm-2 col-md-2 dropdown">
+                        <div class="btn-group">
+                            <div class="btn dropdown-toggle status-pending" type="button" id="dropdown-status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Pending
+                                <span class="caret"></span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown1">
+                                <li><a>Pending</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a>In progress</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a>Resolved</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a>Unresolved</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Dropdown ends -->
+
                     <div class="col-xs-3 col-sm-2 col-md-3">
                         <button class="btn btn-closeBtn" data-toggle="modal" data-target="#closeTicket-modal" data-keyboard="true" id="user-closeTicket-btn" onclick="this.blur();"><i class="fa fa-times" id="closeBtn-icon"></i> Close Ticket</button>
                     </div>
@@ -66,7 +93,7 @@
                 <div class="row ticket-content-container">
                     <div class="col-md-10">
                         <!-- User ticket contents -->
-                        <?php include './assets/content/individual-ticket.php' ?>
+                        <?php include 'content/individual-ticket.php' ?>
 
 
                     <!-- End of col-md-10 -->
@@ -76,8 +103,8 @@
                 <!-- Return home button -->
                 <div class="row btn-margin-fix">
                     <div class="col-sm-12 col-md-2 btn-col ">
-                        <a href="./home.php">
-                            <button class="btn btn-secondary follow-up-home-button">Return Home</button>
+                        <a href="./tickets.php">
+                            <button class="btn btn-secondary follow-up-home-button">Back to Ticket List</button>
                         </a>
                     </div>
                 </div>
@@ -93,6 +120,6 @@
 </body>
 
 <!-- Footer -->
-<?php include_once "footer.php"; ?>
+<?php include_once "content/footer.php"; ?>
 
 </html>

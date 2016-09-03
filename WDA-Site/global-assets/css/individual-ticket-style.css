@@ -191,3 +191,7 @@ p.new-reply-text{
   font-size: 0.5em;
   transition: all 0.2s ease-in-out;
 }
+
+.reply-header-its{
+  color: #D0021B;
+}

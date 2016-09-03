@@ -16,3 +16,16 @@
     min-height: 300px;
     border-top: 2px solid #000;
 }
+
+.receipt-ticketIdRow{
+  border-bottom: 1px solid #e5e5e5;
+  padding: 20px 0;
+}
+
+.receipt-ticketNameRow{
+  padding-top: 15px;
+}
+
+#submitted{
+  margin-top: 15px;
+}
