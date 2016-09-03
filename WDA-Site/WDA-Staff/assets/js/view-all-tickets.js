@@ -32,7 +32,13 @@ $(document).ready(function() {
                     var subject  = "<td><span class=\"ticket-name\">" + primaryIssue + "<br></span>" +
                                         "<span class=\"small\">" + " #" + userID + " (" + email + ")</span></td>";
 
-                    var status = "<td class='ticketStatus-td'><span class=\"status status-"+element.status.toLowerCase()+"\"><i class='fa fa-circle fa-1 fa-statusTag' aria-hidden='true'></i>" + element.status + "</span></td>"; /* By default, pending */
+                    var ticketStatus = element.status.toLowerCase();
+                    if (ticketStatus === "in progress"){
+                        var status = "<td class='ticketStatus-td'><span class=\"status status-in-progress\"><i class='fa fa-circle fa-1 fa-statusTag' aria-hidden='true'></i>" + element.status + "</span></td>"; /* By default, pending */
+                    }
+                    else{
+                        var status = "<td class='ticketStatus-td'><span class=\"status status-"+element.status.toLowerCase()+"\"><i class='fa fa-circle fa-1 fa-statusTag' aria-hidden='true'></i>" + element.status + "</span></td>"; /* By default, pending */
+                    }
                     var category = "<td>" + element.primary_issue + "</td>";
                     var os = "<td>" + element.os_type + "</td>";
 

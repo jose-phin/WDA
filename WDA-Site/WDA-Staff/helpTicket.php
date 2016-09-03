@@ -62,16 +62,16 @@
                         <div class="btn-group">
                             <div class="btn dropdown-toggle" id="dropdown-status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Update status
-                                <span class="caret"></span>
+                                <span class="caret" id="dropdown-caret"></span>
                             </div>
                             <ul class="dropdown-menu" id="changeStatus-dropdown" aria-labelledby="dropdown">
-                                <li><a>Pending</a></li>
+                                <li><a class="dropdown-selection-pending">Pending</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a>In progress</a></li>
+                                <li><a class="dropdown-selection-inprogress">In progress</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a>Resolved</a></li>
+                                <li><a class="dropdown-selection-resolved">Resolved</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a>Unresolved</a></li>
+                                <li><a class="dropdown-selection-unresolved">Unresolved</a></li>
                             </ul>
                         </div>
                     </div>
