@@ -7,6 +7,8 @@ body{
 /* Dropdown status */
 .dropdown-menu{
     padding: 0;
+    border-radius: 0;
+    box-shadow: 0 10px 52px rgba(0,0,0,.150);
 }
 
 .dropdown-menu .divider{
