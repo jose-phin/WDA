@@ -36,7 +36,7 @@
             <div class="hero main-hero">
 
                 <h2 class="user-ticket-ticketTitle">
-                    {{Ticket Title}}
+                   {{Ticket Title}}
                 </h2>
 
                 <div class="row">
@@ -48,11 +48,12 @@
                             {{Ticket ID: #12345}}
                         </h4>
                     </div>
+
                     <!-- Ticket status -->
                     <div class="col-xs-5 col-sm-2 col-md-2">
-                        <span class="status" id="user-ticket-status">
-                          <i class="fa fa-circle fa-1" aria-hidden="true"></i>
-                          {{Status}}</span>
+                        <span class="status status-pending" id="user-ticket-status">
+                          <!-- <i class="fa fa-circle fa-1" aria-hidden="true"></i> -->
+                          <span class="status-text">{{Status}}</span></span>
                     </div>
 
                     <!--
@@ -62,16 +63,17 @@
 
                     READ THE FUNCTIONS AND MAKE CHANGES
                     WHEN IT'S WORKING PLEASE REMOVE THE ORIGINAL TICKET-STATUS DIV
+                    
                     -->
 
                     <!-- Drop down for status begins -->
                     <div class="col-xs-5 col-sm-2 col-md-2 dropdown">
                         <div class="btn-group">
-                            <div class="btn dropdown-toggle status-pending" type="button" id="dropdown-status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Pending
+                            <div class="btn dropdown-toggle" id="dropdown-status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Update status
                                 <span class="caret"></span>
                             </div>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown1">
+                            <ul class="dropdown-menu" aria-labelledby="dropdown">
                                 <li><a>Pending</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a>In progress</a></li>
