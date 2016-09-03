@@ -187,14 +187,14 @@ p.hero-description{
 }
 
 .status-unresolved {
-  background-color: #d9534f;
-  border: 1px solid #d43f3a;
+  background-color: #ff4141;
+  border: 1px solid #ff4141;
 }
 
 .status-in-progress {
   background-color: #004eff;
   border: 1px solid #004eff;
-
+  color: white;
 }
 
 .status-pending {

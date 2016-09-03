@@ -17,21 +17,25 @@ $(document).ready(function(){
         if (selectedStatus === "In progress") {
             replaceClass(selectedStatus, "status status-in-progress white");
             $(".user-ticket-status").html(BULLETSTATUS+"in progress");
+            $("#add-comment-form").show();
         }
 
         if (selectedStatus === "Pending") {
             replaceClass(selectedStatus, "status status-pending");
             $(".user-ticket-status").html(BULLETSTATUS+"pending");
+            $("#add-comment-form").show();
         }
 
         if (selectedStatus === "Resolved") {
             replaceClass(selectedStatus, "status status-resolved");
             $(".user-ticket-status").html(BULLETSTATUS+"resolved");
+            $("#add-comment-form").hide();
         }
 
         if (selectedStatus === "Unresolved") {
             replaceClass(selectedStatus, "status status-unresolved");
             $(".user-ticket-status").html(BULLETSTATUS+"unresolved");
+            $("#add-comment-form").hide();
         }
 
     });

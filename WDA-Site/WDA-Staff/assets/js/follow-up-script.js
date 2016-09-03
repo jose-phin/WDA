@@ -4,11 +4,11 @@ var ticket, comments, ticketStatusClass;
 $(document).ready(function(){
 
   $(function() {
-    $('.btn-closeBtn').hover(function() {
-      $('#closeBtn-icon').css('color', 'white');
+    $('#dropdown-status').hover(function() {
+      $('#dropdown-caret').css('border-top-color', 'white');
     }, function() {
       // on mouseout, reset the background colour
-      $('#closeBtn-icon').css('color', '');
+      $('#dropdown-caret').css('border-top-color', '');
     });
   });
 
@@ -73,9 +73,11 @@ function replaceTicketStatus($ticketStatus){
 
   if ($ticketStatus == "pending"){
     var ticketStatusClass = "pending";
+    $("#add-comment-form").show();
   }
   if ($ticketStatus == "in progress"){
     var ticketStatusClass = "in-progress";
+    $("#add-comment-form").show();
   }
   if ($ticketStatus == "resolved"){
     var ticketStatusClass = "resolved";

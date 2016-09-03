@@ -2,7 +2,7 @@
     font-family: "Karla", "Helvetica Neue", "Arial", sans-serif;
     font-weight: 700;
     color: black;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.02em;
     font-size: 15px;
     border-radius: 0px;
     border: 0;
@@ -15,7 +15,7 @@
     color: black;
     font-weight: 700;
     padding-left: 0px;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.02em;
     font-size: 15px;
     -webkit-transition: 0.1s;
     transition: 0.1s;
@@ -96,4 +96,29 @@ button.navbar-toggle.collapsed{
 /*Active navbar font-awesome styles*/
 a.active > .fa {
     color: white;
+}
+
+
+
+/* Dropdown status */
+.dropdown-menu > li a{
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.btn-group.open .dropdown-toggle{
+    background: #e9021e;
+    color: white!important;
+    border-color: #e9021e!important;
+    box-shadow: none;
+}
+
+.caret{
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn-group.open .dropdown-toggle > .caret{
+    border-top-color: white!important;
+    transform: rotate(180deg);
+    transition: all 0.2s ease-in-out;
 }

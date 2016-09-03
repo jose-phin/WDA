@@ -74,9 +74,11 @@ function replaceTicketStatus($ticketStatus){
 
     if ($ticketStatus == "pending"){
       var ticketStatusClass = "pending";
+      $("#add-comment-form").show();
     }
     if ($ticketStatus == "in progress"){
       var ticketStatusClass = "in-progress";
+      $("#add-comment-form").show();
     }
     if ($ticketStatus == "resolved"){
       var ticketStatusClass = "resolved";

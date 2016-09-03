@@ -91,44 +91,6 @@ p.reply-header{
 
 }
 
-/* Status */
-.status {
-  display: block;
-  padding-top: 6px;
-  width: 120px;
-  height: 35px;
-  color: #fff;
-  text-align: center;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  font-weight: 700;
-  border-radius: 100px;
-  font-size: 0.9em;
-  vertical-align: middle;
-}
-
-.status-resolved {
-  background-color: #19C37F;
-  border: 1px solid #19C37F;
-}
-
-.status-unresolved {
-  background-color: #d9534f;
-  border: 1px solid #d43f3a;
-}
-
-.status-in-progress {
-  background-color: #004eff;
-  border: 1px solid #004eff;
-
-}
-
-.status-pending {
-  background-color: #ffc82b;
-  border: 1px solid #ffc82b;
-  color: black;
-}
-
 .fa-statusTag{
   margin-right: 10px;
   font-size: 12px;
@@ -204,6 +166,14 @@ p.new-reply-text{
   width: 150px;
   padding: 6px 14px;
   border: 1px solid #525252;
+  transition: all 0.05s ease-in-out;
+}
+
+#dropdown-status:hover{
+  transform: scale(1.05);
+  background: #e9021e;
+  border-color: #e9021e;
+  color: white;
 }
 
 .caret {

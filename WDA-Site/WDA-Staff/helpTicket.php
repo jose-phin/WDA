@@ -62,7 +62,7 @@
                         <div class="btn-group">
                             <div class="btn dropdown-toggle" id="dropdown-status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Update status
-                                <span class="caret"></span>
+                                <span class="caret" id="dropdown-caret"></span>
                             </div>
                             <ul class="dropdown-menu" id="changeStatus-dropdown" aria-labelledby="dropdown">
                                 <li><a>Pending</a></li>
