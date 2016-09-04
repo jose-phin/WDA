@@ -61,7 +61,7 @@
                     <div class="col-xs-5 col-sm-2 col-md-2 dropdown">
                         <div class="btn-group">
                             <div class="btn dropdown-toggle" id="dropdown-status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Update status
+                                Update Status
                                 <span class="caret" id="dropdown-caret"></span>
                             </div>
                             <ul class="dropdown-menu" id="changeStatus-dropdown" aria-labelledby="dropdown">
