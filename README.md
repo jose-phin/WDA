@@ -13,7 +13,7 @@ The system also allows ITS staff members to view all tickets in the system, comm
 The `User` page is available at:
 
 ```
-http://localhost:port/WDA/WDA-Site/WDA-Staff/home.php
+http://localhost:port/WDA/WDA-Site/WDA-User/home.php
 ```
 
 Similarly, the `ITS` home page is available at:
