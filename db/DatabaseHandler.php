@@ -37,8 +37,6 @@ class DatabaseHandler
             // Turn foreign key constraints on
             $this->db->exec('PRAGMA foreign_keys = ON;');
 
-            $this->logger->log_info("Connected!");
-
             $this->setUpTables();
         } catch (PDOException $e) {
             $message = "Failed to create database: " . $e->getMessage();
@@ -106,8 +104,6 @@ class DatabaseHandler
 
 
             $this->db->commit();
-
-            $this->logger->log_info("Created tables (if they didn't exist already)");
 
         } catch (Exception $e) {
             $this->db->rollBack();
