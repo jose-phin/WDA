@@ -26,12 +26,9 @@ $(document).ready(function(){
 
         $.ajax({
             type: "POST",
-            url: "/WDA/comment/new",
+            url: "/WDA/comment/staff",
             contentType: 'application/json',
             data: JSON.stringify({
-                "user":{
-                    "email": ticket.user.email
-                },
                 "comment":{
                     "ticketId": ticket.ticket.ticket_id,
                     "comment": $("#newMessage").val()
@@ -99,6 +96,7 @@ function displayAllReplies(){
     });
 }
 
+
 function showLatestReply(){
     $.ajax({
         type: "POST",
@@ -117,7 +115,7 @@ function showLatestReply(){
                 console.log(comments);
 
 
-                $newHtmlRowHead = '<legend class="reply-separator"></legend><div class="new-reply-container col-md-12"><i class="fa fa-circle fa-1 new-reply-bullet"></i><p class="ticket-info-header-text reply-header">';
+                $newHtmlRowHead = '<legend class="reply-separator"></legend><div class="new-reply-container col-md-12"><i class="fa fa-circle fa-1 new-reply-bullet"></i><p class="ticket-info-header-text reply-header reply-header-its">';
                 $newHtmlRowName = ' added:'+'</p><p class="new-reply-text">';
                 $newHtmlRowTail = '</p></div>';
 

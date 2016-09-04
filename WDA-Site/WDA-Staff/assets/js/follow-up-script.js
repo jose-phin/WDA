@@ -4,11 +4,11 @@ var ticket, comments, ticketStatusClass;
 $(document).ready(function(){
 
   $(function() {
-    $('.btn-closeBtn').hover(function() {
-      $('#closeBtn-icon').css('color', 'white');
+    $('#dropdown-status').hover(function() {
+      $('#dropdown-caret').css('border-top-color', 'white');
     }, function() {
       // on mouseout, reset the background colour
-      $('#closeBtn-icon').css('color', '');
+      $('#dropdown-caret').css('border-top-color', '');
     });
   });
 
@@ -41,6 +41,7 @@ $(document).ready(function(){
                 $(".status").hide();
                 $(".btn-closeBtn").hide();
                 $(".ticket-content-container").hide();
+                $("#dropdown-status").hide();
             }
             if (ticket.success === true){
               console.log(ticket);
@@ -71,23 +72,22 @@ $(document).ready(function(){
 function replaceTicketStatus($ticketStatus){
   $ticketStatus = $ticketStatus.toLowerCase();
 
-
-    if ($ticketStatus == "pending"){
-      var ticketStatusClass = "pending";
-      $("#add-comment-form").show();
-    }
-    if ($ticketStatus == "in progress"){
-      var ticketStatusClass = "in-progress";
-      $("#add-comment-form").show();
-    }
-    if ($ticketStatus == "resolved"){
-      var ticketStatusClass = "resolved";
-      $("#add-comment-form").hide();
-    }
-    if ($ticketStatus == "unresolved"){
-      var ticketStatusClass = "unresolved";
-      $("#add-comment-form").hide();
-    }
+  if ($ticketStatus == "pending"){
+    var ticketStatusClass = "pending";
+    $("#add-comment-form").show();
+  }
+  if ($ticketStatus == "in progress"){
+    var ticketStatusClass = "in-progress";
+    $("#add-comment-form").show();
+  }
+  if ($ticketStatus == "resolved"){
+    var ticketStatusClass = "resolved";
+    $("#add-comment-form").hide();
+  }
+  if ($ticketStatus == "unresolved"){
+    var ticketStatusClass = "unresolved";
+    $("#add-comment-form").hide();
+  }
 
   console.log(ticketStatusClass);
   $('.status').replaceWith("<span class='status "+"status-"+ticketStatusClass+" user-ticket-status'><i class='fa fa-circle fa-1 fa-statusTag' aria-hidden='true'></i>"+$ticketStatus+"</span>");
