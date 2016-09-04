@@ -1,32 +1,31 @@
-# WDA
+# Web Database Applications - Assignment 1
 
-Meet the team:
-- Jacqui
+A web ticketing system that allows users to submit tickets, add comments to them and close them as necessary. 
+The system also allows ITS staff members to view all tickets in the system, comment on them, and resolve them.
 
-####Running it in your environment (Quick Fix)
-In the following file's require statements need to be modified depending on your directory layout
-- `.htacces` 
-- `API/classes/*.php`
-- `API/endpoints/*.php`
+## How to Run
 
-e.g My file is located in a WDA sub directory of the server, so my .htaccess looks like 
-In the my `.htaccess`
-```
-RewriteRule ^user(.*)$ /WDA/API/endpoints/user.php?endpoint=$1 [NC,QSA]
-RewriteRule ^comment(.*)$ /WDA/API/endpoints/comment.php?endpoint=$1 [NC,QSA]
-RewriteRule ^ticket(.*)$ /WDA/API/endpoints/ticket.php?endpoint=$1 [NC,QSA,L]
-```
+*Note: These instructions assume that you are using a MAMP or XAMPP stack locally*
 
-Any require statements also need to be modifiled
-e.g, In my `API/classes/AbstractApi.php`
+1. Clone this repo
+2. Place the cloned repo in your `.htaccess` folder (or the root folder that your MAMP/XAMPP stack points to)
+
+The `User` page is available at:
 
 ```
-<?php
-    require($_SERVER['DOCUMENT_ROOT'].'/WDA/db/DatabaseHandler.php');
+http://localhost:port/WDA/WDA-Site/WDA-Staff/home.php
 ```
 
-If you're unsure about your directory, insert
-` echo $_SERVER['DOCUMENT_ROOT']`
- in your php code to find the directory and preppend the required folder names
+Similarly, the `ITS` home page is available at:
 
-This is a quick fix. A better solution will be implemented soon.
+```
+http://localhost:port/WDA/WDA-Site/WDA-Staff/home.php
+```
+
+## Authors
+
+- Dennis Hou
+- Joshua Pancho
+- Josephine Pramudia
+- Jacqueline Shadforth
+- Chloe Smith
