@@ -12,7 +12,7 @@
     private $db = null;
 
     public function __construct() {
-      $this->db = new DatabaseHandler("TestDatabase");
+      $this->db = new DatabaseHandler("tickets");
     }
 
     public function __destruct() {
