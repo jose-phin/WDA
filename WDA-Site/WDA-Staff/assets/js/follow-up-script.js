@@ -41,6 +41,7 @@ $(document).ready(function(){
                 $(".status").hide();
                 $(".btn-closeBtn").hide();
                 $(".ticket-content-container").hide();
+                $("#dropdown-status").hide();
             }
             if (ticket.success === true){
               console.log(ticket);
